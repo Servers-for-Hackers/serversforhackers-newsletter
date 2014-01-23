@@ -1,0 +1,15 @@
+body {
+    padding-top: 50px;
+}
+
+#login form {
+    margin-top: 50px;
+}
+
+.badge.grn {
+    background-color: #5cb85c;
+}
+
+.badge.red {
+    background-color: #d9534f;
+}
