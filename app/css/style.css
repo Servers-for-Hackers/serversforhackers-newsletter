@@ -1,9 +1,6 @@
 body {
-    padding-top: 50px;
-}
-
-#login form {
-    margin-top: 50px;
+    padding-top: 60px;
+    margin-bottom: 80px;
 }
 
 .badge.grn {
@@ -12,4 +9,12 @@ body {
 
 .badge.red {
     background-color: #d9534f;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.meta {
+    padding-top: 60px;
 }
