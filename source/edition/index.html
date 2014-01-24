@@ -1,0 +1,20 @@
+---
+layout: default
+title: Editions
+id: main
+use: editions
+---
+
+            <div class="content" id="description">
+                <h1>Editions</h1>
+                <p>All editions, to date!</p>
+                <hr />
+            </div>
+            <div class="content">
+                <ul>
+                    {% for edition in page.editions %}
+                    <li><a href="{{ edition.url }}">{{ edition.date | date("Y/m/d") }} - {{ edition.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <hr />
+            </div>

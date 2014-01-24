@@ -1,3 +1,7 @@
 sculpin_content_types:
+    posts:
+        enabled: false
     editions:
+        type: path
+        singular_name: edition
         permalink: edition/:year/:month/:day/:filename/
