@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Create Topic</title>
+        <title>Create Period</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -39,8 +39,8 @@
 
     <div class="container" id="login">
         <div class="row">
-            <div class="col-md-8">
-                <form role="login">
+            <form action="" method="post">
+                <div class="col-md-8">
                     <h1>Create Period</h1>
                     <!--<div class="alert alert-danger">
                         <ul>
@@ -72,16 +72,24 @@
                         <textarea name="content" id="content" class="form-control" rows="30" placeholder="Topic Content"></textarea>
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
-            <div class="col-md-4 meta">
-                <h3>Assigned To </h3>
-                <ul>
-                    <li><a href="#" target="_blank">1/03/2013 - 1/10/2013</a></li>
-                    <li><a href="#" target="_blank">4/08/2013 - 4/15/2013</a></li>
-                    <li><a href="#" target="_blank">2/14/2014 - 2/21/2014</a></li>
-                </ul>
-            </div>
+                </div>
+                <div class="col-md-4 meta form-inline">
+                    <h3>Assign Topics</h3>
+                    <div id="add-more-topics">
+                        <div class="add-topic form-inline">
+                            <div class="form-group">
+                                <select class="form-control" name="topic[]">
+                                    <option value="">Select...</option>
+                                    <option value="1">Some First Topic</option>
+                                    <option value="2">Some Second Topic</option>
+                                </select>
+                                <button type="button" class="btn btn-danger remove-topic"><i class="glyphicon glyphicon-remove-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-topic" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Add Topic</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -93,7 +101,17 @@
     <script>
         $(function() {
             $('.datepicker').datepicker();
-        })();
+
+            var topicContainer = $('#add-more-topics');
+            var addTopic = $('.add-topic');
+            $('#add-topic').click(function(e) {
+                addTopic.clone().appendTo(topicContainer);
+            });
+
+            $('#add-more-topics').on('click', '.remove-topic', function() {
+                $(this).parents().parents('.add-topic').remove();
+            });
+        });
     </script>
 </body>
 </html>
