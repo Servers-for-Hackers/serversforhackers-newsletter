@@ -41,7 +41,9 @@ strong {
     padding: 0 20px;
 }
 
-.content {
+#main .content,
+header.content,
+#foot {
     text-align: center;
 }
 
@@ -102,4 +104,14 @@ footer {
 
 .brand {
     margin-top: 40px;
+}
+
+.meta {
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #555;
+    font-family: Georgia, Times, serif;
+}
+
+.meta li {
+    margin: 8px 0;
 }
