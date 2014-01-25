@@ -4,4 +4,4 @@ sculpin_content_types:
     editions:
         type: path
         singular_name: edition
-        permalink: edition/:year/:month/:day/:filename/
+        permalink: editions/:year/:month/:day/:filename/
