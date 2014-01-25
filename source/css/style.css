@@ -12,6 +12,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     color: #f65821;
     font-weight: 300;
+    text-align: center;
 }
 
 a {
@@ -32,8 +33,9 @@ strong {
     font-weight: 600;
 }
 
+
 #container {
-    max-width: 820px;
+    max-width: 960px;
     margin:0 auto;
 }
 
@@ -59,15 +61,26 @@ header.content,
     margin: 20px 0;
 }
 
-ul, ol {
+#foot ul,
+#foot ol,
+#editions ul,
+form ul,
+form ol,
+.meta {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-li {
+#editions li,
+.meta li,
+form li {
     margin: 0;
     padding: 0;
+}
+
+#editions li {
+    margin-bottom: 12px;
 }
 
 input.txt {
@@ -115,3 +128,83 @@ footer {
 .meta li {
     margin: 8px 0;
 }
+
+/**** PRETTY PRINT ****/
+.post pre {
+    margin-bottom: 20px
+}
+
+code {
+    background-color: #fde9ce
+}
+
+.prettyprint {
+    overflow-x: auto;
+    font-family: Monaco, Consolas, "Lucida Console", monospace;
+    background-color: #333;
+    padding: 1.5em;
+    font-size: .75em;
+    border: 0;
+    color: #e9e4e5;
+    line-height: 1.9em;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box
+}
+
+.prettyprint .pln {
+    color: #e9e4e5
+}
+
+.prettyprint .str {
+    color: #bcd42a
+}
+
+.prettyprint .kwd {
+    color: #4bb1b1
+}
+
+.prettyprint .com {
+    color: #888
+}
+
+.prettyprint .typ {
+    color: #ef7c61
+}
+
+.prettyprint .lit {
+    color: #bcd42a
+}
+
+.prettyprint .pun, .prettyprint .opn, .prettyprint .clo {
+    color: #fff
+}
+
+.prettyprint .tag {
+    color: #4bb1b1
+}
+
+.prettyprint .atn {
+    color: #ef7c61
+}
+
+.prettyprint .atv {
+    color: #bcd42a
+}
+
+.prettyprint .dec, .prettyprint .var {
+    color: #606
+}
+
+.prettyprint .fun {
+    color: red
+}
+
+.prettyprint code {
+    font-family: Monaco, Consolas, "Lucida Console", monospace;
+    background-color: transparent
+}
+

@@ -10,10 +10,10 @@ use: [editions]
                 <p>All editions, to date!</p>
                 <hr />
             </div>
-            <div class="content">
+            <div class="content" id="editions">
                 <ul>
                     {% for edition in data.editions %}
-                    <li><a href="{{ edition.url }}">{{ edition.date | date("Y/m/d") }} - {{ edition.title }}</a></li>
+                    <li><a href="{{ edition.url }}"><strong>{{ edition.date | date("m.d.Y") }}</strong> - {{ edition.title }}</a></li>
                     {% endfor %}
                 </ul>
                 <hr />

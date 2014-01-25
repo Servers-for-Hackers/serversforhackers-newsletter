@@ -10,3 +10,18 @@
                 {{ page.blocks.content|raw }}
             </div>
 {% endblock %}
+{% block extra_scripts %}
+  <!--[if lte IE 9]>
+  <script src="/static/bower_components/html5-polyfills/classList.js"></script>
+  <![endif]-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      (function(){
+          var codeBlocks = document.querySelectorAll('.content pre, table code');
+          [].forEach.call(codeBlocks, function(codeBlock){
+              codeBlock.classList.add('prettyprint');
+          });
+          prettyPrint();
+      })();
+  </script>
+{% endblock %}
