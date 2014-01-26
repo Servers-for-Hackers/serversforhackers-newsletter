@@ -1,5 +1,6 @@
 ---
 title: Second Edition!
+topics: [First Title, Second Title]
 
 ---
 

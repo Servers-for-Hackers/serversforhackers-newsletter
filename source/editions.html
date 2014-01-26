@@ -11,10 +11,16 @@ use: [editions]
                 <hr />
             </div>
             <div class="content" id="editions">
-                <ul>
-                    {% for edition in data.editions %}
-                    <li><a href="{{ edition.url }}"><strong>{{ edition.date | date("m.d.Y") }}</strong> - {{ edition.title }}</a></li>
-                    {% endfor %}
-                </ul>
-                <hr />
+                {% for edition in data.editions %}
+                <article class="edition_overview">
+                    <h2><a href="{{ edition.url }}">{{ edition.title }} - <span>{{ edition.date | date("m.d.Y") }}</span></a></h2>
+                    <p>In this issue:</p>
+                    <ul>
+                        {% for topic in edition.topics %}
+                        <li>{{ topic }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr />
+                </article>
+                {% endfor %}
             </div>

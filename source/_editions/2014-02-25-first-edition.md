@@ -1,5 +1,6 @@
 ---
 title: First Edition!
+topics: [Getting Off of MAMP, Configuring Apache Virtual Hosts]
 
 ---
 
@@ -9,7 +10,9 @@ First, we'll discuss getting off of MAMP (or WAMP/XAMP for that matter) and star
 
 ---
 
-# Getting off of MAMP
+<a name="getting-off-mamp" id="getting-off-mamp"></a>
+
+# Getting Off of MAMP
 
 There's a large number of PHP users who rely on their trusty *AMP installs to "just work". However, many need to go beyond default setups for certain frameworks or projects. When you do, these "easy" tools break down because the operating systems (and/or the [applications](http://stackoverflow.com/search?q=mamp+phpunit)) on which you work [break standards](http://stackoverflow.com/search?q=mamp+artisan) set by the Linux/Unix servers on which the projects likely will live in production.
 
@@ -56,14 +59,35 @@ Curious about how to install other things? Check out [Vaprobash](https://github.
 
 ---
 
+<a name="configuring-apache-virtual-hosts" id="configuring-apache-virtual-hosts"></a>
+
 # Configuring Apache Virtual Hosts
 
 If you're using Apache for your development server, knowing how to configure Apache will be important.
+
+Because you might run multiple sites on one Apache server, you need to tell Apache which directory contains the web files (the "web root" or "document root") per website.
+
+First, here's **[a primer on Virtual Hosts](http://fideloper.com/ubuntu-prod-vhost)**, which will be most useful for Vagrant users installing Ubuntu.
+
+If you need more information, check [the documentation](https://httpd.apache.org/docs/2.4/vhosts/). It's fairly easy to understand. Most comment setups for virtual hosts include [name-based](https://httpd.apache.org/docs/2.4/vhosts/name-based.html), in which you differentiate virtual hosts via `ServerName`. However you can also [use IP addresses](https://httpd.apache.org/docs/2.4/vhosts/ip-based.html) to differentiate.
+
+Finally, there are [examples of comment setups](https://httpd.apache.org/docs/2.4/vhosts/examples.html)!
+
+Not using Ubuntu or Debian? Here are guides for [CentOS](https://www.digitalocean.com/community/articles/how-to-set-up-apache-virtual-hosts-on-centos-6), [RedHat](https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Reference_Guide/s1-apache-virtualhosts.html), [FreeBSD](http://www5.us.freebsd.org/doc/handbook/network-apache.html#AEN39491) and [Arch](https://www.digitalocean.com/community/articles/how-to-set-up-apache-virtual-hosts-on-arch-linux).
+
+## Hosts File
+
+You might also need this. Every computer has a hosts file. This file can tell your computer what server to use when you use a specific domain.
+
+For example, if you set a virtual host for url `myproject.local`, your browser won't know what server to use. However, if you also know your server's IP address is `192.168.33.10`, then you can edit your hosts file and add the entry `192.168.33.10  myproject.local`, which informs it where to look when that URL is used.
+
+Here's how to [edit the hosts file on mac](http://osxdaily.com/2012/08/07/edit-hosts-file-mac-os-x/) and two methods for [editing hosts file (as an administrator) on Windows](http://www.petri.co.il/edit-hosts-file-windows-8.htm).
 
 
 
 ## More Resources
 
-* [About Apache Virtual Hosts](http://fideloper.com/ubuntu-prod-vhost) in Ubuntu. This will work nicely with the Vagrant information above.
+* [Upgrading from Apache 2.2 to 2.4](http://httpd.apache.org/docs/2.4/upgrading.html). Some servers still install 2.2, and 2.4 comes with some changes in configuration.
+* My [vhost tool](https://gist.github.com/fideloper/2710970) and the [comment on usage](https://gist.github.com/fideloper/2710970#comment-993649), in both Python and Bash flavors. For Ubuntu specifically.
 
 ---
