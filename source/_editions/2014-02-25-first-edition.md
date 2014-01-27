@@ -77,7 +77,7 @@ First, here's **[a primer on Virtual Hosts](http://fideloper.com/ubuntu-prod-vho
 
 If you need more information, check [the documentation](https://httpd.apache.org/docs/2.4/vhosts/). It's fairly easy to understand. Most comment setups for virtual hosts include [name-based](https://httpd.apache.org/docs/2.4/vhosts/name-based.html), in which you differentiate virtual hosts via `ServerName`. However you can also [use IP addresses](https://httpd.apache.org/docs/2.4/vhosts/ip-based.html) to differentiate.
 
-Finally, there are [examples of comment setups](https://httpd.apache.org/docs/2.4/vhosts/examples.html)!
+Finally, there are [examples of common setups](https://httpd.apache.org/docs/2.4/vhosts/examples.html)!
 
 Not using Ubuntu or Debian? Here are guides for [CentOS](https://www.digitalocean.com/community/articles/how-to-set-up-apache-virtual-hosts-on-centos-6), [RedHat](https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Reference_Guide/s1-apache-virtualhosts.html), [FreeBSD](http://www5.us.freebsd.org/doc/handbook/network-apache.html#AEN39491) and [Arch](https://www.digitalocean.com/community/articles/how-to-set-up-apache-virtual-hosts-on-arch-linux).
 
