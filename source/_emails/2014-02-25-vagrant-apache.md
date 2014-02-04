@@ -1,8 +1,26 @@
 ---
-title: First Edition!
+title: Vagrant and Apache
 
 ---
 
+<table class="row">
+  <tr>
+    <td class="wrapper last">
+
+      <table class="twelve columns">
+        <tr>
+          <td>
+            <h2>{{ page.title }}</h2>
+            <p class="lead">Here's the first edition of Servers for Hackers!</p>
+            <p class="lead">We'll start off a little basic, but on some <strong>super</strong> important topics! If you find the topics too basic, hang in there! We'll be covering a lot in coming months.</p>
+          </td>
+          <td class="expander"></td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
 
 <table class="row">
   <tr>

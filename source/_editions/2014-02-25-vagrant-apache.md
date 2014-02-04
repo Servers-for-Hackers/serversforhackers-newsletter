@@ -1,5 +1,5 @@
 ---
-title: First Edition!
+title: Vagrant and Apache
 topics: [Getting Off of MAMP, Configuring Apache Virtual Hosts]
 
 ---
