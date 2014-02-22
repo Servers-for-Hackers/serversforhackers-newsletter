@@ -1,0 +1,26 @@
+---
+layout: default
+title: Editions
+id: main
+use: [editions]
+---
+
+            <div class="content" id="description">
+                <h1>SFH Editions</h1>
+                <p>All editions, to date!</p>
+                <hr />
+            </div>
+            <div class="content" id="editions">
+                {% for edition in data.editions %}
+                <article class="edition_overview">
+                    <h2><a href="{{ edition.url }}">{{ edition.title }} - <span>{{ edition.date | date("m.d.Y") }}</span></a></h2>
+                    <p><strong>In this issue:</strong></p>
+                    <ul>
+                        {% for topic in edition.topics %}
+                        <li>{{ topic }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr />
+                </article>
+                {% endfor %}
+            </div>

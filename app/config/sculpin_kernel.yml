@@ -1,0 +1,11 @@
+sculpin_content_types:
+    posts:
+        enabled: false
+    editions:
+        type: path
+        singular_name: edition
+        permalink: editions/:year/:month/:day/:filename/
+    emails:
+        type: path
+        singular_name: email
+        permalink: emails/:year/:month/:day/:filename/
