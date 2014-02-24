@@ -24,6 +24,8 @@ Begin with installing and creating a quick server.
 
 [Vagrant](http://www.vagrantup.com) makes this an especially pleasant process. I suggest taking it slow. Many tutorials will go on and on about using provisioning systems like Puppet, Chef or Ansible. If you're new to this, ignore all of that.
 
+> **Vocabulary**: Your computer is called the "**host**" machine. Any virtual machine created within the host machine is called a "**guest**" machine.
+
 The first thing to do is, of course, install [Vagrant](http://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org) (there's no trick, just download and install!). After you install these, you can open your terminal and run a few commands to get started. The process is simply this:
 
     $ cd /path/to/project
@@ -32,19 +34,19 @@ The first thing to do is, of course, install [Vagrant](http://www.vagrantup.com)
     # ... wait for it to bootup ...
     $ vagrant ssh   # Get into your new server!
 
-Once you're in the new server, you can take a peak around. It doesn't do anything interesting yet, it's just like turning on a new, empty computer.
+Once you're in the new guest server, you can take a peak around. It doesn't do anything interesting yet, it's just like turning on a new, empty computer.
 
-In the virtual machine, go into the `/vagrant` directory:
+Within the guest virtual machine (once you are SSH'ed in), go into the `/vagrant` directory:
 
 	cd /vagrant
 
-Any file you create here will show appear on your computer as well! Conversely, any file added to the directory containing the `Vagrantfile` will also be available inside the server. This is a shared folder that Vagrant sets up automatically. This lets you edit files on your computer, using your IDE of choice, while also allowing the server access to thsoe files.
+Any file you create here will appear on your host computer as well! Conversely, any file added to the directory containing the `Vagrantfile` will also be available inside the guest machine. This is a **shared** folder that Vagrant sets up automatically. This lets you edit files on your host computer as you would normally, while also allowing the guest server access and run those files.
 
 > Are you troubled by the need to use your Terminal? You'll get used to this! [Check this out](http://lifehacker.com/5633909/who-needs-a-mouse-learn-to-use-the-command-line-for-almost-anything) if you need a primer on basic commands.
 
 ## Vagrant: Level 2
 
-Next, let's learn how to install a differnt flavor of Linux. We'll use Ubuntu, since it's easy to work with and very popular.
+Next, let's learn how to install a differnt flavor of Linux. We'll use Ubuntu, since it's easy to work with and extremely popular.
 
 To do that, we'll create a new `Vagrantfile`. Change into another project directory, and run `vagrant init` again. In that new file, change two things. Set `config.vm.box` to `precise64` and `config.vm.box_url` to `http://files.vagrantup.com/precise64.box`. Make sure the box_url line is uncommented as well. This will install Ubuntu Server 12.04 (64 bit). That will [look just like this highlighted code](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L6-L8). Then run `vagrant up` in your terminal. That'll download Ubuntu (which you only need to do once!) and then start the server.
 
@@ -52,21 +54,23 @@ For more on this process, see [this pretty simply guide](https://gist.github.com
 
 ## Vagrant: Level 3
 
-As noted, Vagrant let's you edit files directly on your computer, rather than inside the virtual machine. By default, your computer's directory containing the `Vagrantfile` is in will be shared and mapped to the `/vagrant` directory in the server. 
+As noted, Vagrant let's you edit files directly on your computer (the host), rather than inside the virtual machine (the guest). By default, your computer's directory containing the `Vagrantfile` will be shared and mapped to the `/vagrant` directory in the guest server.
 
 In our setup, however, we'll change this to share the `/var/www` folder in the server, which is where Apache reads its web files by default. In this way, any files added to your `Vagrantfile` directory will be available to the Apache web server!
 
 [Here's the file-sharing configuration](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L12) to do that. We simply change `/vagrant` to `/var/www`. The `.` means "share this directory" (the one containing the `Vagrantfile`), and you can see it's being shared with `/var/www`. The next time the server is started, those settings will take effect.
 
+If your server is running already, use `vagrant reload` to restart it using your new settings. You can also use `vagrant halt` to shut down the server when not in use, and use `vagrant up` to start it back up.
+
 ## Vagrant: Level 4
 
 After you get a basic server and file sharing up and running, you'll need to do something with it! This is where you'll be in the Terminal quite a bit, which is why most tutorials turn to Chef, Puppet, Ansible or other tools for installing stuff for you. **You don't learn much that way, and those tools are complicated**. Let's do some learning.
 
-Once get "inside" of the server by running `vagrant ssh`, any command you run will be executed in the server. Once you're in, follow [this guide to install a basic LAMP stack](http://fideloper.com/ubuntu-install-php54-lamp). Once that's all installed, you should be able to get the <strong>It Works!</strong> screen on your browser by going to `http://localhost:8080`. Since we're sharing the `/var/www` folder in the server, any file you add to your project directory will be available in your web server! Try creating the file `info.php`, and adding `<?php phpinfo();` to it. If you head to `http://localhost:8080/info.php`, you'll see the PHP information display.
+Once again, get "inside" of the server by running `vagrant ssh`. Once you're in, follow [this guide to install a basic LAMP stack](http://fideloper.com/ubuntu-install-php54-lamp). Once that's all installed, you should be able to get the **It Works!** screen on your browser by going to `http://localhost:8080`. Since we're sharing the `/var/www` folder in the guest with our host computer, any file you add to the project directory will be also be available in your web server! Try creating the file `info.php`, and adding `<?php phpinfo();` to it. If you head to `http://localhost:8080/info.php`, you'll see the PHP information display.
 
 ## Vagrant: Level 5
 
-Vagrant sets up a [forwarding mechanism](http://docs.vagrantup.com/v2/networking/forwarded_ports.html) so you can use `localhost:8080` to view your Vagrant web server. Alternatively, you can [configure Vagrant to setup a static IP address of your choosing](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L10). Then you can use the IP address in the browser instead of the forwarded `localhost:8080`. I also often use [xip.io](http://xip.io), which let's use addresses such as `http://myproject.192.168.33.10.xip.xio` (where 192.168.33.10 is the IP address I happen to configure). This way you can setup separate projects within the same server, and diffrentiate them by subdomain (`myproject` being the subdomain in this example).
+Vagrant sets up a [forwarding mechanism](http://docs.vagrantup.com/v2/networking/forwarded_ports.html) so you can use `localhost:8080` in your browser to view your Vagrant web server. Alternatively, you can [configure Vagrant to setup a static IP address of your choosing](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L10). Then you can use the IP address in the browser instead of the forwarded `localhost:8080`. I also often use [xip.io](http://xip.io), which let's use addresses such as `http://myproject.192.168.33.10.xip.xio` (where 192.168.33.10 is the IP address I happen to give my Vagrant server). This way you can setup separate projects within the same server, and differentiate them by subdomain (`myproject` being the subdomain in this example).
 
 Don't forget to restart your server after any `Vagrantfile` configuration changes. You can use `vagrant reload` on your computer's terminal to both restart and enable any configuration changes made to the `Vagrantfile`.
 
@@ -82,7 +86,7 @@ Curious about how to install other things? Check out [Vaprobash](https://github.
 * [Excellent slides](https://speakerdeck.com/erikaheidi/vagrant-for-php-developers) on getting started with Vagrant
 * [NetTuts on Vagrant](http://net.tutsplus.com/tutorials/php/vagrant-what-why-and-how/), with a little Puppet
 * [NetTuts on Vagrant](http://net.tutsplus.com/tutorials/setting-up-a-staging-environment/) for setting up a staging environment
-* [Gist to use to install LAMP stack](https://gist.github.com/fideloper/7074502), requiring no user input. Use it [like this](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-rb-L18).
+* [Gist to use to install LAMP stack](https://gist.github.com/fideloper/7074502), requiring no user input. Use it [like this](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-rb-L18) highlighted code.
 
 
 ---
@@ -105,9 +109,9 @@ Not using Ubuntu or Debian? Here are guides for [CentOS](https://www.digitalocea
 
 ## The Hosts File
 
-You might also need this. Every computer has a hosts file. This file can tell your computer what server to use when you use a specific domain.
+You might also need this. Every computer has a `hosts` file. This file can tell your computer what server to use when you request a specific domain.
 
-For example, if you set a virtual host for url `myproject.local`, your browser won't know what server to use. However, if you also know your server's IP address is `192.168.33.10`, then you can edit your hosts file and add the entry `192.168.33.10  myproject.local`, which informs it where to look when that URL is used.
+For example, if you set a virtual host for url `myproject.local`, your browser won't know what server to send that request to. However, if you also know your server's IP address is `192.168.33.10`, then you can edit your hosts file and add the entry `192.168.33.10  myproject.local`, which informs it where to look when that URL is used.
 
 Here's how to [edit the hosts file on mac](http://osxdaily.com/2012/08/07/edit-hosts-file-mac-os-x/) and two methods for [editing hosts file (as an administrator) on Windows](http://www.petri.co.il/edit-hosts-file-windows-8.htm).
 
@@ -118,5 +122,11 @@ Personally, I've started using [xip.io](http://xip.io), which will map to the IP
 
 * [Upgrading from Apache 2.2 to 2.4](http://httpd.apache.org/docs/2.4/upgrading.html). Some servers still install 2.2, however some install the newer 2.4. If you find yourself suddenly using 2.4, know that it comes with some changes in configuration. The above article outlines those.
 * My [vhost tool](https://gist.github.com/fideloper/2710970) script and the [comment on usage](https://gist.github.com/fideloper/2710970#comment-993649), in both Python and Bash flavors. For Ubuntu specifically. This creates and enables an Apache virtual host for you.
+
+## Bonus
+
+Here's a screencast covering more on Apache Virtual Hosts.
+
+<iframe src="//player.vimeo.com/video/87364924" width="500" height="281" style="width:100%; max-width:500px;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ---
