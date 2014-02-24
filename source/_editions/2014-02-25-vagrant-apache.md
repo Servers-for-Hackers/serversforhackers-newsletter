@@ -54,7 +54,7 @@ For more on this process, see [this pretty simply guide](https://gist.github.com
 
 ## Vagrant: Level 3
 
-As noted, Vagrant let's you edit files directly on your computer (the host), rather than inside the virtual machine (the guest). By default, your computer's directory containing the `Vagrantfile` will be shared and mapped to the `/vagrant` directory in the guest server. 
+As noted, Vagrant let's you edit files directly on your computer (the host), rather than inside the virtual machine (the guest). By default, your computer's directory containing the `Vagrantfile` will be shared and mapped to the `/vagrant` directory in the guest server.
 
 In our setup, however, we'll change this to share the `/var/www` folder in the server, which is where Apache reads its web files by default. In this way, any files added to your `Vagrantfile` directory will be available to the Apache web server!
 
@@ -122,5 +122,11 @@ Personally, I've started using [xip.io](http://xip.io), which will map to the IP
 
 * [Upgrading from Apache 2.2 to 2.4](http://httpd.apache.org/docs/2.4/upgrading.html). Some servers still install 2.2, however some install the newer 2.4. If you find yourself suddenly using 2.4, know that it comes with some changes in configuration. The above article outlines those.
 * My [vhost tool](https://gist.github.com/fideloper/2710970) script and the [comment on usage](https://gist.github.com/fideloper/2710970#comment-993649), in both Python and Bash flavors. For Ubuntu specifically. This creates and enables an Apache virtual host for you.
+
+## Bonus
+
+Here's a screencast covering more on Apache Virtual Hosts.
+
+<iframe src="//player.vimeo.com/video/87364924" width="500" height="281" style="width:100%; max-width:500px;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ---
