@@ -30,7 +30,7 @@ title: Vagrant and Apache
                         <tr>
                           <td class="panel">
 
-                            <p><a href="http://serversforhackers.com">Serversforhackers.com</a> is already blowing by the free tier on MailChimp! That means I'll be on the look out for <strong>sponsors</strong>! If this interests you, feel free to respond to this email directly.</p>
+                            <p>This newsletter was generously sponsored by <a href="http://daytoday.io">DayToday.io</a>! They offer full stack web solutions, from design to engineering.</p>
 
                           </td>
                           <td class="expander"></td>
@@ -75,6 +75,25 @@ title: Vagrant and Apache
                                 </td>
                               </tr>
                             </table>
+
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+<table class="row callout">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td class="panel">
+
+                            <p><a href="http://serversforhackers.com">Serversforhackers.com</a> is already blowing by the free tier on MailChimp! That means I'll be on the look out for <strong>sponsors</strong>! If this interests you, feel free to respond to this email directly.</p>
 
                           </td>
                           <td class="expander"></td>
