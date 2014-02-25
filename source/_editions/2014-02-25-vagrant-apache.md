@@ -127,6 +127,6 @@ Personally, I've started using [xip.io](http://xip.io), which will map to the IP
 
 Here's a screencast covering more on Apache Virtual Hosts.
 
-<iframe src="//player.vimeo.com/video/87364924" width="500" height="281" style="width:100%; max-width:500px;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe src="//player.vimeo.com/video/87364924" width="100%" height="517" style="width:100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 ---
