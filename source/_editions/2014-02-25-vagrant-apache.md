@@ -70,7 +70,7 @@ Once again, get "inside" of the server by running `vagrant ssh`. Once you're in,
 
 ## Vagrant: Level 5
 
-Vagrant sets up a [forwarding mechanism](http://docs.vagrantup.com/v2/networking/forwarded_ports.html) so you can use `localhost:8080` in your browser to view your Vagrant web server. Alternatively, you can [configure Vagrant to setup a static IP address of your choosing](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L10). Then you can use the IP address in the browser instead of the forwarded `localhost:8080`. I also often use [xip.io](http://xip.io), which let's use addresses such as `http://myproject.192.168.33.10.xip.xio` (where 192.168.33.10 is the IP address I happen to give my Vagrant server). This way you can setup separate projects within the same server, and differentiate them by subdomain (`myproject` being the subdomain in this example).
+Vagrant sets up a [forwarding mechanism](http://docs.vagrantup.com/v2/networking/forwarded_ports.html) so you can use `localhost:8080` in your browser to view your Vagrant web server. Alternatively, you can [configure Vagrant to setup a static IP address of your choosing](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L10). Then you can use the IP address in the browser instead of the forwarded `localhost:8080`. I also often use [xip.io](http://xip.io), which let's use addresses such as `http://myproject.192.168.33.10.xip.io` (where 192.168.33.10 is the IP address I happen to give my Vagrant server). This way you can setup separate projects within the same server, and differentiate them by subdomain (`myproject` being the subdomain in this example).
 
 Don't forget to restart your server after any `Vagrantfile` configuration changes. You can use `vagrant reload` on your computer's terminal to both restart and enable any configuration changes made to the `Vagrantfile`.
 
@@ -115,7 +115,7 @@ For example, if you set a virtual host for url `myproject.local`, your browser w
 
 Here's how to [edit the hosts file on mac](http://osxdaily.com/2012/08/07/edit-hosts-file-mac-os-x/) and two methods for [editing hosts file (as an administrator) on Windows](http://www.petri.co.il/edit-hosts-file-windows-8.htm).
 
-Personally, I've started using [xip.io](http://xip.io), which will map to the IP address given in the URL. This way, you can setup a virtual host with a `ServerName` such as `myproject.192.168.33.11.xip.xio`, and use `http://myproject.192.168.33.11.xip.xio` in your browser to go to the server. Note that the IP address I used would be the address of your Vagrant server. This lets you avoid editing your hosts file!
+Personally, I've started using [xip.io](http://xip.io), which will map to the IP address given in the URL. This way, you can setup a virtual host with a `ServerName` such as `myproject.192.168.33.11.xip.io`, and use `http://myproject.192.168.33.11.xip.io` in your browser to go to the server. Note that the IP address I used would be the address of your Vagrant server. This lets you avoid editing your hosts file!
 
 
 ## More Resources
