@@ -30,6 +30,15 @@ The first thing to do is, of course, install [Vagrant](http://www.vagrantup.com)
 
     $ cd /path/to/project
     $ vagrant init  # Creates Vagrantfile
+
+Now edit your `Vagrantfile` in order to tell Vagrant which flavor of Linux to install. Set the following options:
+
+	> config.vm.box = "precise64"      # This likely says "base"
+	> config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+This will install Ubuntu Server 12.04 (64 bit). That will [look just like this highlighted code](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L6-L8).
+
+Save that and continue onward:
+	    
     $ vagrant up    # Starts the server
     # ... wait for it to bootup ...
     $ vagrant ssh   # Get into your new server!
@@ -44,15 +53,10 @@ Any file you create here will appear on your host computer as well! Conversely, 
 
 > Are you troubled by the need to use your Terminal? You'll get used to this! [Check this out](http://lifehacker.com/5633909/who-needs-a-mouse-learn-to-use-the-command-line-for-almost-anything) if you need a primer on basic commands.
 
-## Vagrant: Level 2
-
-Next, let's learn how to install a differnt flavor of Linux. We'll use Ubuntu, since it's easy to work with and extremely popular.
-
-To do that, we'll create a new `Vagrantfile`. Change into another project directory, and run `vagrant init` again. In that new file, change two things. Set `config.vm.box` to `precise64` and `config.vm.box_url` to `http://files.vagrantup.com/precise64.box`. Make sure the box_url line is uncommented as well. This will install Ubuntu Server 12.04 (64 bit). That will [look just like this highlighted code](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L6-L8). Then run `vagrant up` in your terminal. That'll download Ubuntu (which you only need to do once!) and then start the server.
-
 For more on this process, see [this pretty simply guide](https://gist.github.com/dergachev/3866825), which roughly follows the same process. You can follow that up until it talks about Chef.
 
-## Vagrant: Level 3
+
+## Vagrant: Level 2
 
 As noted, Vagrant let's you edit files directly on your computer (the host), rather than inside the virtual machine (the guest). By default, your computer's directory containing the `Vagrantfile` will be shared and mapped to the `/vagrant` directory in the guest server.
 
@@ -62,13 +66,13 @@ In our setup, however, we'll change this to share the `/var/www` folder in the s
 
 If your server is running already, use `vagrant reload` to restart it using your new settings. You can also use `vagrant halt` to shut down the server when not in use, and use `vagrant up` to start it back up.
 
-## Vagrant: Level 4
+## Vagrant: Level 3
 
 After you get a basic server and file sharing up and running, you'll need to do something with it! This is where you'll be in the Terminal quite a bit, which is why most tutorials turn to Chef, Puppet, Ansible or other tools for installing stuff for you. **You don't learn much that way, and those tools are complicated**. Let's do some learning.
 
 Once again, get "inside" of the server by running `vagrant ssh`. Once you're in, follow [this guide to install a basic LAMP stack](http://fideloper.com/ubuntu-install-php54-lamp). Once that's all installed, you should be able to get the **It Works!** screen on your browser by going to `http://localhost:8080`. Since we're sharing the `/var/www` folder in the guest with our host computer, any file you add to the project directory will be also be available in your web server! Try creating the file `info.php`, and adding `<?php phpinfo();` to it. If you head to `http://localhost:8080/info.php`, you'll see the PHP information display.
 
-## Vagrant: Level 5
+## Vagrant: Level 4
 
 Vagrant sets up a [forwarding mechanism](http://docs.vagrantup.com/v2/networking/forwarded_ports.html) so you can use `localhost:8080` in your browser to view your Vagrant web server. Alternatively, you can [configure Vagrant to setup a static IP address of your choosing](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L10). Then you can use the IP address in the browser instead of the forwarded `localhost:8080`. I also often use [xip.io](http://xip.io), which let's use addresses such as `http://myproject.192.168.33.10.xip.io` (where 192.168.33.10 is the IP address I happen to give my Vagrant server). This way you can setup separate projects within the same server, and differentiate them by subdomain (`myproject` being the subdomain in this example).
 
