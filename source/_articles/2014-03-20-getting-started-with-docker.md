@@ -1,5 +1,4 @@
 ---
-draft: true
 title: Getting Started with Docker
 
 ---
