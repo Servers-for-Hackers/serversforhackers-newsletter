@@ -9,3 +9,7 @@ sculpin_content_types:
         type: path
         singular_name: email
         permalink: emails/:year/:month/:day/:filename/
+    articles:
+        type: path
+        singular_name: article
+        permalink: articles/:year/:month/:day/:filename/
