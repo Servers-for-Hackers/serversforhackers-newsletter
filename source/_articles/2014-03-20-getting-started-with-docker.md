@@ -65,7 +65,7 @@ Docker has a concept of "base containers", which you use to build off of. After 
 
 One of Docker's most basic images is just called "Ubuntu". Let's run an operation on it.
 
-> If the image is not already downloaded in your system, it will download it first from the "Ubuntu repository". Note the use of similar terminology to VCS systems such as Git.
+> If the image is not already downloaded in your system, it will download it first from the "Ubuntu repository". Note the use of similar terminology to version control systems such as Git.
 
 Run Bash:
 
@@ -225,8 +225,9 @@ Also run `docker ps -a`:
     3d3ed53987ec        77ca921f5eef            /bin/sh -c #(nop) AD   About a minute ago   Exit 0             sleepy_brattain
     b281b7bf017f        cccba2355de7            /bin/sh -c mkdir /et   About a minute ago   Exit 0             high_heisenberg
     56a84c7687e9        fideloper/docker-e...   /bin/sh -c #(nop) MA   4 minutes ago        Exit 0             backstabbing_turing
+    ... other images ...
 
-What you can see here is that for **each line in the Dockerfile resulting in a change in the image used, a new container (and commit sha) is produced**. (Also, how funny is it made a container named "backstabbing_turing"?)
+What you can see here is that **for each line in the Dockerfile, a new container (and commit sha) is produced** if that line results in a change to the image used. Similar(ish) to version control! (Also, how funny is the name "backstabbing_turing"?)
 
 ### Finally, run the web server
 
