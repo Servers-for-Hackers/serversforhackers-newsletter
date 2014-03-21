@@ -55,7 +55,7 @@ And finally, fixing a Vagrant plugin conflict:
 
 If you're **not** using CoreOS, then check out [this page](https://www.docker.io/gettingstarted/) with install instructions for other flavors of Linux. **Note:** Ubuntu is what Docker develops on, so that's a safe bet.
 
-> If you are useing CoreOS, dont be dismayed when it tries to restart on you. It's a "feature", done during auto-updates. You may, however, need to run `vagrant reload` to restart the server so Vagrant set up file sync and networking again.
+> If you are using CoreOS, dont be dismayed when it tries to restart on you. It's a "feature", done during auto-updates. You may, however, need to run `vagrant reload` to restart the server so Vagrant set up file sync and networking again.
 
 ## Your First Container
 
@@ -63,7 +63,7 @@ This is the unfortunate baby-step which everyone needs to take to first get thei
 
 Docker has a concept of "base containers", which you use to build off of. After you make changes to a base container, you can save those change and commit them. You can even push your boxes up to [index.docker.io](http://index.docker.io).
 
-One of Docker's most basic images is just called "Ubuntu". Let's run an operation on it. 
+One of Docker's most basic images is just called "Ubuntu". Let's run an operation on it.
 
 > If the image is not already downloaded in your system, it will download it first from the "Ubuntu repository". Note the use of similar terminology to VCS systems such as Git.
 
@@ -98,7 +98,7 @@ What's that command doing?
 Exit out of that shell (`ctrl+d` or type `exit`) and run `docker ps -a` again. You'll see some more output similar to before:
 
 	CONTAINER ID    IMAGE           COMMAND         CREATED              STATUS      PORTS       NAMES
-	30557c9017ec    ubuntu:12.04    /bin/bash       About a minute ago   Exit 127                elegant_pike        
+	30557c9017ec    ubuntu:12.04    /bin/bash       About a minute ago   Exit 127                elegant_pike
 	8ea31697f021    ubuntu:12.04    /bin/bash       22 minutes ago       Exit 0                  loving_pare
 
 Copy and paste the most recent Container ID (`30557c9017ec` in my case). Use that ID and run `docker diff <container id>`. For me, I see:
@@ -220,10 +220,10 @@ Also run `docker ps -a`:
 
     core@localhost ~/webapp $ docker ps -a
     CONTAINER ID        IMAGE                   COMMAND                CREATED              STATUS    PORTS    NAMES
-    de48fa2b142b        8dc0de13d8be            /bin/sh -c #(nop) CM   About a minute ago   Exit 0             cranky_turing         
-    84c5b21feefc        2eb367d9069c            /bin/sh -c #(nop) EX   About a minute ago   Exit 0             boring_babbage        
-    3d3ed53987ec        77ca921f5eef            /bin/sh -c #(nop) AD   About a minute ago   Exit 0             sleepy_brattain       
-    b281b7bf017f        cccba2355de7            /bin/sh -c mkdir /et   About a minute ago   Exit 0             high_heisenberg       
+    de48fa2b142b        8dc0de13d8be            /bin/sh -c #(nop) CM   About a minute ago   Exit 0             cranky_turing
+    84c5b21feefc        2eb367d9069c            /bin/sh -c #(nop) EX   About a minute ago   Exit 0             boring_babbage
+    3d3ed53987ec        77ca921f5eef            /bin/sh -c #(nop) AD   About a minute ago   Exit 0             sleepy_brattain
+    b281b7bf017f        cccba2355de7            /bin/sh -c mkdir /et   About a minute ago   Exit 0             high_heisenberg
     56a84c7687e9        fideloper/docker-e...   /bin/sh -c #(nop) MA   4 minutes ago        Exit 0             backstabbing_turing
 
 What you can see here is that for **each line in the Dockerfile resulting in a change in the image used, a new container (and commit sha) is produced**. (Also, how funny is it made a container named "backstabbing_turing"?)
@@ -232,7 +232,7 @@ What you can see here is that for **each line in the Dockerfile resulting in a c
 
 Let's run this web server! Use `docker run -p 80:80 -d nginx-example` (assuming you also named yours "nginx-example" when building it).
 
-> The `-p 80:80` binds the Container's port 80 to the guest machines, so if we `curl localhost` or go to the server's IP address in our browser, we'll see the results of Nginx processing requests on port 80 in the container. 
+> The `-p 80:80` binds the Container's port 80 to the guest machines, so if we `curl localhost` or go to the server's IP address in our browser, we'll see the results of Nginx processing requests on port 80 in the container.
 
     core@localhost ~/webapp $ docker run -d nginx-example
     73750fc2a49f3b7aa7c16c0623703d00463aa67ba22d2108df6f2d37276214cc # Success!
@@ -303,7 +303,7 @@ Note that the IP address I used is that of my CoreOS server. I set the IP addres
             }
         },
         ... more JSON ...
-    }]     
+    }]
 
 ### Linking Containers
 
@@ -314,11 +314,11 @@ For example:
 Start a container and name it something useful (in this case, `mysql`, via the `-name` parameter):
 
 	docker run -p 3306:3306 -name mysql -d some-mysql-image
-	
+
 Start your web application container and link it to that container via `-d name:db` (where `db` is an arbitrary name used in the container's environment variables):
 
 	docker run -p 80:80 -link mysql:db -d some-application-image
-	
+
 In this example, the `some-application-image` will have environment variables available such as `DB_PORT_3306_TCP_ADDR=172.17.0.8` and `DB_PORT_3306_TCP_PORT=3306` which you application can use to know the database location.
 
 > Here's an example of a [MySQL Dockerfile](https://github.com/fideloper/docker-mysql)
