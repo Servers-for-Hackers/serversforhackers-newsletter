@@ -136,6 +136,10 @@ footer {
     margin: 8px 0;
 }
 
+.article-content img {
+    max-width: 100%;
+}
+
 /**** PRETTY PRINT ****/
 .post pre {
     margin-bottom: 20px
