@@ -136,7 +136,8 @@ footer {
     margin: 8px 0;
 }
 
-.article-content img {
+.article-content img,
+.content img {
     max-width: 100%;
 }
 
