@@ -9,6 +9,29 @@
             <div class="content">
                 {{ page.blocks.content|raw }}
             </div>
+            <div class="content" id="form" style="text-align:center;">
+                <hr /><br /><br />
+                <form action="http://serversforhackers.us3.list-manage.com/subscribe/post?u=a8135265ae1b33559181e2f60&amp;id=5b5ccc2ff7" method="post">
+                <p>If you like what you see here, check out <a href="/editions">past editions</a> and Signup to receive regular newsletters:</p>
+                    <ul>
+                        <li><input type="email" name="EMAIL" placeholder="Email Address" class="txt" value=""></li>
+                        <li><button type="submit" class="subcr">Subscribe</button></li>
+                    </ul>
+                    <div style="position: absolute; left: -5000px;"><input type="text" name="b_a8135265ae1b33559181e2f60_5b5ccc2ff7" value=""></div>
+                </form>
+            </div>
+            <div class="content" id="comments">
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'serversforhackers';
+
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+            </div>
 {% endblock %}
 {% block extra_scripts %}
   <!--[if lte IE 9]>
