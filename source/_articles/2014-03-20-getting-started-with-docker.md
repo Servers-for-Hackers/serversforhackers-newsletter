@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Docker
-
+descr: Start using Docker now! These are the basics to get up and running, along with a few important points on how to best use Docker.
 ---
 
 

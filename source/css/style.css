@@ -50,10 +50,48 @@ strong {
     padding: 0 20px;
 }
 
+#nav ul,
+#nav li {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav ul {
+    border-bottom: 1px dotted #f65821;
+}
+
+#nav li {
+    display: block;
+    float: left;
+    border-left: 1px dotted #f65821;
+}
+
+#nav li:first-child {
+    border-left:none;
+}
+
+#nav li a {
+    display: block;
+    font-weight: 300;
+    padding: 12px;
+}
+
 #main .content,
 header.content,
 #foot {
     text-align: center;
+}
+
+#main #articles,
+#main #articles h1,
+#main #articles h2,
+#main #articles h3,
+#main #articles h4,
+#main #articles h5,
+#main #articles h6 {
+    text-align: left;
 }
 
 #description.content {
@@ -220,3 +258,8 @@ code {
     background-color: transparent
 }
 
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}

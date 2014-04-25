@@ -1,0 +1,21 @@
+---
+layout: default
+title: Articles
+id: main
+use: [articles]
+---
+
+            <div class="content" id="description">
+                <h1>SFH Articles</h1>
+                <p>Separate from email editions, these are stand-alone articles!</p>
+                <hr />
+            </div>
+            <div class="content" id="articles">
+                {% for article in data.articles %}
+                <article class="edition_overview">
+                    <h2><a href="{{ article.url }}">{{ article.title }} - <span>{{ article.date | date("m.d.Y") }}</span></a></h2>
+                    <p>{{ article.descr }}</p>
+                    <hr />
+                </article>
+                {% endfor %}
+            </div>

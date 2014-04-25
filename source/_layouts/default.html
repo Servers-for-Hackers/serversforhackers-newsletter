@@ -50,6 +50,15 @@
 </head>
 <body>
     <div id="container">
+        <div id="nav">
+            <ul class="group">
+                <li><a href="/">Home</a></li>
+                <li><a href="/editions">Email Editions</a></li>
+                <li><a href="/articles">Articles</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="container">
         <div class="row" id="{{ page.id }}">
 {% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
         </div>
