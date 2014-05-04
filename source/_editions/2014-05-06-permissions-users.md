@@ -24,12 +24,12 @@ Users can perform **read (r)**, **write (w)** and **execute (x)** operations on 
 The other half of this is users and groups. For any file and directory, we can define how **users (u)**, **groups (g)** and **others (o)** can interact with a directory or file. Here's how that breaks down:
 
 * `User` - The permission for *owners* of a file or directory
-* `Group` - The permissios for users belonging to a group. A user can be part of one or more groups. Groups permissions are the primary means for how multiple users can read, write or execute the same sets of files
+* `Group` - The permissios for users belonging to a *group*. A user can be part of one or more groups. Groups permissions are the primary means for how multiple users can read, write or execute the same sets of files
 * `Other` - The permissions for users who aren't the user or part of a group assigned to a file or directory
 
 ### Checking Permissions
 
-Let's check the permissions of a directory, for example `/var/www`:
+To illustrate this, let's check the permissions of a directory, for example `/var/www`:
 
     $ ls -la /var/www
     drwxr-xr-x  2 root root 4096 May  3 19:52 .          # Curent Directory
@@ -42,13 +42,14 @@ How do these columns of information break down?
 * `2` - This is the number of ["hard links"](http://superuser.com/a/443781) to the file or directory
 * `root root` - The User and Group assigned to the file or directory
 * `4096` - The size of the file/directory in bytes
-* `4096 May  3 19:52` - last modified (or created) data/time
+* `May  3 19:52` - last modified (or created) data/time
+* `.` - The file name. A period (.) is the current directory. Two periods (..) is the directory one level up. Otherwise this will show a file or directory name.
 
-Most interesting to this article are the permission attributes. 
+**Let's go over the permission attributes** - that first column of information:
 
-For any permission attribute set, the first slot denotes if it's a **directory (d)**, **link (l)** or **file (-)**.
+For any permission attribute set, the first slot denotes if it's a **directory (d)**, **link (l)**  (as in symbolic link) or **file (-)**.
 
-Then each next set of three denotes the read, write and execute permissions for users groups and others, respectively.
+Then each next three characters denotes the read, write and execute permissions for users groups and others, respectively.
 
 Let's take the permissions `drwxr-xr-x`. 
 
@@ -57,7 +58,7 @@ Let's take the permissions `drwxr-xr-x`.
 * `r-x` - The group can read and execute, but not write
 * `r-x` - The same for others. Since this is a directory, this means users can read the directory but not modify it or its containing files
 
-Now let's analyze `-rw-r--r--`:
+Next, let's analyze `-rw-r--r--`:
 
 * `-` - denotes it's a file
 * `rw-` - denotes users can read, write but not execute the file
@@ -102,9 +103,9 @@ So, for example, let's create the `/var/www` directory as user root and set its 
 	sudo chown www-data:www-data /var/www
 	
 	# Set permissions so user and group has permissions, but not other:
-	sudo chmod ug+rwx /var/www # User and Group have all permissions
-	sudo chmod o-rwx /var/www  # Other has no permissions
-	sudo chmod o+rx /var/www   # Other can read and `cd` into the directory
+	sudo chmod ug+rwx /var/www # User and Group have all permissions (+rwx)
+	sudo chmod o-rwx /var/www  # Other has no permissions (-rwx)
+	sudo chmod o+rx /var/www   # Other can read and `cd` into the directory (+rx)
 
 This is useful if you have a user for deployment on your server. If the deployment user is part of the group `www-data`, that user will have permissions to add/update files within the `/var/www` directory.
 
@@ -113,6 +114,8 @@ Note that files created by a user are set to belong to that users username and m
 
 * [More chmod usage examples](http://fideloper.com/user-group-permissions-chmod-apache)
 * [Permissions to octal (and visa-versa) calculator](http://permissions-calculator.org/)
+
+---
 
 <a name="user_management" id="user_management"></a>
 
@@ -229,7 +232,15 @@ This is how Ubuntu assigns "normal" sudo privileges to users. It defines the "su
 	# Allow members of group sudo to execute any command
 	%sudo   ALL=(ALL:ALL) ALL
 
-Some resources:
+### Running Processes
+
+Processes (programs) are actually run as specific users and groups as well. This means we can regulate what processes can do to the system using the same means as file/directory permissions.
+
+Core processes which need system access are often run as user root. However some run as user root, but then spawn processes as other users.
+
+For example, Apache is started as user root. However, the workers it spawns is set by the User and Group settings in the Apache configuration. In Ubuntu, this is often user `www-data`. This gives Apache the ability to do things like listen to port 80 (requires root privileges), but also more safely spawn processes which (hopefully) cannot perform malicious operations on the server.
+
+## Some resources:
 
 * [Adding/Deleting users on Ubuntu and CentOS](https://www.digitalocean.com/community/articles/how-to-add-and-delete-users-on-ubuntu-12-04-and-centos-6), including giving users `sudo` abilities
 * [Adding a User to a Group (or Second Group)](http://www.howtogeek.com/50787/add-a-user-to-a-group-or-second-group-on-linux/)

@@ -12,7 +12,7 @@ title: Permissions and User Management
         <tr>
           <td>
             <h2>{{ page.title }}</h2>
-            <p class="lead" style="font-style:italic;">Stuff about permissions and user management.</p>
+            <p class="lead" style="font-style:italic;">In this edition we'll learn how *nix handles users and permissions. This will let you setup users for deploying web applications or performing other tasks.</p>
           </td>
           <td class="expander"></td>
         </tr>
@@ -30,7 +30,7 @@ title: Permissions and User Management
         <tr>
           <td class="panel">
 
-            <p>Servers for Hackers is sponsored by <a href="http://www.tipsyandtumbler.co.uk">Tipsy &amp; Tumbler</a>, a full service digital agency with offices in the UK, USA and Eastern Europe. Tipsy &amp; Tumbler specialises in cross platform mobile, web apps, Appcelerator Titanium, Laravel PHP and solutions for digital startups.</p>
+            <p>This newsletter was sponsored by SitePoint, one of the world's biggest resources for web developers. We're looking for web developers to join our (paid) writing team. <a href="http://www.sitepoint.com/write-for-us/?utm_source=serversforhackers&utm_medium=email">Find out more</a>!</p>
           </td>
           <td class="expander"></td>
         </tr>
@@ -48,7 +48,7 @@ title: Permissions and User Management
         <tr>
           <td>
             <h3>Permissions</h3>
-            <p>Covering how to set/user permissions for users and groups, and how to use chmod (without the seemingly meaningless numbers).</p>
+            <p>First, we'll cover how to set read, write and execute permissions for users, groups, and others. We'll also see how to use chmod (without using octals).</p>
           </td>
           <td class="expander"></td>
         </tr>
@@ -91,7 +91,7 @@ title: Permissions and User Management
         <tr>
           <td class="panel">
 
-            <p><a href="http://serversforhackers.com">Serversforhackers.com</a> is on the look out for regular <strong>sponsorship</strong>! If this interests you, feel free to respond to this email directly.</p>
+            <p>Servers for Hackers is sponsored by <a href="http://www.tipsyandtumbler.co.uk">Tipsy &amp; Tumbler</a>, a full service digital agency with offices in the UK, USA and Eastern Europe. Tipsy &amp; Tumbler specialises in cross platform mobile, web apps, Appcelerator Titanium, Laravel PHP and solutions for digital startups</p>
           </td>
           <td class="expander"></td>
         </tr>
@@ -109,7 +109,7 @@ title: Permissions and User Management
         <tr>
           <td>
             <h3>User Management</h3>
-            <p>Creating users and setting their permissions for everyday uses, such as system manager, deploying and "regular" users.</p>
+            <p>Creating users and setting their permissions for everyday uses, such as system management or deploying, is very important. This will cover creating users and setting their permissions, as well as going over running processes as specific users.</p>
           </td>
           <td class="expander"></td>
         </tr>
