@@ -24,7 +24,7 @@ Users can perform **read (r)**, **write (w)** and **execute (x)** operations on 
 The other half of this is users and groups. For any file and directory, we can define how **users (u)**, **groups (g)** and **others (o)** can interact with a directory or file. Here's how that breaks down:
 
 * `User` - The permission for *owners* of a file or directory
-* `Group` - The permissios for users belonging to a *group*. A user can be part of one or more groups. Groups permissions are the primary means for how multiple users can read, write or execute the same sets of files
+* `Group` - The permissions for users belonging to a *group*. A user can be part of one or more groups. Groups permissions are the primary means for how multiple users can read, write or execute the same sets of files
 * `Other` - The permissions for users who aren't the user or part of a group assigned to a file or directory
 
 ### Checking Permissions
@@ -38,7 +38,7 @@ To illustrate this, let's check the permissions of a directory, for example `/va
 
 How do these columns of information break down?
 
-* `drwxr-xr-x` - User/Group/Other Permisions. The preceding "d" denotes this as a directory. Lacking a "d" means it's a file.
+* `drwxr-xr-x` - User/Group/Other Permissions. The preceding "d" denotes this as a directory. Lacking a "d" means it's a file.
 * `2` - This is the number of ["hard links"](http://superuser.com/a/443781) to the file or directory
 * `root root` - The User and Group assigned to the file or directory
 * `4096` - The size of the file/directory in bytes
@@ -75,7 +75,7 @@ Here's some chmod information and a breakdown:
 
 Flags:
 
-* `-R` - Change permissios recursively (if its a directory)
+* `-R` - Change permissions recursively (if its a directory)
 
 User types:
 
@@ -168,7 +168,7 @@ Then we can type in `groups` to see what groups we are part of:
 	$ groups
 	deployer
 
-If you're following along, run the `exit` command to go back to your sudo user (`vagrant` in my case, since I'm writin this article using a Vagrant server).
+If you're following along, run the `exit` command to go back to your sudo user (`vagrant` in my case, since I'm writing this article using a Vagrant server).
 
 Let's set our `deployer` user to have a secondary group of `www-data`. 
 
@@ -202,11 +202,11 @@ On a new server, you want to turn off the ability for user `root` to login over 
 	> PermitRootLogin no             #  Change from yes
 	$ sudo reload ssh
 
-If you create a new user who needs sudo privileges (but isn't the "root" user), you can assign sudo privilgesin a few ways.
+If you create a new user who needs sudo privileges (but isn't the "root" user), you can assign sudo privileges in a few ways.
 
 In Ubuntu, you can add the user to group "sudo":
 
-	sudo usermog -G sudo someusername
+	sudo usermod -G sudo someusername
 
 Otherwise you often need to use `visudo`:
 
@@ -218,7 +218,7 @@ Find a section "user privilege specification" and grant your new user all permis
 	root          ALL=(ALL)       ALL
 	someusername  ALL=(ALL)       ALL  # Add your user here
 
-Save and Exit there and that user will have sudo priviledges!
+Save and Exit there and that user will have sudo privileges!
 
 You may notice some fun things in there. For example, we can setup a group which allows users assigned to it have passwordless-sudo abilities. This is what Vagrant uses for its `vagrant` user:
 
@@ -227,7 +227,7 @@ You may notice some fun things in there. For example, we can setup a group which
 
 Any user assigned the `admin` group will have passwordless sudo abilities.
 
-This is how Ubuntu assigns "normal" sudo privileges to users. It defines the "sudo" group one that has sudo privilges, so we can assign sudo privileges based on groups:
+This is how Ubuntu assigns "normal" sudo privileges to users. It defines the "sudo" group one that has sudo privileges, so we can assign sudo privileges based on groups:
 
 	# Allow members of group sudo to execute any command
 	%sudo   ALL=(ALL:ALL) ALL
