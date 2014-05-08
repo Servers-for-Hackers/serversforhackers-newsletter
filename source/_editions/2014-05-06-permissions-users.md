@@ -14,11 +14,11 @@ Users can perform **read (r)**, **write (w)** and **execute (x)** operations on 
 
 * **Directories**
 	* `read` - ability to read contents of a directory
-	* `write` - ability to rename or create a new file/directory within a directory
+	* `write` - ability to rename or create a new file/directory within a directory (or delete a directory)
 	* `execute` - ability to `cd` into a directory
 * **Files**
 	* `read` - ability to read a file
-	* `write` - ability to edit/write to a file
+	* `write` - ability to edit/write to a file (or delete a file)
 	* `execute` - ability to execute a file (such as a bash command)
 
 The other half of this is users and groups. For any file and directory, we can define how **users (u)**, **groups (g)** and **others (o)** can interact with a directory or file. Here's how that breaks down:
