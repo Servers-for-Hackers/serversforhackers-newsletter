@@ -34,7 +34,7 @@ To illustrate this, let's check the permissions of a directory, for example `/va
     $ ls -la /var/www
     drwxr-xr-x  2 root root 4096 May  3 19:52 .          # Curent Directory
 	drwxr-xr-x 12 root root 4096 May  3 19:46 ..         # Containing Directory
-	-rw-r--r--  1 root root   13 May  3 19:52 index.html # File in this Directory
+	-rw-r-xr--  1 root root   13 May  3 19:52 index.html # File in this Directory
 
 How do these columns of information break down?
 
@@ -58,7 +58,7 @@ Let's take the permissions `drwxr-xr-x`.
 * `r-x` - The group can read and execute, but not write
 * `r-x` - The same for others. Since this is a directory, this means users can read the directory but not modify it or its containing files
 
-Next, let's analyze `-rw-r--r--`:
+Next, let's analyze `-rw-r-xr--`:
 
 * `-` - denotes it's a file
 * `rw-` - denotes users can read, write but not execute the file
