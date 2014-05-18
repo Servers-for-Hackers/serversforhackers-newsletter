@@ -4,15 +4,15 @@ topics: [Copying Files (remotely)]
 
 ---
 
-After an awesome week at Laracon, I have a short (but sweet) edition Servers for Hackers to share. During Laracon, many people expressed gratitude for SFH and [Vaprobash](https://github.com/fideloper/vaprobash). I'm still taken aback - that's so awesome. I'm so glad this content is found to be so useful!
-
 <a name="copying_files" id="copying_files"></a>
 
-## Copying Files
+After an awesome (but tiring!) week at Laracon NYC, I have a simpler (but useful!) edition Servers for Hackers to share. During Laracon, many people expressed gratitude for SFH and [Vaprobash](https://github.com/fideloper/vaprobash). Thank you so much!
 
-So there's quite a few ways of copying files using the command line. Of course we can copy files inside of our own computer, but often **we need to copy files across servers**! There's a few strategies for doing so, which we'll cover here in a little more detail.
+> Special thanks to [@jordonbrill](https://twitter.com/jordonbrill) who gave me this topic idea during the after-party.
 
-### Locally Copying Files
+<span style="font-size:2em;">**So**</span>, there's quite a few ways of copying files using the command line. Of course we can copy files inside of our own computer, but often **we need to copy files *across* servers**! There's a few strategies for doing so, which we'll cover here in a little more detail.
+
+## Copying Files Locally
 
 I suspect this is a boring part of the newsletter - I'll cover it quickly. We can use the `cp` command:
 
@@ -28,7 +28,7 @@ To copy a directory, we copy recursively with the `-r` flag:
     $ cp -r /path/to/source/dir /path/to/destination
     # Result: /path/to/destination/dir exists!
 
-### SCP: Secure Copy
+## SCP: Secure Copy
 
 Secure Copy is the `cp` command, but secure. More importantly, it has the ability to send files to remote servers via SSH!
 
@@ -58,7 +58,7 @@ You can also use the `-i` (identity file) flag to specify an SSH identity file t
     * e.g. Limit to 50 KB/s: `scp -l 400 ~/file.ext user@host.com:~/file.ext`
 * `-q` - Quiet output
 
-### Rsync: Sync Files Across Hosts
+## Rsync: Sync Files Across Hosts
 
 Rsync is another secure way to transfer files. Rsync has the ability to detect file differences, giving it the opportunity to save bandwidth and time when transfering files.
 
@@ -129,7 +129,7 @@ There's also a `-a` or `--archive` option, which is a handy shortcut for the opt
     # Copy using the archive option and print some stats
     $ rsync -a --stats /source/dir/path username@hostname:/destination/dir/path
 
-## Resources
+## More Resources
 
 * [Use ssh config](http://nerderati.com/2011/03/simplify-your-life-with-an-ssh-config-file/) for simpler SSH connections
 * [Rsync manual page](http://linux.die.net/man/1/rsync)
