@@ -30,9 +30,9 @@ To copy a directory, we copy recursively with the `-r` flag:
 
 ## SCP: Secure Copy
 
-Secure Copy is the `cp` command, but secure. More importantly, it has the ability to send files to remote servers via SSH!
+<span style="font-size:2em;">**Secure Copy**</span> is just like the `cp` command, but secure. More importantly, it has the ability to send files to remote servers via SSH!
 
-Copy a file or a remote server:
+Copy a file to a remote server:
 
     # Copy a file:
     $ scp /path/to/source/file.ext username@hostname.com:/path/to/destination/file.ext
@@ -40,7 +40,7 @@ Copy a file or a remote server:
     # Copy a directory:
     $ scp -r /path/to/source/dir username@server-host.com:/path/to/destination
 
-This will attempt to connect to `hostname.com` as user `username`. It will ask you for a password if there's no SSH key setup (or if you don't have a password-less SSH key setup between the two computers). If the connection is authenticated, the file will be copied to the remote server.
+This will attempt to connect to `hostname.com` as user `username`. It will ask you for a password if there's no SSH key setup (or if you *don't* have a password-less SSH key setup between the two computers). If the connection is authenticated, the file will be copied to the remote server.
 
 Since this works just like SSH (using SSH, in fact), we can add flags normally used with the SSH command as well. For example, you can add the `-v` and/or `-vvv` to get various levels of verbosity in output about the connection attempt and file transfer.
 
@@ -60,11 +60,11 @@ You can also use the `-i` (identity file) flag to specify an SSH identity file t
 
 ## Rsync: Sync Files Across Hosts
 
-Rsync is another secure way to transfer files. Rsync has the ability to detect file differences, giving it the opportunity to save bandwidth and time when transfering files.
+<span style="font-size:2em;">**Rsync**</span> is another secure way to transfer files. Rsync has the ability to detect file differences, giving it the opportunity to save bandwidth and time when transfering files.
 
-Just like `scp`, rsync can use SSH to connect to remote hosts and send/receive files from them. The same (mostly) rules and SSH-related flags apply for rsync as well.
+Just like `scp`, `rsync` can use SSH to connect to remote hosts and send/receive files from them. The same (mostly) rules and SSH-related flags apply for `rsync` as well.
 
-Copy a files to a remote server:
+Copy files to a remote server:
 
     # Copy a file
     $ rsync /path/to/source/file.ext username@hostname.com:/path/to/destination/file.ext
@@ -74,6 +74,7 @@ Copy a files to a remote server:
 
 To use a specific SSH identity file and/or SSH port, we need to do a little more work. We'll use the `-e` flag, which lets us choose/modify the remote shell program used to send files.
 
+    # Send files over SSH on port 8888 using a specific identity file:
     $ rsync -e 'ssh -p 8888 -i /home/username/.ssh/some_identity.pem' /source/file.ext username@hostname:/destination/file.ext
 
 **Here are some other common [flags](http://linux.die.net/man/1/rsync) to use:**
@@ -95,7 +96,7 @@ There are many [other options](http://linux.die.net/man/1/rsync) as well - you c
 
 **Do a Dry-Run:**
 
-I often do a dry-run of rsync to preview what files will be copied over. This is useful for making sure your flags are correct and you won't overwrite files you don't with to:
+I often do a dry-run of rsync to preview what files will be copied over. This is useful for making sure your flags are correct and you won't overwrite files you don't wish to:
 
 For this, we can use the `-n` or `--dry-run` flag:
 
