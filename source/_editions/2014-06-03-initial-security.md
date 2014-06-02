@@ -1,6 +1,6 @@
 ---
-title: Some Light Security
-topics: [SSH Access, Firewalls]
+title: Initial Security Setup
+topics: [Initial User Setup, SSH Key Access]
 
 ---
 
@@ -8,9 +8,9 @@ When we first get our hands on a fresh server, some initial security precautions
 
 We'll cover some initial, important security precautions to take.
 
-<a name="ssh_access" id="ssh_access"></a>
+<a name="overview" id="overview"></a>
 
-## SSH Access
+## Overview
 
 Many hosting/server providers start you off with password-based access to the root user (or occasionally a sudo user who doesn't need a password to run commands as root, similar to Vagrant). The root user can do *anything* to our system, and so we want to lock down the ability for remote connections to log in as root.
 
@@ -29,7 +29,9 @@ Then we'll take this one step further - we'll stop users from being able to logi
 1. Create an SSH key on our local computer
 2. Turn off password-based authentication on our server
 
-### Initial User Setup
+<a name="init_setup" id="init_setup"></a>
+
+## Initial User Setup
 
 Alright, let's get started. First, you'll need to log into the server with the credentials your provider gave you. For most, that's something like this:
 
@@ -49,7 +51,7 @@ This will ask you for some information, the most important of which is the passw
 
 CentOS might require you to run `passwd someusername` to set a password on the new user.
 
-> Don't [confused the `adduser` command with the `useradd` command](http://askubuntu.com/questions/345974/what-is-the-difference-between-adduser-and-useradd). Using `adduser` takes care of some work that we'd have to do manually otherwise. You can leave the other questions empty or add in their information (full name, room number, and other somewhat useless information).
+> Don't [confuse the `adduser` command with the `useradd` command](http://askubuntu.com/questions/345974/what-is-the-difference-between-adduser-and-useradd). Using `adduser` takes care of some work that we'd have to do manually otherwise. You can leave the other questions empty or add in their information (full name, room number, and other somewhat useless information).
 
 Next, we need to make this new user (`someusername`) a sudo user. This means allowing the user to use "sudo", to run commands as root. How you do this changes per operating system. On Ubuntu, you can simply add the user to the "sudo" group. (If you need a refresher on what groups are, see the past edition [Permissions and User Management](http://serversforhackers.com/editions/2014/05/06/permissions-users/)).
 
@@ -91,12 +93,12 @@ If you want to get even more secure, you can explicitly define a list of users w
 Once you save and edit from the `/etc/ssh/sshd_config` file, we need to reload the SSH daemon.
 
 	# On Debian/Ubuntu
-	$ service sshd reload
+	$ service ssh restart
 	
 	# RedHat/CentOS
-	$ /etc/init.d/sshd reload
+	$ /etc/init.d/sshd restart
 
-That's it! Before you close your session as user root, I sugget you now open a **new** terminal window (session) and attempt to log in with your new user:
+That's it! Before you close your session as user root, I suggest you now open a **new** terminal window (session) and attempt to log in with your new user:
 
 	# If you left the default port:
 	$ ssh someusername@your-server-ip
@@ -106,7 +108,9 @@ That's it! Before you close your session as user root, I sugget you now open a *
 
 You should beA prompted for a password - enter the one you created and you should be logged in! Try running some commands as "sudo" to ensure it works. 
 
-### SSH Key Access
+<a name="ssh_access" id="ssh_access"></a>
+
+## SSH Key Access
 
 Assuming that's working, we can take this a step further by disallowing users to log in with a password. This means users can only log in with a valid SSH key. This is more secure as it's substantially less likely for a user to get their hands on your SSH private key than it is for them to obtain or guess a password.
 
@@ -130,16 +134,54 @@ Now we've created a private key file (id_myserveridentity) and a public key file
 
 Once that's copied, you can go into your server as your new user ("someusername" in our example).
 
+> Note that we'll use "sudo" now, since we're logging in as our new, non-root user.
+
 	# In your server
 	$ sudo nano ~/.ssh/authorized_key
 	> Paste in your public key and save/exit
 
-So, we're simply appending the public key from our local computer to the `authorized_keys` file of the newly created user on our server. If there's already a key in the `authorized_key` file, just add yours on a newline underneath the other.
+So overall, we're just appending the public key from our local computer to the `authorized_keys` file of the newly created user on our server. If there's already a key in the `authorized_key` file, just add yours on a newline underneath the other.
 
-Then you should be able to login with
+Once the `authorized_keys` file is saved, you should be able to login using your key. You shouldn't need to do anything more, it should attempt your keys first and, finding one, log in using it. You'll need to enter in your password created while generating your SSH key, if you elected to use a password.
+
+On my Mac, I create a long SSH password and then save the password to my keychain, so I don't have to worry about remembering it. When you log into a server and you have an SSH key setup, your Mac should popup asking for your key's password. You'll have the opportunity to save your password to the Keychain then.
+
+> If you're on a Macintosh, remember to click "Remember password in my keychain" so you don't have to type in your SSH password more than once:
+
+![mac ssh password](https://s3.amazonaws.com/serversforhackers/mac-ssh-password.png)
+
+The last thing we'll do is to tell our server to only allow remote access via SSH keys (by turning off the ability to log in using a password).
+
+Once again, we'll edit the `/var/ssh/sshd_config` file:
+
+	# Edit with vim
+	$ vim /etc/ssh/sshd_config
+	
+	# Or, if you're not a vim user:
+	$ nano /etc/ssh/sshd_config
+
+Once inside, find or create the option `PasswordAuthentication` and set it to "no":
+
+	PasswordAuthentication no
+
+Save that file, and once again reload the SSH daemon:
+
+	# Debian/Ubuntu
+	$ sudo service ssh restart
+	
+	# RedHat/CentOS
+	/etc/init.d/sshd restart
+
+You should test that you can still log in after this change **before** exiting out of the server.
+
+And that's it! We've done some basic user security. We've closed off the root user from logging in, create a sudo user, and turned off password authentication. Now in order to log in via SSH, an attacker would need to gain your SSH private key, your SSH password, and then still know your user password to run damaging commands on your server (although there's definitely potential for damage even if an attacker doesn't know the user's password to run sudo commands).
 
 ## Resouces
 
-* [Initial server setup on CentOS](https://www.digitalocean.com/community/articles/initial-server-setup-with-centos-6)
+* [Initial server setup on CentOS 6](https://www.digitalocean.com/community/articles/initial-server-setup-with-centos-6)
+* [Initial server setup on Ubuntu 14.04](https://www.digitalocean.com/community/articles/initial-server-setup-with-ubuntu-14-04)
 * Various ways to [only allow specific users SSH access](http://knowledgelayer.softlayer.com/learning/how-do-i-permit-specific-users-ssh-access)
 * [A Comprehensive SSH Key Primer](http://epocsquadron.com/a-comprehensive-ssh-key-primer/)
+* [Visudo and the sudoers file](https://www.digitalocean.com/community/articles/how-to-edit-the-sudoers-file-on-ubuntu-and-centos)
+
+> If you're a PHP developer, also check out the eBook **[Building Secure PHP Apps](https://leanpub.com/buildingsecurephpapps/c/SecurityForHackers)** by [Ben Edmunds](https://twitter.com/benedmunds).
