@@ -33,7 +33,7 @@ Then we'll take this one step further - we'll stop users from being able to logi
 
 ## Initial User Setup
 
-Alright, let's get started. First, you'll need to log into the server with the credentials your provider gave you. For most, that's something like this:
+**Alright, let's get started.** First, you'll need to log into the server with the credentials your provider gave you. For most, that's something like this:
 
 	$ ssh root@your-server-ip
 
@@ -112,7 +112,7 @@ You should beA prompted for a password - enter the one you created and you shoul
 
 ## SSH Key Access
 
-Assuming that's working, we can take this a step further by disallowing users to log in with a password. This means users can only log in with a valid SSH key. This is more secure as it's substantially less likely for a user to get their hands on your SSH private key than it is for them to obtain or guess a password.
+**Assuming that's working**, we can take this a step further by disallowing users to log in with a password. This means users can only log in with a valid SSH key. This is more secure as it's substantially less likely for a user to get their hands on your SSH private key than it is for them to obtain or guess a password.
 
 On your local computer, the one from which you log into your server (for me, that's my Macbook), run the following command to generate a new SSH key pair (a private and public key):
 
@@ -176,7 +176,9 @@ You should test that you can still log in after this change **before** exiting o
 
 And that's it! We've done some basic user security. We've closed off the root user from logging in, create a sudo user, and turned off password authentication. Now in order to log in via SSH, an attacker would need to gain your SSH private key, your SSH password, and then still know your user password to run damaging commands on your server (although there's definitely potential for damage even if an attacker doesn't know the user's password to run sudo commands).
 
-## Resouces
+## More Resouces
+
+Here are some more resources on similar and adjacent topics you may be interested in:
 
 * [Initial server setup on CentOS 6](https://www.digitalocean.com/community/articles/initial-server-setup-with-centos-6)
 * [Initial server setup on Ubuntu 14.04](https://www.digitalocean.com/community/articles/initial-server-setup-with-ubuntu-14-04)
