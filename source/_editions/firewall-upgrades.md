@@ -9,3 +9,6 @@ Firewall:
 2. Get into detail for additional (MySQL open port)
 3. APPEND, INSERT, DELETE
 4. Read more for CHAINs
+
+Resources:
+* http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
