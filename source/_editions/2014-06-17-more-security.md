@@ -121,11 +121,48 @@ And the command explanation:
 
 This is our first instance of "DROP" - we're simply dropping the network data packet instead of allowing it through to our server.
 
-**REMAINING:**
+### Inserting Rules
 
-* Insert https rule
-* Delete a SSH rule and insert new port ssh rule
-* Persistence, to survive a reboot
+So far we've seen how to **A**ppend rules (to the bottom of the chain). Let's see how to **I**nsert rules, so we can add rules in the middle of a chain.
+
+We haven't yet added a firewall rule to allow HTTPS traffic (port 443). Let's do that:
+
+    sudo iptables -I INPUT 4 -p tcp --dport 443 -j ACCEPT
+
+And the command explanation:
+
+* `-I INPUT 4` - **I**nsert into the INPUT chain at the fourth position
+* `-p tcp` - Apply the rule to the tcp **p**rotocol
+* `--dport 80` - Apply to the **d*estination port 443 (Incoming traffic coming into port 443).
+* `-j ACCEPT` - Use the ACCEPT target; accept the traffic
+
+### Deleting Rules
+
+Let's say we want to change our SSH port from a non-standard port. We'd set that in `/etc/ssh/sshd_config` as explained in the [Initial Security Setup](/editions/2014/06/03/initial-security/) edition. Then we need to change the firewall rules to allow SSH traffic from port 22 to our new port (let's pretend 1234).
+
+First, we'll delete the SSH rule (two ways):
+
+    # Delete at position 3
+    sudo iptables -D INPUT 3
+
+    # Or delete by the rule:
+    sudo iptables -D INPUT -p tcp --dport 22 -j ACCEPT
+
+We can see that `-D` will delete the firewall rule. Otherwise we need to match either the position of the rule or all the conditions set when creating the rule to delete it.
+
+Then we can insert our new SSH rule at port 1234:
+
+    sudo iptables -I INPUT 3 -p tcp --dport 1234 -j ACCEPT
+
+> This article covers ipv4 IP addresses, but iptables can handle rules for both [ipv4](http://en.wikipedia.org/wiki/IPv4) and [ipv6](http://en.wikipedia.org/wiki/IPv6).
+
+### Saving Firewall Rules
+
+By default, iptables doesn't save firewall rules after a reboot (they are saved in memory). We therefore need a way to save the rules and re-apply them on reboot.
+
+1. Output rules to file
+2. Restore rules to file
+3. Install persistent and apply rules
 
 ## Automatic Updates
 
@@ -135,13 +172,10 @@ We want our server to run automatic security updates (skipping other upgrades wh
 2. https://bjornjohansen.no/get-your-vps-up-and-running
 3. http://lattejed.com/first-five-and-a-half-minutes-on-a-server-with-ansible - Ansible
 
-Firewall:
-1. Show settings for web server
-2. Get into detail for additional (MySQL open port)
-3. APPEND, INSERT, DELETE
-4. Read more for CHAINs
+## More Resources:
 
-Resources:
 * http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
-* Try out UFW
-* Try out Shorewall
+* [Try out UFW](https://help.ubuntu.com/community/UFW), a wrapper for Iptables. More [here](https://help.ubuntu.com/14.04/serverguide/firewall.html) and [here](https://wiki.archlinux.org/index.php/Uncomplicated_Firewall).
+* [Try out Shorewall](http://shorewall.net/shorewall_quickstart_guide.htm), an alternative to Iptables.
+* [Logging dropped packets with iptables](http://fideloper.com/iptables-tutorial)
+* [Persisting iptables rules on CentOS](https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s1-iptables-saving.html)
