@@ -186,4 +186,4 @@ Here are some more resources on similar and adjacent topics you may be intereste
 * [A Comprehensive SSH Key Primer](http://epocsquadron.com/a-comprehensive-ssh-key-primer/)
 * [Visudo and the sudoers file](https://www.digitalocean.com/community/articles/how-to-edit-the-sudoers-file-on-ubuntu-and-centos)
 
-> If you're a PHP developer, also check out the eBook **[Building Secure PHP Apps](https://leanpub.com/buildingsecurephpapps/c/SecurityForHackers)** by [Ben Edmunds](https://twitter.com/benedmunds).
+> If you're a PHP developer, also check out the eBook **[Building Secure PHP Apps](http://buildingsecurephpapps.com/?coupon=SecurityForHackers)** by [Ben Edmunds](https://twitter.com/benedmunds).
