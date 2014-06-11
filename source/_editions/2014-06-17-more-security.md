@@ -1,6 +1,6 @@
 ---
 title: More Security
-topics: [Firewall, Security Updates]
+topics: [Setting Up the Firewall With Iptables, Automatic Security Updates]
 
 ---
 
@@ -10,7 +10,7 @@ I still count this as basic security - things you should do when you first get y
 
 <a name="firewall" id="firewall"></a>
 
-## Firewall
+## Setting Up the Firewall: Iptables
 
 The firewall offers some really basic protections on your server - it's a very important tool. Unfortunately, iptables is the defacto firewall, and it's a little hard to pick up and use. Hopefully this will clear up a bit of how it works.
 
@@ -37,9 +37,9 @@ Let's go over this list of rules we have for inbound traffic, in order of appear
 5. Accept TCP traffic over port 443 (which iptables labels "https" by default)
 6. Drop anything and everything else
 
-See how the last rule says to DROP all traffic? If a packet has passed all other rules without matching, it will reach this rule, which says to DROP the data. This means that we've only allowed current connections, SSH (tcp port 22), http (tcp port 80) and https (tcp port 443) traffic into our server! Everything else is blocked.
+See how the last rule says to DROP all from/to anywhere? If a packet has passed all other rules without matching, it will reach this rule, which says to DROP the data. This means that we've only allowed current connections, SSH (tcp port 22), http (tcp port 80) and https (tcp port 443) traffic into our server! Everything else is blocked.
 
-> The first rule that matches the traffic type (protocol, interface, source/destination and other types) will decide how to handle the traffic. Rules below a match are not tested.
+> The first rule that matches the traffic type (protocol, interface, source/destination and other types) will decide how to handle the traffic. Rules below a match are not applied.
 > 
 > If more than one rule match the traffic type, then the 2nd rule will never be reached.
 
@@ -127,11 +127,11 @@ So far we've seen how to **A**ppend rules (to the bottom of the chain). Let's se
 
 We haven't yet added a firewall rule to allow HTTPS traffic (port 443). Let's do that:
 
-    sudo iptables -I INPUT 4 -p tcp --dport 443 -j ACCEPT
+    sudo iptables -I INPUT 5 -p tcp --dport 443 -j ACCEPT
 
 And the command explanation:
 
-* `-I INPUT 4` - **I**nsert into the INPUT chain at the fourth position
+* `-I INPUT 5` - **I**nsert into the INPUT chain at the fifth position, just after the "http" rule, which is at the fourth position (The position starts at 1 instead of 0)
 * `-p tcp` - Apply the rule to the tcp **p**rotocol
 * `--dport 80` - Apply to the **d**estination port 443 (Incoming traffic coming into port 443).
 * `-j ACCEPT` - Use the ACCEPT target; accept the traffic
@@ -156,26 +156,109 @@ Then we can insert our new SSH rule at port 1234:
 
 > This article covers ipv4 IP addresses, but iptables can handle rules for both [ipv4](http://en.wikipedia.org/wiki/IPv4) and [ipv6](http://en.wikipedia.org/wiki/IPv6).
 
+Now check that we've accomplished all that we've wanted:
+
+    $ sudo iptables -L -v
+
+    Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+    pkts bytes target  prot opt in     out     source      destination         
+    3226  315K ACCEPT  all  --  lo     any     anywhere    anywhere            
+    712 37380 ACCEPT   all  --  any    any     anywhere    anywhere      ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     tcp  --  any    any     anywhere    anywhere      tcp dpt:ssh
+    0     0 ACCEPT     tcp  --  any    any     anywhere    anywhere      tcp dpt:http
+    0     0 ACCEPT     tcp  --  any    any     anywhere    anywhere      tcp dpt:https
+    8  2176 DROP       all  --  any    any     anywhere    anywhere
+
 ### Saving Firewall Rules
 
-By default, iptables doesn't save firewall rules after a reboot (they are saved in memory). We therefore need a way to save the rules and re-apply them on reboot.
+By default, iptables does **not** save firewall rules after a reboot, as the rules exist in memory. We therefore need a way to save the rules and re-apply them on reboot.
 
-1. Output rules to file
-2. Restore rules to file
-3. Install persistent and apply rules
+At any time, you can output the curren iptables rules to stdout:
 
-## Automatic Updates
+    $ sudo iptables-save
 
-We want our server to run automatic security updates (skipping other upgrades which could break our software). Whether or not you consider this a best practice is up to you - perhaps security upgrades have potential to break your applications. Use this as you see fit.
+And we can restore iptables rules with that data output from `iptables-save`, using the `iptables-restore` command:
 
-1. https://help.ubuntu.com/14.04/serverguide/automatic-updates.html
-2. https://bjornjohansen.no/get-your-vps-up-and-running
-3. http://lattejed.com/first-five-and-a-half-minutes-on-a-server-with-ansible - Ansible
+    # Output rules to files "iptables-backup.rules"
+    $ sudo iptables-save > iptables-backup.rules
+
+    # Restore rules from our backup file
+    $ sudo iptables-restore < iptables-backup.rules
+
+So, we can back up our rules and then run a restore on boot, but let's automate this. 
+
+On Ubuntu, we can use the `iptables-persistent` package:
+
+    # Install the service
+    $ sudo apt-get install -y iptables-persistent
+
+    # Start the service
+    $ sudo service iptables-persistent start 
+
+Once this is installed, we can output our rules to a file iptables-persitent reads when it starts. This file will contain the output from `iptables-save` and load those rules in when the server boots (or when `iptables-persistent` is started/restarted).
+
+    $ sudo iptables-save | sudo tee /etc/iptables/rules.v4
+
+> Note that if you are using ipv6, you can use `sudo ip6tables-save | sudo tee /etc/iptables/rules.v6 ` with the iptables-persistent package.
+
+When that's done, restart iptables-persistent:
+    
+    $ sudo service iptables-persistent restart
+
+And that's the basics of iptables for securing your server!
+
+<a name="security_updates" id="security_updates"></a>
+
+## Automatic Security Updates
+
+You may want your server to run automatic security updates. In Ubuntu, we can do this, and skipping other upgrades which could break our server software. 
+
+Whether or not you consider this a best practice is up to you - perhaps security upgrades have potential to break your applications as well. Because I don't have an opinion on if this is "best practive", I'd say use this as you see fit. I personally have it on this server, which runs Nginx as well as php-fpm (for another site).
+
+First, we'll install [`unattended-upgrades`](https://help.ubuntu.com/14.04/serverguide/automatic-updates.html) (it may already be installed):
+
+    $ sudo apt-get install unattended-upgrades
+
+Then update `/etc/apt/apt.conf.d/50unattended-upgrades` (the filename might vary slightly). Make sure  `"Ubuntu trusty-security";` is uncommented, while the remaining "Allowed-Origins" are:
+
+    Unattended-Upgrade::Allowed-Origins {
+        "Ubuntu trusty-security";
+    //  "Ubuntu trusty-updates";
+    };
+
+> My example says "trusty" since I'm using Ubuntu 14.04. You might have a different name for your Ubuntu distribution there, such as "precise" (12.04).
+
+Alternatively, you might see this inside of the `/etc/apt/apt.conf.d/50unattended-upgrades` file, in which case, you're all set - it handles changing for your distribution of Ubuntu dynamically:
+
+    Unattended-Upgrade::Allowed-Origins {
+        "${distro_id}:${distro_codename}-security";
+    //  "${distro_id}:${distro_codename}-updates";
+    //  "${distro_id}:${distro_codename}-proposed";
+    //  "${distro_id}:${distro_codename}-backports";
+    };
+
+You should also decide if you want to uncomment/set/change `Unattended-Upgrade::Automatic-Reboot "false";`, as some updates can trigger a server reboot. If you have running processes that don't turn back on after a reboot, that could cause problems!
+
+Finally, create or edit `/etc/apt/apt.conf.d/02periodic` and ensure these lines are present:
+
+    APT::Periodic::Update-Package-Lists "1";
+    APT::Periodic::Download-Upgradeable-Packages "1";
+    APT::Periodic::AutocleanInterval "7";
+    APT::Periodic::Unattended-Upgrade "1";
+
+"Periodic" items are set to run daily via the daily cron via the `/etc/cron.daily/apt` file.
+
+Upgrade information is logged within the `/var/log/unattended-upgrades` directory.
 
 ## More Resources:
 
-* http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
+* [First 5 Minutes On a Server](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers) - linux security
 * [Try out UFW](https://help.ubuntu.com/community/UFW), a wrapper for Iptables. More [here](https://help.ubuntu.com/14.04/serverguide/firewall.html) and [here](https://wiki.archlinux.org/index.php/Uncomplicated_Firewall).
 * [Try out Shorewall](http://shorewall.net/shorewall_quickstart_guide.htm), an alternative to Iptables.
-* [Logging dropped packets with iptables](http://fideloper.com/iptables-tutorial)
+* More on iptables, including [Logging dropped packets with iptables](http://fideloper.com/iptables-tutorial)
 * [Persisting iptables rules on CentOS](https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s1-iptables-saving.html)
+* It seems to be harder to get automatic security updates only in CentOS/RedHat, but check out the package `yum-cron` to get automated updates.
+* For more options for configuring Unattended Upgrades, see [this article](https://bjornjohansen.no/get-your-vps-up-and-running), particularly options found in `/etc/apt/apt.conf.d/50unattended-upgrades`.
+* Some [server setup with Ansible](http://lattejed.com/first-five-and-a-half-minutes-on-a-server-with-ansible)
+
+> If you're a PHP developer, also check out the eBook **[Building Secure PHP Apps](http://buildingsecurephpapps.com/?coupon=SecurityForHackers)** by [Ben Edmunds](https://twitter.com/benedmunds).
