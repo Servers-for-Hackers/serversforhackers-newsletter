@@ -130,19 +130,21 @@ This will ask your for a password. You can either leave this blank (for password
 
 > Note that the SSH password you create is NOT the user password used to run sudo commands on the server.
 
-Now we've created a private key file (id_myserveridentity) and a public key file (id_myserveridentity.pub). We need to put the public key on the server, so that the server knows its a key authorized to be used to log in. Copy the contents of the public key file (on mac: `cat ~/.ssh/id_myserveridentity.pub | pbcopy` will add it to your clipboard).
+Now we've created a private key file (id_myserveridentity) and a public key file (id_myserveridentity.pub). We need to put the public key on the server, so that the server knows its a key authorized to be used to log in. Copy the contents of the public key file (on **Mac**: `cat ~/.ssh/id_myserveridentity.pub | pbcopy` will add it to your clipboard).
 
 Once that's copied, you can go into your server as your new user ("someusername" in our example).
 
 > Note that we'll use "sudo" now, since we're logging in as our new, non-root user.
 
 	# In your server
-	$ sudo nano ~/.ssh/authorized_key
+	$ sudo nano ~/.ssh/authorized_keys
 	> Paste in your public key and save/exit
 
-So overall, we're just appending the public key from our local computer to the `authorized_keys` file of the newly created user on our server. If there's already a key in the `authorized_key` file, just add yours on a newline underneath the other.
+So overall, we're just appending the public key from our local computer to the `authorized_keys` file of the newly created user on our server. If there's already a key in the `authorized_keys` file, just add yours on a newline underneath the other.
 
 Once the `authorized_keys` file is saved, you should be able to login using your key. You shouldn't need to do anything more, it should attempt your keys first and, finding one, log in using it. You'll need to enter in your password created while generating your SSH key, if you elected to use a password.
+
+> Note: You may need to [set some permissions](http://stackoverflow.com/questions/6377009/adding-public-key-to-ssh-authorized-keys-does-not-log-me-in-automatically) of your `.ssh` and `authorized_keys` directory. The following command should do: `chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys`.
 
 On my Mac, I create a long SSH password and then save the password to my keychain, so I don't have to worry about remembering it. When you log into a server and you have an SSH key setup, your Mac should popup asking for your key's password. You'll have the opportunity to save your password to the Keychain then.
 
