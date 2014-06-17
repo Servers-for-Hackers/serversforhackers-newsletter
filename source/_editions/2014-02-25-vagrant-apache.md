@@ -1,7 +1,7 @@
 ---
 title: Vagrant and Apache
 topics: [Getting Off of MAMP, Configuring Apache Virtual Hosts]
-
+description: This is the very first Servers for Hackers newsletter. We'll get off of MAMP, and into Vagrant and setting up Apache!
 ---
 
 This is the very first Servers for Hackers newsletter. As one of the main goals of this newsletter is to get those less experienced on the server side of things get their feet wet, we'll start with some basics.
@@ -38,7 +38,7 @@ Now edit your `Vagrantfile` in order to tell Vagrant which flavor of Linux to in
 This will install Ubuntu Server 12.04 (64 bit). That will [look just like this highlighted code](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-share-var-www-rb-L6-L8).
 
 Save that and continue onward:
-	    
+
     $ vagrant up    # Starts the server
     # ... wait for it to bootup ...
     $ vagrant ssh   # Get into your new server!

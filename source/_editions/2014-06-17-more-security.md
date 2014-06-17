@@ -1,10 +1,10 @@
 ---
 title: More Security
 topics: [Setting Up the Firewall With Iptables, Automatic Security Updates]
-
+description: In this edition, we'll continue on with more security by learning how to manage the firewall with Iptables. We'll also learn how to turn on automatic security updates on Ubuntu.
 ---
 
-In the last edition, we talked about some basic security setup for your new servers. In this edition, we'll add on to that! 
+In the last edition, we talked about some basic security setup for your new servers. In this edition, we'll add on to that!
 
 I still count this as basic security - things you should do when you first get your hands on a server. In fact, let's just call this "Initial Security Setup, Part II".
 
@@ -40,7 +40,7 @@ Let's go over this list of rules we have for inbound traffic, in order of appear
 See how the last rule says to DROP all from/to anywhere? If a packet has passed all other rules without matching, it will reach this rule, which says to DROP the data. This means that we've only allowed current connections, SSH (tcp port 22), http (tcp port 80) and https (tcp port 443) traffic into our server! Everything else is blocked.
 
 > The first rule that matches the traffic type (protocol, interface, source/destination and other types) will decide how to handle the traffic. Rules below a match are not applied.
-> 
+>
 > If more than one rule match the traffic type, then the 2nd rule will never be reached.
 
 So, we've effectively (for the most part) shut off our server from external connections unless they come from SSH, HTTP, or HTTPS tcp ports.
@@ -54,10 +54,10 @@ OK, so we need to know how to add these rules. You can check your current rules 
 You'll see something like this:
 
     Chain INPUT (policy ACCEPT 35600 packets, 3504K bytes)
-     pkts bytes target     prot opt in     out     source    destination         
+     pkts bytes target     prot opt in     out     source    destination
 
     Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
-     pkts bytes target     prot opt in     out     source    destination         
+     pkts bytes target     prot opt in     out     source    destination
 
     Chain OUTPUT (policy ACCEPT 35477 packets, 3468K bytes)
      pkts bytes target     prot opt in     out     source    destination
@@ -161,8 +161,8 @@ Now check that we've accomplished all that we've wanted:
     $ sudo iptables -L -v
 
     Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
-    pkts bytes target  prot opt in     out     source      destination         
-    3226  315K ACCEPT  all  --  lo     any     anywhere    anywhere            
+    pkts bytes target  prot opt in     out     source      destination
+    3226  315K ACCEPT  all  --  lo     any     anywhere    anywhere
     712 37380 ACCEPT   all  --  any    any     anywhere    anywhere      ctstate RELATED,ESTABLISHED
     0     0 ACCEPT     tcp  --  any    any     anywhere    anywhere      tcp dpt:ssh
     0     0 ACCEPT     tcp  --  any    any     anywhere    anywhere      tcp dpt:http
@@ -185,7 +185,7 @@ And we can restore iptables rules with that data output from `iptables-save`, us
     # Restore rules from our backup file
     $ sudo iptables-restore < iptables-backup.rules
 
-So, we can back up our rules and then run a restore on boot, but let's automate this. 
+So, we can back up our rules and then run a restore on boot, but let's automate this.
 
 On Ubuntu, we can use the `iptables-persistent` package:
 
@@ -193,7 +193,7 @@ On Ubuntu, we can use the `iptables-persistent` package:
     $ sudo apt-get install -y iptables-persistent
 
     # Start the service
-    $ sudo service iptables-persistent start 
+    $ sudo service iptables-persistent start
 
 Once this is installed, we can output our rules to a file iptables-persitent reads when it starts. This file will contain the output from `iptables-save` and load those rules in when the server boots (or when `iptables-persistent` is started/restarted).
 
@@ -202,7 +202,7 @@ Once this is installed, we can output our rules to a file iptables-persitent rea
 > Note that if you are using ipv6, you can use `sudo ip6tables-save | sudo tee /etc/iptables/rules.v6 ` with the iptables-persistent package.
 
 When that's done, restart iptables-persistent:
-    
+
     $ sudo service iptables-persistent restart
 
 And that's the basics of iptables for securing your server!
@@ -211,7 +211,7 @@ And that's the basics of iptables for securing your server!
 
 ## Automatic Security Updates
 
-You may want your server to run automatic security updates. In Ubuntu, we can do this, and skipping other upgrades which could break our server software. 
+You may want your server to run automatic security updates. In Ubuntu, we can do this, and skipping other upgrades which could break our server software.
 
 Whether or not you consider this a best practice is up to you - perhaps security upgrades have potential to break your applications as well. Because I don't have an opinion on if this is "best practive", I'd say use this as you see fit. I personally have it on this server, which runs Nginx as well as php-fpm (for another site).
 

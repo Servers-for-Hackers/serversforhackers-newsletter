@@ -11,28 +11,29 @@
 
     <title>{% block title %}{{ page.title }}{% endblock %} | Servers for Hackers</title>
 
-    <meta name="description" content="A newsletter about servers, geared for developers; Simple server management for hackers." />
-    <meta name="keywords" content="servers, server management, devops, easy servers, ubuntu, debian, redhat, centos" />
+    <meta name="description" content="{% block title %}{{ description }}{% endblock %}" />
+    <meta name="keywords" content="servers, server management, devops, sysadmin, easy servers, ubuntu, debian, redhat, centos" />
 
     <!--Facebook Metadata /-->
     <meta property="fb:page_id" content="" />
     <meta property="og:image" content="http://serversforhackers.com/sfh_share.png?v=1" />
-    <meta property="og:description" content="A newsletter about servers, geared for developers; Simple server management for hackers."/>
-    <meta property="og:title" content="Servers for Hackers"/>
+    <meta property="og:description" content="{% block title %}{{ description }}{% endblock %}"/>
+    <meta property="og:title" content="{% block title %}{{ page.title }}{% endblock %}"/>
 
     <!--Google+ Metadata /-->
-    <meta itemprop="name" content="Servers for Hackers">
-    <meta itemprop="description" content="A newsletter about servers, geared for developers; Simple server management for hackers.">
+    <meta itemprop="name" content="{% block title %}{{ page.title }}{% endblock %}">
+    <meta itemprop="description" content="{% block title %}{{ description }}{% endblock %}">
     <meta itemprop="image" content="http://serversforhackers.com/sfh_share.png?v=1">
 
     <!-- Twitter Metadata /-->
     <meta property="twitter:account_id" content="xxx" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@fideloper" />
-    <meta name="twitter:title" content="Servers for Hackers" />
-    <meta name="twitter:description" content="A newsletter about servers, geared for developers; Simple server management for hackers." />
+    <meta name="twitter:title" content="{% block title %}{{ page.title }}{% endblock %}" />
+    <meta name="twitter:description" content="{% block title %}{{ description }}{% endblock %}" />
     <meta name="twitter:image" content="http://serversforhackers.com/sfh_share.png?v=1" />
     <meta name="twitter:domain" content="serversforhackers.com">
+    <meta name="twitter:creator" content="Chris Fidao">
 
     <link rel="shortcut icon" href="http://serversforhackers.com/favicon.ico" type="image/x-icon" />
 

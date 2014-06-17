@@ -1,7 +1,7 @@
 ---
 title: Permissions and User Management
 topics: [Permissions, User Management]
-
+description: Managing user and group permissions is a pain until you know what's going on. We'll cover managing creating users and setting up user and group permissions.
 ---
 
 <a name="permissions" id="permissions"></a>
@@ -51,7 +51,7 @@ For any permission attribute set, the first slot denotes if it's a **directory (
 
 Then each next three characters denotes the read, write and execute permissions for users groups and others, respectively.
 
-Let's take the permissions `drwxr-xr-x`. 
+Let's take the permissions `drwxr-xr-x`.
 
 * `d` - denotes it's a directory
 * `rwx` - The user has read, write and execution permissions
@@ -98,10 +98,10 @@ So, for example, let's create the `/var/www` directory as user root and set its 
 
 	# Create directory as root
 	sudo mkdir /var/www
-	
+
 	# Change to owner/group www-data:
 	sudo chown www-data:www-data /var/www
-	
+
 	# Set permissions so user and group has permissions, but not other:
 	sudo chmod ug+rwx /var/www # User and Group have all permissions (+rwx)
 	sudo chmod o-rwx /var/www  # Other has no permissions (-rwx)
@@ -170,7 +170,7 @@ Then we can type in `groups` to see what groups we are part of:
 
 If you're following along, run the `exit` command to go back to your sudo user (`vagrant` in my case, since I'm writing this article using a Vagrant server).
 
-Let's set our `deployer` user to have a secondary group of `www-data`. 
+Let's set our `deployer` user to have a secondary group of `www-data`.
 
 	$ sudo usermod -G www-data deployer
 

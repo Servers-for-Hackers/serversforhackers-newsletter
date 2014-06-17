@@ -1,7 +1,7 @@
 ---
 title: Copying Files
 topics: [Copying Files (remotely)]
-
+description: We all need to move files around different computers, both locally and remotely. Let's learn some techniques and see how to make that easier for ourselves!
 ---
 
 <a name="copying_files" id="copying_files"></a>

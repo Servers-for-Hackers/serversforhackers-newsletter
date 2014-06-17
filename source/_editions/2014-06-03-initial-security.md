@@ -1,7 +1,7 @@
 ---
 title: Initial Security Setup
 topics: [Initial User Setup, SSH Key Access]
-
+description: Server security is hugely important. In this edition, we'll cover the initial security precautions you should take.
 ---
 
 When we first get our hands on a fresh server, some initial security precautions are always warranted, especially if the server is open to a public network. The servers we get on a lot of our popular providers (Digital Ocean, Linode, Rackspace, AWS and so on) are usually open to the public - they are assigned an IP address on their public network upon creation.
@@ -74,12 +74,12 @@ To do this, we need to edit the `/etc/ssh/sshd_config` file.
 
 	# Edit with vim
 	$ vim /etc/ssh/sshd_config
-	
+
 	# Or, if you're not a vim user:
 	$ nano /etc/ssh/sshd_config
 
 Once inside that file, find the `PermitRootLogin` option, and set it to "no":
- 
+
 	PermitRootLogin no
 
 You may also want to change the default SSH port (22) used. This is because a lot of automated systems scan port 22 to see if its an open for attack. You're allowed to use ports between 1025 and 65536. To do so, you can simply change the `Port` option:
@@ -94,7 +94,7 @@ Once you save and edit from the `/etc/ssh/sshd_config` file, we need to reload t
 
 	# On Debian/Ubuntu
 	$ service ssh restart
-	
+
 	# RedHat/CentOS
 	$ /etc/init.d/sshd restart
 
@@ -102,11 +102,11 @@ That's it! Before you close your session as user root, I suggest you now open a 
 
 	# If you left the default port:
 	$ ssh someusername@your-server-ip
-	
+
 	# If you changed the SSH port number:
 	$ ssh -p 1234 someusername@your-server-ip
 
-You should beA prompted for a password - enter the one you created and you should be logged in! Try running some commands as "sudo" to ensure it works. 
+You should beA prompted for a password - enter the one you created and you should be logged in! Try running some commands as "sudo" to ensure it works.
 
 <a name="ssh_access" id="ssh_access"></a>
 
@@ -144,8 +144,8 @@ So overall, we're just appending the public key from our local computer to the `
 
 Once the `authorized_keys` file is saved, you should be able to login using your key. You shouldn't need to do anything more, it should attempt your keys first and, finding one, log in using it. You'll need to enter in your password created while generating your SSH key, if you elected to use a password.
 
-> Note: You may need to [set some permissions](http://stackoverflow.com/questions/6377009/adding-public-key-to-ssh-authorized-keys-does-not-log-me-in-automatically) of your `.ssh` directory and `authorized_keys` file. 
-> 
+> Note: You may need to [set some permissions](http://stackoverflow.com/questions/6377009/adding-public-key-to-ssh-authorized-keys-does-not-log-me-in-automatically) of your `.ssh` directory and `authorized_keys` file.
+>
 > The following command should do: <br /> `chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys`.
 
 On my Mac, I create a long SSH password and then save the password to my keychain, so I don't have to worry about remembering it. When you log into a server and you have an SSH key setup, your Mac should popup asking for your key's password. You'll have the opportunity to save your password to the Keychain then.
@@ -160,7 +160,7 @@ Once again, we'll edit the `/var/ssh/sshd_config` file:
 
 	# Edit with vim
 	$ vim /etc/ssh/sshd_config
-	
+
 	# Or, if you're not a vim user:
 	$ nano /etc/ssh/sshd_config
 
@@ -172,7 +172,7 @@ Save that file, and once again reload the SSH daemon:
 
 	# Debian/Ubuntu
 	$ sudo service ssh restart
-	
+
 	# RedHat/CentOS
 	/etc/init.d/sshd restart
 

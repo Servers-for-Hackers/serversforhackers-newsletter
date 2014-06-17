@@ -1,6 +1,7 @@
 ---
 title: Proxying to FastCGI in Ubuntu/Apache 2.4
 descr: This will cover differences in passing requests off from Apache to a FastCGI process in Ubuntu 12.04 and 14.04
+description: This will cover differences in passing requests off from Apache to a FastCGI process in Ubuntu 12.04 and 14.04
 ---
 <p></p>
 > My Vagrant project [Vaprobash](https://github.com/fideloper/Vaprobash) is undergoing updates for Ubuntu 14.04 LTS from Ubuntu 12.04 LTS. The following will outline one of the changes made between handling PHP with Apache, and the reasons/considerations made.
@@ -80,7 +81,7 @@ Our virtualhost might look something like this:
 	<VirtualHost *:80>
 		ServerName localhost
 		DocumentRoot /var/www/html
-		
+
 		ErrorLog ${APACHE_LOG_DIR}/error.log
 		CustomLog ${APACHE_LOG_DIR}/access.log combined
 	</VirtualHost>
@@ -94,10 +95,10 @@ The **full VirtualHost** in this example would look like this:
 	<VirtualHost *:80>
 		ServerName localhost
 		DocumentRoot /var/www/html
-		
+
 		ErrorLog ${APACHE_LOG_DIR}/error.log
 		CustomLog ${APACHE_LOG_DIR}/access.log combined
-		
+
 		ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/html/$1
 	</VirtualHost>
 
