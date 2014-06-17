@@ -1,11 +1,31 @@
+---
+use: [editions, articles]
+permalink: sitemap.xml
+---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
   xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  <url> 
-    <loc>http://serversforhackers.com/</loc> 
+  <url>
+    <loc>http://serversforhackers.com/</loc>
     <image:image>
-       <image:loc>http://serversforhackers.com.com/sfh_logo-256.png</image:loc> 
+       <image:loc>http://serversforhackers.com.com/sfh_logo-256.png</image:loc>
     </image:image>
   </url>
+  {% for edition in data.editions %}
+  <url>
+    <loc>http://serversforhackers.com{{ edition.url }}</loc>
+    <lastmod>{{ edition.date|date('c') }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  {% endfor %}
+  {% for article in data.articles %}
+  <url>
+    <loc>http://serversforhackers.com{{ article.url }}</loc>
+    <lastmod>{{ article.date|date('c') }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  {% endfor %}
 </urlset>
