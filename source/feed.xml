@@ -4,11 +4,11 @@ permalink: feed.xml
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title><![CDATA[{{ site.title }}]]></title>
-    <link href="{{ site.url }}/atom.xml" rel="self"/>
-    <link href="{{ site.url }}/"/>
+    <title><![CDATA[Servers for Hackers]]></title>
+    <link href="http://serversforhackers.com/atom.xml" rel="self"/>
+    <link href="http://serversforhackers.com/"/>
     <updated>{{ site.calculated_date | date('c') }}</updated>
-    <id>{{ site.url }}/</id>
+    <id>http://serversforhackers.com</id>
     {% if site.author or site.email %}
         <author>
             {% if site.author %}<name><![CDATA[{{ site.author }}]]></name>{% endif %}
