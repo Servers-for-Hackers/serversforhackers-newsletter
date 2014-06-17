@@ -1,3 +1,9 @@
+---
+title: SSH Tricks
+topics: [Logging In]
+description: Description for SSH tricks
+draft: true
+---
 # SSH Tricks
 
 We use SSH to log into our servers, but it actually has a lot of neat tricks it can help us with as well! We'll cover some of them here.
@@ -20,7 +26,7 @@ If you use AWS, and in other cases, you might get a PEM file to use as an identi
 
 	$ ssh -i /path/to/identity.pem username@hostname
 	
-> You may need to set your permissions on the pem file so only the owner can read/write/execute it: `chmod 0777 identity.pem` or `chmod u+rwx identity.pem && chmod go-rwx identity.pem`
+> You may need to set your permissions on the pem file so only the owner can read/write/execute it: `chmod 0700 identity.pem` or `chmod u+rwx identity.pem && chmod go-rwx identity.pem`
 
 Finally, if you want to setup aliases for servers you access often, you can create an `~/.ssh/config` file and specify each server you log into, along with the authentication method to use:
 
