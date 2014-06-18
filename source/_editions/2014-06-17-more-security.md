@@ -253,6 +253,7 @@ Upgrade information is logged within the `/var/log/unattended-upgrades` director
 ## More Resources:
 
 * [First 5 Minutes On a Server](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers) - linux security
+* [DROP vs REJECT](http://serverfault.com/questions/157375/reject-vs-drop-when-using-iptables) in iptables
 * [Try out UFW](https://help.ubuntu.com/community/UFW), a wrapper for Iptables. More [here](https://help.ubuntu.com/14.04/serverguide/firewall.html) and [here](https://wiki.archlinux.org/index.php/Uncomplicated_Firewall).
 * [Try out Shorewall](http://shorewall.net/shorewall_quickstart_guide.htm), an alternative to Iptables.
 * More on iptables, including [Logging dropped packets with iptables](http://fideloper.com/iptables-tutorial)
