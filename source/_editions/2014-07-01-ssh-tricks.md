@@ -1,13 +1,13 @@
 ---
 title: SSH Tricks
-topics: [Logging In]
+topics: [Logging In, Tunneling, One-Off Commands]
 description: Description for SSH tricks
-draft: true
 ---
 # SSH Tricks
 
 We use SSH to log into our servers, but it actually has a lot of neat tricks it can help us with as well! We'll cover some of them here.
 
+<a name="logging-in"></a>
 ## Logging in
 
 Of course, we use SSH to login:
@@ -69,7 +69,8 @@ Let's cover the options used above:
 * **IdentitiesOnly**  - "Yes" to specify only attempting to log in via SSH key
 * **PubkeyAuthentication** - "No" to specify you wish to bypass attempting SSH key authentication
 
-## Tunneling
+<a name="ssh-tunneling"></a>
+## SSH Tunneling
 
 SSH can be used for tunneling, which is essentially port forwarding. There's a few ways we can do this - Local (Outbound), Remote (Inboud), and some others (Dynamic and Agent Forwarding).
 
@@ -134,25 +135,72 @@ If our remote server's IP address was `123.123.123.123`, then our friends can ac
 
 **Note:** To accomplish this, your remote server's firewall much not block port `9000`. You may also need to edit `/etc/ssh/sshd_config` and set the `GatewayPorts` directive to `yes`. (Don't forget to restart SSH after any changes to `sshd_config`).
 
+<a name="one-off-cmnds"></a>
+## One-Off Commands
 
+You can run commands remotely using SSH as well - in fact, this might be the easiest "trick" for using SSH.
 
+When you run a command using SSH, you're running the command on the remote server. However, any resulting output will be displayed in your terminal.
 
-## Cover
+Let's just run some simple commands on a remote server. The following will run `pwd` command. We'll see that it returns the default folder that we would be in after logging in. The we'll run the `ls` command to see the directory's output:
 
-* SSH in
-* [One-off commands with SSH](http://www.symkat.com/ssh-tips-and-tricks-you-need)
-* [SSH force password](http://bijayrungta.com/force-ssh-to-use-password-instead-of-public-key)
-* SSH in with pem file (AWS) - `-i` flag
-* Use `~/.ssh/config` file
-* [SSH Tunnel](http://blog.sensible.io/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html) (use mysql without binding it to allow remote connections)
-* One-off commands (And Ansible?)
-* Packages:
-	* Shunt (php)
-	* Envoy (php)
-	* Ansible (quick example)
-	
+	# Run `pwd` command
+	$ ssh -p 2222 username@hostname	pwd
+	/home/username
 
-## Resources:
+	# Run `ls -la` command
+	$ ssh -p 2222 username@hostname ls -la
+	drwxr-xr-x 8 username username   4096 Jun 30 17:49 .
+	drwxr-xr-x 4 root     root       4096 Apr 28  2013 ..
+	-rw------- 1 username username  18589 Jun 30 17:49 .bash_history
+	-rw-r--r-- 1 username username    220 Apr 28  2013 .bash_logout
+	-rw-r--r-- 1 username username   3486 Apr 28  2013 .bashrc
+	-rw-r--r-- 1 username username    675 Apr 28  2013 .profile
+	drwxrwxr-x 2 username username   4096 Mar 15 14:21 .ssh
 
-* http://blog.tjll.net/ssh-kung-fu
-* http://www.symkat.com/ssh-tips-and-tricks-you-need (incl. one off command)
+### Ansible
+
+This is actually the basis of how some server provisioning tools work. In fact, Ansible is very similar - it will run commands over SSH on groups of servers (in series and in parallel).
+
+Let's see how that works on Ubuntu really quickly.
+
+First install Ansible on a server that will be doing provisioning (not the one being provisioned):
+
+	sudo apt-add-repository -y ppa:rquillo/ansible
+	sudo apt-get update
+	sudo apt-get install -y ansible
+
+Then, configure one or more servers in the `/etc/ansible/hosts` directory:
+
+	[web]
+	192.168.22.10
+	192.168.22.11
+	192.168.22.12
+
+Save that file and then let's run a command on all three servers!
+
+	$ ansible -k all -m ping -u vagrant
+
+This will run "ping" on each server. You'll get some JSON output saying if they were successful or not.
+
+The flags of that command:
+
+* `-k` - Ask for password
+* `all` - All servers configured in `/etc/ansible/hosts`
+* `-m ping` - Use the ping module
+* `-u vagrant` - Login with user "vagrant", which will work if the hosts defined are other vagrant servers. Change the username as needed.
+
+You can actually run any command using the "shell" module:
+
+	$ ansible -k all -m shell -u vagrant -a "apt-get install nginx"
+
+Here, the `-a "apt-get install nginx` will run the given command using the "shell" module.
+
+Here's more information on [running ad-hoc commands with Ansible](http://docs.ansible.com/intro_adhoc.html)!
+
+## More Resources:
+
+* [http://blog.tjll.net/ssh-kung-fu](http://blog.tjll.net/ssh-kung-fu)
+* [http://www.symkat.com/ssh-tips-and-tricks-you-need](http://www.symkat.com/ssh-tips-and-tricks-you-need)
+* [http://blogs.perl.org/users/smylers/2011/08/ssh-productivity-tips.html](http://www.symkat.com/ssh-tips-and-tricks-you-need)
+* [http://blog.urfix.com/25-ssh-commands-tricks/](http://blog.urfix.com/25-ssh-commands-tricks/)
