@@ -131,9 +131,9 @@ Let's go over this command:
 * `localhost:8001` - The local address to forward to. Since our webserver is on localhost port `8001`, that's what we specify here. (Yep, the order of those arguments changed for -R over -L!)
 * `username@hostname` - SSH access to the remote server
 
-If our remote server's IP address was `123.123.123.123`, then our friends can access our website at `123.123.123.123:9000`, which will forward to our local site at `localhost:80001`!
+If our remote server's IP address was `123.123.123.123`, then our friends can access our website at `123.123.123.123:9000`, which will forward to our local site at `localhost:8001`!
 
-**Note:** To accomplish this, your remote server's firewall much not block port `9000`. You may also need to edit `/etc/ssh/sshd_config` and set the `GatewayPorts` directive to `yes`. (Don't forget to restart SSH after any changes to `sshd_config`).
+**Note:** To accomplish this, your remote server's firewall must not block port `9000`. You may also need to edit `/etc/ssh/sshd_config` and set the `GatewayPorts` directive to `yes`. (Don't forget to restart SSH after any changes to `sshd_config`).
 
 <a name="one-off-cmnds"></a>
 ## One-Off Commands
