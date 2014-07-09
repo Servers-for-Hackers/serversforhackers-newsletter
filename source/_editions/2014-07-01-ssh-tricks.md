@@ -1,7 +1,7 @@
 ---
 title: SSH Tricks
 topics: [Logging In, Tunneling, One-Off Commands]
-description: Description for SSH tricks
+description: Amazing things you can do with SSH
 ---
 # SSH Tricks
 
