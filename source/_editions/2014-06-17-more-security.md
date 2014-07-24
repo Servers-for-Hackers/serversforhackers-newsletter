@@ -133,7 +133,7 @@ And the command explanation:
 
 * `-I INPUT 5` - **I**nsert into the INPUT chain at the fifth position, just after the "http" rule, which is at the fourth position (The position starts at 1 instead of 0)
 * `-p tcp` - Apply the rule to the tcp **p**rotocol
-* `--dport 80` - Apply to the **d**estination port 443 (Incoming traffic coming into port 443).
+* `--dport 443` - Apply to the **d**estination port 443 (Incoming traffic coming into port 443).
 * `-j ACCEPT` - Use the ACCEPT target; accept the traffic
 
 ### Deleting Rules
