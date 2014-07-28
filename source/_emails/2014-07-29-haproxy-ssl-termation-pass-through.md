@@ -30,7 +30,9 @@ title: SSL Certificates with HAProxy
         <tr>
           <td class="panel">
 
-            <p>An official announcement: I'm writing a <a href="#">Servers for Hackers book</a>! This will cover a lot of the material seen on this newsletter, but more in depth. It will cover numerous topics which developers should know in order to further their skills and support our increasingly more complex applications.</p>
+            <h3>Servers for Hackers eBook!</h3>
+            <p> I'm super excited to let you all know that I'm writing the <a href="http://book.serversforhackers.com">Servers for Hackers <strong>eBook</strong></a>! This will cover a lot of the material seen on this newsletter as well as many <strong>new topics</strong> - all <strong>more in depth</strong> than is feasible in this newsletter.</p>
+            <p>Readers for Servers for Hackers will <strong>get a discount</strong> - keep on the lookout for updates!</p>
           </td>
           <td class="expander"></td>
         </tr>
