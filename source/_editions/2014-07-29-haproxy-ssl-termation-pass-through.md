@@ -2,7 +2,6 @@
 title: Using SSL Certificates with HAProxy
 topics: [Overview, SSL Termination, SSL Pass-through]
 description: Using HAProxy with SSL certificates, including SSL Termation and SSL Pass-Through
-draft: true
 ---
 
 <a name="overview"></a>
