@@ -64,7 +64,7 @@ This leaves us with a `xip.io.csr`, `xip.io.key` and `xip.io.crt` file.
 
 **Next**, after the certificates are created, we need to create a `pem` file. A `pem` file is essentially just the certificate, the key and optionally certificate authorities concatenated into one file. In our example, we'll simply concatenate the certificate and key files together (in that order) to create a `xip.io.pem` file. This is HAProxy's preferred way to read an SSL certificate.
 
-	$ sudo cat /etc/ssl/xip.io/xip.io.crt /etc/ssl/xip.io/xip.io.key > /etc/ssl/xip.io/xip.io.pem
+	$ sudo cat /etc/ssl/xip.io/xip.io.crt /etc/ssl/xip.io/xip.io.key | sudo tee /etc/ssl/xip.io/xip.io.pem
 
 > When purchasing a real certificate, you won't necessarily get a concatenated "bundle" file. You may have to concatenate them yourself. However, many do provide a bundle file. If you do, it might not be a `pem` file, but instead be a `bundle`, `cert`, `cert`, `key` file or some similar name for the same concept. This [Stack Overflow answer](http://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file) explains that nicely.
 
