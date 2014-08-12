@@ -115,20 +115,20 @@ user=www-data
 environment=SECRET_PASSPHRASE='this is secret',SECRET_TWO='another secret'
 ```
 
-As usual, we need to go over the options set here:
+As usual, we'll cover the options set here:
 
-* `[program:nodehook]` - We need to define a program to monitor. We'll call it "nodehook".
-* `command` - This is the command to run. We use "node" and run the "http.js" file. If we needed to pass any command line arguments or other data, we could do so here.
-* `directory` - We can set a directory for Supervisord to "cd" into for before running the process, useful for cases where the process assumes a directory structure relative to the location of the executed script.
+* `[program:nodehook]` - Define the program to monitor. We'll call it "nodehook".
+* `command` - This is the command to run that kicks off the monitored process. We use "node" and run the "http.js" file. If you needed to pass any command line arguments or other data, you could do so here.
+* `directory` - Set a directory for Supervisord to "cd" into for before running the process, useful for cases where the process assumes a directory structure relative to the location of the executed script.
 * `autostart` - Setting this "true" means the process will start when Supervisord starts (essentially on system boot).
 * `autorestart` - If this is "true", the program will be restarted if it exits unexpectedly.
 * `startretries` - The number of retries to do before the process is considered "failed"
 * `stderr_logfile` - The file to write any errors output.
 * `stdout_logfile` - The file to write any regular output.
-* `user` - The system user under which to run the process as.
+* `user` - The user the process is run as.
 * `environment` - Environment variables to pass to the process.
 
-Note that we've specified some log files to be created inside of the `/var/log/webhook` directory. Supervisord won't create a directory for logs if they do not exit; We need to create them before running Supervisord:
+Note that we've specified some log files to be created inside of the `/var/log/webhook` directory. Supervisord won't create a directory for logs if they do not exist; We need to create them before running Supervisord:
 
 ```
 sudo mkdir /var/log/webhook
@@ -150,14 +150,14 @@ $ supervisorctl
 nodehook               RUNNING    pid 444, uptime 0:02:45
 ```
 
-We can check this with the `ps` command:
+We can double check this with the `ps` command:
 
 ```
 $ ps aux | grep node
 www-data   444  0.0  2.0 659620 10520 ?  Sl   00:57   0:00 /usr/bin/node /srv/http.js
 ```
 
-It's running! If we check our localhost at port 9000, we'll see the output we write out, including the environment variables. These are useful if we need to pass information or credentials to our script.
+It's running! If we check our localhost at port 9000, we'll see the output written out by the NodeJS script, including the environment variables. The environmental variables are useful if we need to pass information or credentials to our script.
 
 > If your process is not running, try explicitly telling Supervisord to start process "nodehook" via `supervisorctl start nodehook`
 
@@ -169,6 +169,14 @@ nodehook     RUNNING    pid 444, uptime 0:15:42
 ```
 
 We can try some more commands:
+
+Get a menu of available commands:
+
+```
+supervisor> help
+# Available commands output here
+```
+
 
 Let's stop the process:
 
@@ -192,7 +200,6 @@ These commands can also be run directly:
 $ supervisorctl stop nodebook
 $ supervisorctl start nodebook
 ```
-
 
 
 ### Web Interface
