@@ -1,8 +1,7 @@
 ---
-title: Monitoring Processes
+title: Monitoring Processes with Supervisord
 topics: [Supervisord]
-description: Who watches the server while you sleep at night?
-draft: true
+description: Process monitoring is important to keep your applications alive after restart or error. Find out how to use the ultra-popular Supervisord.
 ---
 
 As some point you'll likely find yourself writing a script which needs to run all the time - a "long running script". These are scripts that shouldn't fail if there's an error, or ones that should restart when the system reboots. 
@@ -11,7 +10,7 @@ To accomplish this, we need something to watch these scripts. Such tools are pro
 
 ## The Script
 
-What might such a script be? Well, most things we install already have mechanisms in place for process watching. For example, Upstart or Systemd. These are tools used by many systems to watch over important proceses. When we install PHP5-FPM, Apache and Nginx with our package managers, they often integrate with such systems so that they are much less likely to fail without notice.
+What might such a script be? Well, most things we install already have mechanisms in place for process watching. For example, Upstart or Systemd. These are tools used by many systems to watch over important processes. When we install PHP5-FPM, Apache and Nginx with our package managers, they often integrate with such systems so that they are much less likely to fail without notice.
 
 However, we might find that we need some simpler solutions. For example, I often make use of a NodeJS script to listen to web hooks (often from Github) and take actions based on them. NodeJS can handle HTTP requests and take action on them all in the same process, making it a good fit for a small, quick one-off service for listening to web hooks.
 
@@ -99,7 +98,7 @@ files = /etc/supervisor/conf.d/*.conf
 
 So, any files found in `/etc/supervisor/conf.d` and ending in `.conf` will be included. This is where we can add configurations for our services.
 
-Now we need to tell Supervisord how to run and monitor our Node script. What we'll do is create a configuration which tells Supervisord how to start and monitor the Node script.
+Now we need to tell Supervisord how to run and monitor our Node script. What we'll do is create a configuration that tells Supervisord how to start and monitor the Node script.
 
 Let's create a configuration for it called `webhooks.conf`. This file will be created at `/etc/supervisor/conf.d/webhooks.conf`:
 
@@ -120,14 +119,14 @@ As usual, we need to go over the options set here:
 
 * `[program:nodehook]` - We need to define a program to monitor. We'll call it "nodehook".
 * `command` - This is the command to run. We use "node" and run the "http.js" file. If we needed to pass any command line arguments or other data, we could do so here.
-* `directory` - We can set a directory for Supervisord to "cd" into for before running the process, useful for cases where the process assumes a directory structure relative to the location of the set directory
-* `autostart` - Setting this "true" means the process will start when Supervisord starts (essentially on system boot)
-* `autorestart` - If this is "true", the program will be restarted if i exists
+* `directory` - We can set a directory for Supervisord to "cd" into for before running the process, useful for cases where the process assumes a directory structure relative to the location of the executed script.
+* `autostart` - Setting this "true" means the process will start when Supervisord starts (essentially on system boot).
+* `autorestart` - If this is "true", the program will be restarted if it exits unexpectedly.
 * `startretries` - The number of retries to do before the process is considered "failed"
-* `stderr_logfile` - The file to write any errors output
-* `stdout_logfile` - The file to write any regular output
-* `user` - The system user under which to run the process as
-* `environment` - Environment variables to pass to the process
+* `stderr_logfile` - The file to write any errors output.
+* `stdout_logfile` - The file to write any regular output.
+* `user` - The system user under which to run the process as.
+* `environment` - Environment variables to pass to the process.
 
 Note that we've specified some log files to be created inside of the `/var/log/webhook` directory. Supervisord won't create a directory for logs if they do not exit; We need to create them before running Supervisord:
 
@@ -144,23 +143,23 @@ supervisorctl reread
 supervisorctl update
 ```
 
-Our Node process should running now. We can check this by simply running `supervisorctl`:
+Our Node process should be running now. We can check this by simply running `supervisorctl`:
 
 ```
 $ supervisorctl
 nodehook               RUNNING    pid 444, uptime 0:02:45
 ```
 
-We can check this by running `ps` as well:
+We can check this with the `ps` command:
 
 ```
 $ ps aux | grep node
 www-data   444  0.0  2.0 659620 10520 ?  Sl   00:57   0:00 /usr/bin/node /srv/http.js
 ```
 
-It's running! If we check our localhost at port 9000, we'll see the output we write out, including the environment variables! These are useful if we need to pass information or credentials to our script.
+It's running! If we check our localhost at port 9000, we'll see the output we write out, including the environment variables. These are useful if we need to pass information or credentials to our script.
 
-> If your process is not running, try explicitly telling it to start process "nodehook" via `supervisorctl start nodehook`
+> If your process is not running, try explicitly telling Supervisord to start process "nodehook" via `supervisorctl start nodehook`
 
 There's other things we can do with `supervisorctl` as well. Enter the controlling tool using `supervisorctl`:
 
@@ -185,20 +184,20 @@ supervisor> start nodehook
 nodehook: started
 ```
 
-We can use ctrl+c or type "exit" to get out of the supervisor tool.
+We can use <ctrl+c> or type "exit" to get out of the supervisorctl tool.
 
 These commands can also be run directly:
 
 ```
-$ supervisor stop nodebook
-$ supervisor start nodebook
+$ supervisorctl stop nodebook
+$ supervisorctl start nodebook
 ```
 
 
 
 ### Web Interface
 
-We can configure a web interface which comes with Supervisord. This lets us see a list of all processes being monitored, as well as take action on them (restarting, stoppping, clearing logs and checking output).
+We can configure a web interface which comes with Supervisord. This lets us see a list of all processes being monitored, as well as take action on them (restarting, stopping, clearing logs and checking output).
 
 Inside of `/etc/supervisord.conf`, add this:
 
@@ -214,3 +213,8 @@ If we access our server in a web browser at port 9001, we'll see the web interfa
 ![](https://s3.amazonaws.com/serversforhackers/supervisord.png)
 
 Clicking into the process name ("nodehook" in this case) will show the logs for that process.
+
+### Resource
+
+* Also check out [Python Circus](http://circus.readthedocs.org/en/0.11.1/), a more featured process monitor
+* Check out sample [Supervisord config](http://docs.ghost.org/installation/deploy/#supervisor-(http://supervisord.org/)-) for the popular Ghost blogging system
