@@ -23,10 +23,10 @@ Of course we need to start by installing Ansible. Ansible can be run off of any 
 
 This means there's usually a "central" server running Ansible commands, although there's nothing particularly special about what server Ansible is installed on. Ansible is "agentless" - there's no central agents running. We can even run Ansible from a server it configures. I often run it from my laptop rather than spin up a server just for Ansible.
 
-Here's how to install Ansible on Ubuntu 14.04. We'll use the `ppa:rquillo/ansible` repository as [recommended in the official docs](http://docs.ansible.com/intro_installation.html) .
+Here's how to install Ansible on Ubuntu 14.04. We'll use the easy-to-remember `ppa:ansible/ansible` repository as [per the official docs](http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu).
 
 ```bash
-sudo apt-add-repository -y ppa:rquillo/ansible
+sudo apt-add-repository -y ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install -y ansible
 ```
