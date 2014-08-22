@@ -13,7 +13,7 @@ We often use SSH or other tools to run commands or bash scripts in order to prov
 
 We could just make bash scripts, but Ansible is much cleaner because it takes care of so many edge cases - the kind we usually take care of with longer and increasingly complex bash scripts.
 
-Ansible tasks are idempotent. Without a lot of extra coding, CLI command and bash scripts are usually **not** safetly run again and again. Ansible uses "Facts", which is system and environment information it gathers before running tasks. It uses these to check state and see if it needs to change anything in order to get the desired outcome. This makes it safe to run Ansible tasks against a server over and over again.
+Ansible tasks are idempotent. Without a lot of extra coding, CLI command and bash scripts are usually **not** safety run again and again. Ansible uses "Facts", which is system and environment information it gathers before running tasks. It uses these to check state and see if it needs to change anything in order to get the desired outcome. This makes it safe to run Ansible tasks against a server over and over again.
 
 Let's see how we can start using Ansible. We're start basic and then add in some of Ansible's features to get a working Ansible Role
 
@@ -239,13 +239,15 @@ Let's add a few more Tasks to this Playbook and explore some other functionality
       service: name=nginx state=reloaded
 ```
 
-We have three tasks now. One to add in the Nginx stable PPA to get the latest stable version of Nginx, using the [apt_repository module](http://docs.ansible.com/apt_repository_module.html). Then we have one to install Nginx. Finally, we have one to create a web root which will be used by a website I'll deploy.
+We have three tasks now.
+
+One adds in the Nginx stable PPA to get the latest stable version of Nginx, using the [apt_repository module](http://docs.ansible.com/apt_repository_module.html). One installs Nginx. Finally, we have one which creates a web root which will be used by a website to be deployed later.
 
 Then we defined two handlers - one to start Nginx and one to reload Nginx's configuration.
 
 There's somethign new here - the `register` and `when` directives. These tell Ansible to run a task "when" something else happens. The "Add Nginx Repository" task registers "ppastable". Then the task Install Nginx runs only when the registered "ppastable" task is successful. This allows us to stop Ansible from running a task if a required task fails.
 
-We also use a variable. We first define the `docroot` variable with the `var` setion. Then we use that variable for the destination of the document root that we create with the [file module](http://docs.ansible.com/file_module.html).
+We also use a variable. We first define the `docroot` variable with the `var` section. Then we use that variable for the destination of the document root that we create with the [file module](http://docs.ansible.com/file_module.html).
 
 This can be run with the usual command:
 
@@ -259,7 +261,7 @@ Let's take Ansible further and by organizing the Playbook into a Role, and showi
 
 ## Roles
 
-Roles are good for handling multiple related tasks. For example, installing Nginx may involves defining Tasks for the package repository, installing the package, setting up configuration and more. We'll likely also have externalities - variables defined, configuration files or templates to copy, handlers and more.
+Roles are good for handling multiple related tasks. For example, installing Nginx may involve defining Tasks for the package repository, installing the package, setting up configuration and more. We'll likely also have externalities - variables defined, configuration files or templates to copy, handlers and more.
 
 Let's see how we can organize all of these into one coherent structure: a Role.
 
@@ -277,11 +279,11 @@ rolename
 
 Ansible will read any Yaml file called `main.yml` automatically, so we can define configuration files within each and name them `main.yml`.
 
-We'll break apart our `nginx.yml` file and put each compoent within the corresponding directory to create a cleaner and more complete provisioning toolset.
+We'll break apart our `nginx.yml` file and put each component within the corresponding directory to create a cleaner and more complete provisioning toolset.
 
 ### Files
 
-First, within the `files` directory, we can add files which we'll want copied into our servers. For Nginx, I often copy [H5BP's component configurations](https://github.com/h5bp/server-configs-nginx/tree/master/h5bp). I simply download the latest there, make any tweaks I want, and put them into the `files` directory.
+First, within the `files` directory, we can add files that we'll want copied into our servers. For Nginx, I often copy [H5BP's component configurations](https://github.com/h5bp/server-configs-nginx/tree/master/h5bp). I simply download the latest there, make any tweaks I want, and put them into the `files` directory.
 
 ```
 nginx
@@ -404,15 +406,13 @@ server {
 }
 ```
 
-This is a fairly standart Nginx configuration for a PHP application. Of note, there are three variables used here:
+This is a fairly standard Nginx configuration for a PHP application. Of note, there are three Ansible variables used here:
 
 * domain
 * ssl_crt
 * ssl_key
 
 These three will be defined in the variables section.
-
-Also note that this references the H5BP configuration items which Ansible will copy.
 
 ### Variables
 
@@ -494,7 +494,7 @@ There's some new modules (and uses thereof), including copy, template, & file. B
 
 ### Running the Role
 
-Before running the role, we need to tell Ansible where our roles are located. In my Vagrant server, they are located within `/vagrant/ansible/roles`. We can add add this file path to the `/etc/ansible/ansible.cfg` file:
+Before running the role, we need to tell Ansible where our roles are located. In my Vagrant server, they are located within `/vagrant/ansible/roles`. We can add this file path to the `/etc/ansible/ansible.cfg` file:
 
 ```config
 roles_path    = /vagrant/ansible/roles
@@ -615,4 +615,4 @@ That's a lot, and it will get you pretty far. However, there's much more to lear
 * Using [Ansible Vault](http://docs.ansible.com/playbooks_vault.html) to encrypt secure data, making it more safe if your Playbooks or Roles end up in version control or otherwise shared
 * The [Module Index](http://docs.ansible.com/modules_by_category.html)
 
-There's a **lot** of useful things you acn do with Ansible. Explore the [documentation](http://docs.ansible.com/)!
+There are a **lot** of useful things you can do with Ansible. Explore the [documentation](http://docs.ansible.com/)!
