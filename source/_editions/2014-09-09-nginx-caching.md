@@ -22,12 +22,18 @@ Example LBing Nginx, proxying to some other servers
 
 ## Cache some files
 
-* cache levels, zone, other settings
+* cache levels, zone, other settings -> http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_path
 * cache key
 * Ignore or incorporate Cookies
 * Add headers
 * cache bypass
 * Other stuff?
+
+>  all active keys and information about data are stored in a shared memory zone, whose name and size are configured by the keys_zone parameter. One megabyte zone can store about 8 thousand keys.
+
+> Cached data that are not accessed during the time specified by the inactive parameter get removed from the cache regardless of their freshness. By default, inactive is set to 10 minutes.
+
+
 
 ## Cache results of PHP requests
 
