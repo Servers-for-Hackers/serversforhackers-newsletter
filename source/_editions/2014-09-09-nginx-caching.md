@@ -2,7 +2,6 @@
 title: Nginx Caching
 topics: [Nginx Caching]
 description: See how to cache both dynamic and static content using Nginx!
-draft: true
 ---
 
 Like Varnish, **Nginx is a very capable web cache**. Many administrators reach for Varnish, often before it's really needed. However, there are two things to know about Nginx:
