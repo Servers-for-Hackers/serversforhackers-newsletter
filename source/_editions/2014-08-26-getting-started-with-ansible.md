@@ -408,7 +408,7 @@ server {
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
 
-        include fastcgi_params;
+        include fastcgi_params; # fastcgi.conf for version 1.6.1+
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PATH_INFO       $fastcgi_path_info;
         fastcgi_param ENV production;
@@ -427,7 +427,7 @@ server {
         access_log off;
         allow 127.0.0.1;
         deny all;
-        include fastcgi_params;
+        include fastcgi_params; # fastcgi.conf for version 1.6.1+
         fastcgi_pass unix:/var/run/php5-fpm.sock;
     }
 }

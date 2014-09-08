@@ -198,7 +198,7 @@ The above server block can be used for a marketing home page. Again, it's just a
     	location / {
     		fastcgi_param  USER $user;
     		fastcgi_pass 127.0.0.1:9000;
-    		include fastcgi_params;
+    		include fastcgi_params; # fastcgi.conf for version 1.6.1+
     	}
     }
 

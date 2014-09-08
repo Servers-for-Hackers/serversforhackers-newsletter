@@ -371,7 +371,7 @@ server {
             fastcgi_no_cache $no_cache; # Don't save to cache based on $no_cache
 
             # Regular PHP-FPM stuff:
-            include fastcgi_params;
+            include fastcgi.conf; # fastcgi_params for nginx < 1.6.1
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
             fastcgi_pass unix:/var/run/php5-fpm.sock;
             fastcgi_index index.php;
