@@ -7,14 +7,14 @@ permalink: sitemap.xml
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
   xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
-    <loc>http://serversforhackers.com/</loc>
+    <loc>https://serversforhackers.com/</loc>
     <image:image>
-       <image:loc>http://serversforhackers.com.com/sfh_logo-256.png</image:loc>
+       <image:loc>https://serversforhackers.com.com/sfh_logo-256.png</image:loc>
     </image:image>
   </url>
   {% for edition in data.editions %}
   <url>
-    <loc>http://serversforhackers.com{{ edition.url }}</loc>
+    <loc>https://serversforhackers.com{{ edition.url }}</loc>
     <lastmod>{{ edition.date|date('c') }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -22,7 +22,7 @@ permalink: sitemap.xml
   {% endfor %}
   {% for article in data.articles %}
   <url>
-    <loc>http://serversforhackers.com{{ article.url }}</loc>
+    <loc>https://serversforhackers.com{{ article.url }}</loc>
     <lastmod>{{ article.date|date('c') }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>

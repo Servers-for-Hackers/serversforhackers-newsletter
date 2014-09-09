@@ -5,10 +5,10 @@ permalink: feed.xml
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[Servers for Hackers]]></title>
-    <link href="http://serversforhackers.com/atom.xml" rel="self"/>
-    <link href="http://serversforhackers.com/"/>
+    <link href="https://serversforhackers.com/atom.xml" rel="self"/>
+    <link href="https://serversforhackers.com/"/>
     <updated>{{ site.calculated_date | date('c') }}</updated>
-    <id>http://serversforhackers.com</id>
+    <id>https://serversforhackers.com</id>
     {% if site.author or site.email %}
         <author>
             {% if site.author %}<name><![CDATA[{{ site.author }}]]></name>{% endif %}
@@ -19,9 +19,9 @@ permalink: feed.xml
     {% for edition in data.editions|slice(0, 10) %}
         <entry>
             <title type="html"><![CDATA[{{ edition.title }}]]></title>
-            <link href="http://serversforhackers.com{{ edition.url }}"/>
+            <link href="https://serversforhackers.com{{ edition.url }}"/>
             <updated>{{ edition.date|date('c') }}</updated>
-            <id>http://serversforhackers.com{{ edition.url }}</id>
+            <id>https://serversforhackers.com{{ edition.url }}</id>
             <content type="html"><![CDATA[{{ edition.blocks.content|raw }}]]></content>
         </entry>
     {% endfor %}
