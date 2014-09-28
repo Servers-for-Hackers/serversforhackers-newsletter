@@ -2,6 +2,7 @@
 title: Ansible Facts & Vault
 topics: [Ansible Facts, Ansible Vault]
 description: See how to use Ansible Facts to gather system information and Anisble Vault to encrypt data.
+draft: true
 ---
 
 <a name="ansible_facts" id="ansible_facts"></a>
@@ -86,8 +87,6 @@ First we create the `Ensure Ubuntu Distro is Supported` task, which uses the `an
 Then we run a series of tasks to remove NodeJS repositories in case the system already has `ppa:chris-lea/node.js` added. These only run when if the distribution is supported via `when: distrosupported|success`. Note that most of these continue to use the `ansible_distribution_release` Fact.
 
 Finally we get the debian source packages and install NodeJS after updating the repository cache. This will install the latest stable of NodeJS and NPM. We know it will get the latest version available by using `state=latest` when installing the `nodejs` package.
-
----
 
 <a name="ansible_vault" id="ansible_vault"></a>
 ## Vault
