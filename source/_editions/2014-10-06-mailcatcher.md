@@ -9,3 +9,4 @@ draft: true
 ## Mailcatcher
 
 Stuff here: http://dor.ky/install-mailcatcher-on-laravel-homestead/
+and here: https://github.com/fideloper/Vaprobash/blob/master/scripts/mailcatcher.sh
