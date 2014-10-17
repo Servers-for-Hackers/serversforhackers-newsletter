@@ -121,3 +121,9 @@ if( mail('mail@serversforhackers.com', 'Feedback', 'This is so useful, thanks!')
 ```
 
 That's it! Mailcatcher is now setup for development use.
+
+## More Information
+
+If you have questions on any of this, check out the [Servers for Hackers book](https://book.serversforhackers.com)!
+
+The Servers for Hackers book covers installing lots of software and process monitoring. It goes into a little more depth with Upstart, Supervisord, Circus and other monitors.
