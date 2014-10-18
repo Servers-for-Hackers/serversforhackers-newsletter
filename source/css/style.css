@@ -1,16 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
 body {
     margin: 0 0 50px 0;
     padding: 0;
-    border-top: 10px solid #f65821;
     font-family: 'Open Sans', helvetica, arial, sans-serif;
     font-size: 20px;
     color: #555;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #f65821;
+    color: #ff5750;
     font-weight: 300;
     text-align: center;
 }
@@ -23,11 +22,11 @@ blockquote {
 }
 
 a {
-    color: #4ea3d0;
+    color: #e37568;
     text-decoration: none;
 }
 a:visited {
-    color: #4ea3d0;
+    color: #e37568;
 }
 
 p {
@@ -36,12 +35,43 @@ p {
 }
 
 strong {
-    color: #f65821;
-    font-weight: 600;
+    color: #373f43;
+    font-weight: 700;
 }
 
+.dark {
+    background: #373e42;
+}
 
-#container {
+.breadth {
+    max-width: 68em;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 960px;
+}
+
+.breadth nav,
+.breadth article {
+    display: block;
+    margin-right: 2.35765%;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+header.dark h1 {
+    color: #e2e1e6;
+    font-size: 3em;
+    letter-spacing: 0.0625em;
+    bottom: -24px;
+    margin: 0;
+    font-weight: 700;
+    position: relative;
+    bottom: -18px;
+}
+
+#container,
+.container {
     max-width: 960px;
     margin:0 auto;
 }
@@ -59,13 +89,13 @@ strong {
 }
 
 #nav ul {
-    border-bottom: 1px dotted #f65821;
+    border-bottom: 1px dotted #373f43;
 }
 
 #nav li {
     display: block;
     float: left;
-    border-left: 1px dotted #f65821;
+    border-left: 1px dotted #373f43;
 }
 
 #nav li:first-child {
@@ -142,7 +172,7 @@ input.txt {
 }
 
 button.subcr {
-    background: #f65821;
+    background: #373f43;
     border: 0;
     border-radius: 8px;
     color: #FFF;

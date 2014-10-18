@@ -9,11 +9,11 @@ description: Install and use Mailcatcher to test emails in your application.
 
 Handling email in applications can be hard.
 
-While reading and receiving email programmatically is a bit of a tougher problem in my experience, sending emails of certain formats can sometimes be challening as well.
+While reading and receiving email programmatically is a bit of a tougher problem in my experience, sending emails of certain formats can sometimes be challenging as well.
 
 Mailcatcher is a program you can use to test sending email. It gives you the ability to inspect sent emails and their headers.
 
-It is a simple SMTP server which can receive emails. It also gives you a nice web interface for inspecting sent emails.
+It is a simple SMTP server that can receive emails. It also gives you a nice web interface for inspecting sent emails.
 
 Her we'll cover install the dependencies for Mailcatcher and setting it up for easy use in our development environment.
 
@@ -21,7 +21,7 @@ Her we'll cover install the dependencies for Mailcatcher and setting it up for e
 
 First we'll install some dependencies. As usual, I'll assume we're using Ubuntu 14.04. This process will work for Debian and likely older Ubuntu servers as well.
 
-Here are some basics to isntall. We'll install some dependencies as well as PHP. Then we can see how to make PHP's `mail()` function work with Mailcatcher.
+Here are some basics to install. We'll install some dependencies as well as PHP. Then we can see how to make PHP's `mail()` function work with Mailcatcher.
 
 Finally we'll install Mailcatcher, which is a Ruby gem.
 
@@ -67,7 +67,7 @@ exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0
 This configuration file tells Mailcatcher to start at runlevel 2,3,4 and 5. We can see what those [runlevel's do here](http://en.wikipedia.org/wiki/Runlevel).
 
 * `2` - Start with the GUI (N/A on a server), and with networking
-* `3-5` - Unused in Ubuntu, same as runlevel 2. Useful to keep if used on on other distributions
+* `3-5` - Unused in Ubuntu, same as runlevel 2. Useful to keep if used on other distributions
 
 Our setup say to start on the above runlevels are reached and stop when they are not reached.
 
@@ -87,6 +87,8 @@ sudo service mailcatcher stop
 ```
 
 Run `sudo service mailcatcher start` to kick it off. Then you can head to the server's IP address at port `1080` (the default) to see the web interface.
+
+![mailcatcher web interface](https://s3.amazonaws.com/serversforhackers/sfh_mailcatcher.png)
 
 ### Send Email in PHP
 

@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width"/>
-	<style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    <style>
 /**********************************************
 * Ink v1.0.5 - Copyright 2013 ZURB Inc        *
 **********************************************/
@@ -21,6 +21,7 @@ body{
   -ms-text-size-adjust:100%;
   margin:0;
   padding:0;
+  background: #FFF;
 }
 
 .ExternalClass {
@@ -131,11 +132,17 @@ table.column td {
   padding: 0px 0px 10px;
 }
 
+.header table.columns td,
+.header  table.column td {
+  padding: 0;
+}
+
+
 table.columns td.sub-columns,
 table.column td.sub-columns,
 table.columns td.sub-column,
 table.column td.sub-column {
-  padding-right: 10px;
+  padding-right: 12px;
 }
 
 td.sub-column, td.sub-columns {
@@ -323,7 +330,7 @@ img.center {
 /* Typography */
 
 body, table.body, h1, h2, h3, h4, h5, h6, p, td {
-  color: #555555;
+  color: #373f43;
   font-family: "Helvetica", "Arial", sans-serif;
   font-weight: normal;
   padding:0;
@@ -358,20 +365,20 @@ small {
 }
 
 a {
-  color: #2ba6cb;
+  color: #e37568;
   text-decoration: none;
 }
 
 a:hover {
-  color: #2795b6 !important;
+  color: #4c5154 !important;
 }
 
 a:active {
-  color: #f65821 !important;
+  color: #4c5154 !important;
 }
 
 a:visited {
-  color: #f65821 !important;
+  color: #e37568 !important;
 }
 
 h1 a,
@@ -380,7 +387,7 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-  color: #2ba6cb;
+  color: #e37568;
 }
 
 h1 a:active,
@@ -389,7 +396,7 @@ h3 a:active,
 h4 a:active,
 h5 a:active,
 h6 a:active {
-  color: #2ba6cb !important;
+  color: #4c5154 !important;
 }
 
 h1 a:visited,
@@ -398,7 +405,7 @@ h3 a:visited,
 h4 a:visited,
 h5 a:visited,
 h6 a:visited {
-  color: #2ba6cb !important;
+  color: #4c5154 !important;
 }
 
 /* Panels */
@@ -415,6 +422,18 @@ h6 a:visited {
 
 .sub-grid td.sub-columns {
   padding-bottom: 0;
+}
+
+.launch_day {
+  color: #FFFFFF;
+  background: #373f43;
+  text-align: center;
+  padding: 18px;
+  font-size: 30px;
+}
+
+.many_cols p {
+  padding-right: 10px;
 }
 
 /* Buttons */
@@ -436,8 +455,8 @@ table.large-button td {
   display: block;
   width: auto !important;
   text-align: center;
-  background: #2ba6cb;
-  border: 1px solid #2284a1;
+  background: #e37568;
+  border: none;
   color: #ffffff;
   padding: 8px 0;
 }
@@ -490,13 +509,13 @@ table.large-button td a {
 table.button:hover td,
 table.button:visited td,
 table.button:active td {
-  background: #2795b6 !important;
+  background: #ffffff !important;
 }
 
 table.button:hover td a,
 table.button:visited td a,
 table.button:active td a {
-  color: #fff !important;
+  color: #ffffff !important;
 }
 
 table.button:hover td,
@@ -504,7 +523,7 @@ table.tiny-button:hover td,
 table.small-button:hover td,
 table.medium-button:hover td,
 table.large-button:hover td {
-  background: #2795b6 !important;
+  background: #373f43 !important;
 }
 
 table.button:hover td a,
@@ -730,20 +749,29 @@ body.outlook p {
     }
 
     .callout .panel {
-      background: #f6cec0;
-      border-color: #f65821;
+      /*background: #ECF8FF;
+      border-color: #b9e5ff;*/
+      background: #373f43;
+      border-color: #b9e5ff;
     }
 
     .header {
-      background: #f65821;
+      background: #373f43;
     }
 
-    .footer .wrapper {
-      background: #ebebeb;
+    .footer .wrapper,
+    .footer center {
+      color: #e2e1e6;
+      background: #373f43;
     }
 
     .footer h5 {
+      color: #e2e1e6;
       padding-bottom: 10px;
+    }
+
+    .footer p {
+      color: #e2e1e6;
     }
 
     table.columns .text-pad {
@@ -773,9 +801,9 @@ body.outlook p {
   </style>
 </head>
 <body>
-	<table class="body">
-		<tr>
-			<td class="center" align="center" valign="top">
+    <table class="body">
+        <tr>
+            <td class="center" align="center" valign="top">
         <center>
 
 
@@ -786,21 +814,18 @@ body.outlook p {
 
                   <table class="container">
                     <tr>
-                      <td class="wrapper last">
+                      <td class="wrapper last" style="padding: 0;">
 
-                        <!-- <table class="twelve columns">
+                        <table class="twelve columns">
                           <tr>
 
-                            <td class="six sub-columns">
-                              <img src="http://placehold.it/200x50">
-                            </td>
-                            <td class="six sub-columns last" align="right" style="text-align:right; vertical-align:middle;">
-                              <span class="template-label">HERO</span>
+                            <td class="twelve sub-columns" style="padding: 0;">
+                              <img src="https://s3.amazonaws.com/serversforhackers/header-compressor.png">
                             </td>
                             <td class="expander"></td>
 
                           </tr>
-                        </table> -->
+                        </table>
 
                       </td>
                     </tr>
@@ -812,218 +837,52 @@ body.outlook p {
           </table>
           <br>
 
-          <table class="container">
+          {% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
+
+
+          <table class="row header footer">
             <tr>
-              <td>
-                <!-- content start -->
-                <table class="row">
-                  <tr>
-                    <td class="wrapper last">
+              <td class="center" align="center">
+                <center>
 
-                      <table class="twelve columns">
-                        <tr>
-                          <td>
-                            <h1>Servers For Hackers</h1>
-                            <p class="lead">A newsletter about servers, made for developers!</p>
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
+                  <table class="container" style="background: #373f43; color: #e2e1e6;" backgroud="373f43">
+                    <tr>
+                      <td class="wrapper last" style="padding: 18px 0;">
 
-                    </td>
-                  </tr>
-                </table>
+                        <table class="twelve columns">
+                          <tr>
+                            <td align="center">
+                              <center>
+                                  <p style="text-align:center; ">From <a href="https://twitter.com/fideloper"> @fideloper</a></p>
+                                  <p style="text-align: center; font-size: 11px;">Copyright *|CURRENT_YEAR|* *|LIST:COMPANY|*</p>
+                                  <p style="text-align: center; color: #e2e1e6;">
+                                      <a href="*|UNSUB|*" style="font-size: 11px; color: #2ba6cb; text-decoration: none;">Unsubscribe</a> yourself (<a href="mailto:*|EMAIL|*" style="font-size: 11px; color: #2ba6cb; text-decoration: none;">*|EMAIL|*</a>) from this list |
+                                      <a href="*|UPDATE_PROFILE|*" style="font-size: 11px; color: #2ba6cb; text-decoration: none;">Update Your Information</a>
+                                      <br>
+                                      <a href="*|FORWARD|*" style="font-size: 11px; color: #2ba6cb; text-decoration: none;">Forward to a friend</a>
+                                  </p>
+                                  <p style="text-align: center; font-size: 11px;">Contact SFH at <a href="mailto:mail@serversforhackers.com" style="color: #2ba6cb; text-decoration: none;">mail@serversforhackers.com</a> or physical mail to:</p>
+                                <p style="margin:0;padding:0; font-size: 11px; text-align: center; color: #e2e1e6;">*|HTML:LIST_ADDRESS_HTML|*</p>
+                                <p style="font-size: 11px; text-align: center; color: #e2e1e6;">*|LIST:DESCRIPTION|*</p>
+                              </center>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
 
-{% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
+                      </td>
+                    </tr>
+                  </table>
 
-                <!-- <table class="row callout">
-                  <tr>
-                    <td class="wrapper last">
-
-                      <table class="twelve columns">
-                        <tr>
-                          <td class="panel">
-
-                            <p>Here's an ad from a sponsor, or something like that. Either way, you shoud <a href="#">Click it! »</a> before it's too late. After all, why not?</p>
-
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table>
-
-                <table class="row">
-                  <tr>
-                    <td class="wrapper last">
-
-                      <table class="twelve columns">
-                        <tr>
-                          <td>
-
-                            <h3>Title Ipsum <small>This is a note.</small></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table>
-
-                <table class="row">
-                  <tr>
-                    <td class="wrapper last">
-
-                      <table class="twelve columns">
-                        <tr>
-                          <td>
-
-                            <h3>Web Servers</h3>
-                            <ul>
-                              <li><a href="#">Another Title</a> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</li>
-                              <li><a href="#">Here's another Title</a> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</li>
-                              <li><a href="#">Last TItle</a> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</li>
-                            </ul>
-
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table>
-
-                <table class="row">
-                  <tr>
-                    <td class="wrapper last">
-
-                      <table class="three columns">
-                        <tr>
-                          <td>
-
-                            <table class="button">
-                              <tr>
-                                <td>
-                                  <a href="#">Click Me!</a>
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table> -->
-
-
-                <!-- <table class="row footer">
-                  <tr>
-                    <td class="wrapper">
-
-                      <table class="six columns">
-                        <tr>
-                          <td class="left-text-pad">
-
-                            <h5>Connect With Us:</h5>
-
-                            <table class="tiny-button facebook">
-                              <tr>
-                                <td>
-                                  <a href="#">Facebook</a>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <br>
-
-                            <table class="tiny-button twitter">
-                              <tr>
-                                <td>
-                                  <a href="#">Twitter</a>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <br>
-
-                            <table class="tiny-button google-plus">
-                              <tr>
-                                <td>
-                                  <a href="#">Google +</a>
-                                </td>
-                              </tr>
-                            </table>
-
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
-
-                    </td>
-                    <td class="wrapper last">
-
-                      <table class="six columns">
-                        <tr>
-                          <td class="last right-text-pad">
-                            <h5>Contact Info:</h5>
-                            <p>Phone: 408.341.0600</p>
-                            <p>Email: <a href="mailto:hseldon@trantor.com">hseldon@trantor.com</a></p>
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table> -->
-
-
-                <table class="row">
-                  <tr>
-                    <td class="wrapper last">
-
-                      <table class="twelve columns">
-                        <tr>
-                          <td align="center">
-                            <center>
-                                <p style="text-align:center;">From <a href="https://twitter.com/fideloper"> @fideloper</a></p>
-                                <p style="text-align: center;">Copyright *|CURRENT_YEAR|* *|LIST:COMPANY|*</p>
-                                <p style="text-align: center;">
-                                    <a href="*|UNSUB|*" style="color: #2ba6cb; text-decoration: none;">Unsubscribe</a> yourself (<a href="mailto:*|EMAIL|*" style="color: #2ba6cb; text-decoration: none;">*|EMAIL|*</a>) from this list |
-                                    <a href="*|UPDATE_PROFILE|*" style="color: #2ba6cb; text-decoration: none;">Update Your Information</a>
-                                    <br>
-                                    <a href="*|FORWARD|*" style="color: #2ba6cb; text-decoration: none;">Forward to a friend</a>
-                                </p>
-                                <p style="text-align: center;">Contact SFH at <a href="mailto:mail@serversforhackers.com" style="color: #2ba6cb; text-decoration: none;">mail@serversforhackers.com</a> or physical mail to:</p>
-                              <p style="margin:0;padding:0; text-align: center;">*|HTML:LIST_ADDRESS_HTML|*</p>
-                              <p style="text-align: center;">*|LIST:DESCRIPTION|*</p>
-                            </center>
-                          </td>
-                          <td class="expander"></td>
-                        </tr>
-                      </table>
-
-                    </td>
-                  </tr>
-                </table>
-
-                <!-- container end below -->
+                </center>
               </td>
             </tr>
           </table>
 
         </center>
-			</td>
-		</tr>
-	</table>
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>
