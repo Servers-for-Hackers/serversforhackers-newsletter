@@ -17,9 +17,9 @@ title: Mailcatcher
                                     <h1>Using Mailcatcher</h1>
                                     <p class="lead">Learn how to use Mailcatcher in your development environment!</p>
                                     <p>Handling email in applications can be hard! Sending emails of certain formats can sometimes be challenging, but <strong>Mailcatcher</strong> is here to help.</p>
-                                    <p>Using Mailcatcher, we can intercept and inspect sent emails html/plaintext formats and headers.</p>
+                                    <p>Using Mailcatcher, we can intercept and inspect sent email's html/plaintext formats and headers.</p>
                                     <p>This week, we go over how to install Mailcather, set it to start on server boot, and configure it for PHP!</p>
-                                    <img width="580" src="https://s3.amazonaws.com/serversforhackers/sfh_mailcatcher.png">
+                                    <a href="https://serversforhackers.com/editions/2014/10/21/mailcatcher" style="text-decoration: none;"><img width="580" border="0" src="https://s3.amazonaws.com/serversforhackers/sfh_mailcatcher.png"></a>
                                 </td>
                                 <td class="expander"></td>
                              </tr>
@@ -86,9 +86,12 @@ title: Mailcatcher
                         <table class="twelve columns">
                             <tr>
                                 <td>
-                                    <h2>Servers for Hackers eBook</h2>
-                                    <p class="lead">Some of the topics in this weeks newsletter are covered in more detail in the <a href="https://book.serversforhackers.com/">Servers for Hackers eBook</a>, on sale now!</p>
-                                    <p></p>
+                                    <h2>Servers for Hackers eBook Update!</h2>
+                                    <p class="lead">This week there's a new chapter: <strong>Hosting Web Applications</strong>.</p>
+                                    <p class="lead"><a href="https://book.serversforhackers.com"><strong><a href="https://book.serversforhackers.com">You'll learn the three software types used to serve a production application</strong></a>!</p>
+                                    <p><img src="https://s3.amazonaws.com/serversforhackers/bookimg-compressor.jpg" width="580" height="250" style="margin-bottom:12px;" /></p>
+                                    <p>This update also includes many clarifications and fixes for typos.</p>
+                                    <p>Lastly, the <a href="https://serversforhackers.com/articles/2014/10/21/web-apps">Hosting Web Applications chapter is also available <strong>for free</strong></a> as a new article!</p>
                                 </td>
                                 <td class="expander"></td>
                             </tr>
@@ -121,7 +124,7 @@ title: Mailcatcher
                                     <table class="button">
                                         <tr>
                                             <td>
-                                                <a href="https://book.serversforhackers.com#buynow">Choose your Servers for Hackers Package!</a>
+                                                <a href="https://book.serversforhackers.com">Learn More About the Servers for Hackers Book!</a>
                                             </td>
                                         </tr>
                                     </table>
