@@ -48,19 +48,34 @@ That does it for installing PHP and our dependencies. Next, we can install the M
 sudo gem install mailcatcher
 ```
 
-Once that's installed, you can start using Mailcatcher:
+Once that's installed, we can see the available options:
 
 ```bash
-mailcatcher --foreground --http=0.0.0.0
+$ mailcatcher --help
+Usage: mailcatcher [options]
+        --ip IP                      Set the ip address of both servers
+        --smtp-ip IP                 Set the ip address of the smtp server
+        --smtp-port PORT             Set the port of the smtp server
+        --http-ip IP                 Set the ip address of the http server
+        --http-port PORT             Set the port address of the http server
+    -f, --foreground                 Run in the foreground
+    -v, --verbose                    Be more verbose
+    -h, --help                       Display this help information
+```
+
+Then we can can start using Mailcatcher. We'll bind the web interface's IP address to all networks:
+
+```bash
+mailcatcher --foreground --http-ip=0.0.0.0
 ```
 
 This will run Mailcatcher in the foreground. You can exit it by hitting Ctrl+C.
 
-Local scripts can then connect to SMTP at `localhost` port `1025`. Additionally, there's a web interface available at port `1080`. We bound the web interface to all network interfaces via the `--http=0.0.0.0` option.
+Local scripts can then connect to SMTP at `localhost` port `1025`. Additionally, the web interface is available at port `1080` by default.
 
 ### Start on Boot
 
-We can setup Mailcatcher to start when our server starts. This lets us forget about having to turn on Mailcatcher whenever we start our development machine.
+It is useful to setup Mailcatcher to start when the server boots. This lets us forget about having to turn on Mailcatcher whenever we start our development machine.
 
 Rather than install a process monitor, we can use Upstart, which currently comes out of the box with Ubuntu. This will get replaced with Systemd eventually. For now, we can use Upstart.
 
