@@ -38,10 +38,10 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 * Redirect http://fideloper.com/ubuntu-prod-logrotate to this new page
 * MOVE DISQUS THREAD CORRECTLY
 
-/editions/2014/03/25/nginx/
+✔️ /editions/2014/03/25/nginx/
 
-* Nginx as Frontman (+ wildcard subdomain video)
-* Nginx as a Load Balancer
+✔️ * Nginx as Frontman (+ wildcard subdomain video)
+✔️ * Nginx as a Load Balancer
 
 
 /editions/2014/04/08/ssl-certs/
