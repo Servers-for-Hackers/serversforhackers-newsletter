@@ -4,8 +4,6 @@ topics: [Getting Off of MAMP]
 description: We'll get off of MAMP, and into Vagrant, along with setting up Apache!
 ---
 
-# Getting Off of MAMP
-
 There's a large number of PHP users who rely on their trusty *AMP installs to "just work". However, many need to go beyond default setups for certain frameworks or projects. When you do, these "easy" tools break down because the operating systems (and/or the [applications](http://stackoverflow.com/search?q=mamp+phpunit)) on which you work [break standards](http://stackoverflow.com/search?q=mamp+artisan) set by the Linux/Unix servers on which the projects likely will live in production.
 
 When you start hitting these walls, it's time to leave *AMP behind and start using virtual machines to set up a "real" server. You'll never look back.

@@ -4,8 +4,6 @@ topics: [Configuring Apache Virtual Hosts]
 description: Learn what's going on inside of a basic Apache virtualhost
 ---
 
-# Configuring Apache Virtual Hosts
-
 If you're using Apache for your development server, knowing how to configure Apache will be important.
 
 Because you might run multiple sites on one Apache server, you need to tell Apache which directory contains the web files (the "web root" or "document root") per website.

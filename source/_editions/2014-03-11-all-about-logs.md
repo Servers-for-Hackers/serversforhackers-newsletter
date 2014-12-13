@@ -1,16 +1,12 @@
 ---
-title: The Log Edition
-topics: [All About Logs, Managing Logs with Logrotate]
-description: Logs are important for giving us detailed error and debugging information. Let's cover how to manage logs affectively!
+title: All About Logs
+topics: [All About Logs]
+description: Logs are important for giving us detailed error and debugging information. Let's cover how to manage logs effectively!
 ---
-
-<a name="all-about-logs" id="all-about-logs"></a>
-
-## All About Logs
 
 Logs are important to application developers. They give us detailed error information about our applications and the systems supporting them. They also can give us clues about what may go wrong in the future.
 
-### Where To Find Them
+## Where To Find Them
 
 Logs are almost always found in `/var/log`. Usually they are owned by a privileged user and group, such as `root` or `adm`. Even if you don't have access to a privileged user (a user who can use `sudo`), you can often - but not always - read these files.
 
@@ -20,7 +16,7 @@ Not all log files are in a subdirectory. For example, if you're using PHP-FPM, y
 
 Lastly, logs are often split between access (or events) and error logs. Apache, Nginx and MySQL all have separate error and access/use logs.
 
-### Application Logs
+## Application Logs
 
 Some web applications create their own logs. You should consult your framework's documentation to find out where they might be. The Laravel PHP framework, for example, will create logs in the `app/storage/logs` directory. To [avoid getting a WSOD upon an error](http://stackoverflow.com/questions/20678360/laravel-blank-white-screen/20682951#20682951), you should make sure that the log directory can be written to.
 
@@ -35,7 +31,7 @@ Log information on other popular frameworks:
 * [RoR (Ruby)](http://guides.rubyonrails.org/debugging_rails_applications.html)
 
 
-### Watching Logs With Tail
+## Watching Logs With Tail
 
 Since logs may give you more error information than the browser when developing a web application, you may find it appropriate to monitor a log file. This is especially true in production environments where error reporting is turned off - they will only be displayed within log files.
 
@@ -45,13 +41,13 @@ If I wanted to watch the last 50 lines of my apache error log for errors, I woul
 
     tail -n 50 -f /var/log/apache2/error.log
 
-### Virtual Hosts and Logs
+## Virtual Hosts and Logs
 
 If you read the previous newsletter on Apache virtual hosts, you may have noticed that I setup a [unique access and error log for each virtual host](https://gist.github.com/fideloper/2710970#file-vhost-sh-L44-L50). This lets you track the logs of just one website, rather than having multiple website events combined into one log.
 
 For a site **example.com**, the log files might be `/var/log/apache2/example.com-access.log` and `/var/log/apache2/exampe.com-error.log`.
 
-### Analyzing Log Files
+## Analyzing Log Files
 
 Here are some simple examples of examining some Apache (or Nginx!) log files.
 
@@ -62,7 +58,7 @@ For more command-line tricks:
 * [Analyzing Apache log files](http://www.the-art-of-web.com/system/logs/)
 * [Sed and Awk examples](https://www.adayinthelifeof.nl/2010/12/11/sed-awk-examples/)
 
-### More Advanced Analysis and Tooling
+## More Advanced Analysis and Tooling
 
 As you might imagine, there are LOTS of tools available to analyze and store logs. This becomes especially important if you have a multiple-server environment, each of which may be generating it's own collection of logs.
 
@@ -70,7 +66,7 @@ In situations like this, a common strategy is to combine log files to a central 
 
 Here's a list of some available logging tools:
 
-#### Self Install
+### Self Install
 
 * [Logstash](http://logstash.net/) - An easy to use Open Source log and event manager. Numerous people pointed out that I missed this at first. It's one of the easiest (and backed by [Elasticsearch](http://www.elasticsearch.org/)) open-source loggers!
 * [Webalizer](http://www.webalizer.org/) - Good for single servers, and often found in hosting accounts, this is good for basic analyzing of web traffic from Apache logs
@@ -79,7 +75,7 @@ Here's a list of some available logging tools:
 	* Some information on [Graylog2 and PHP Monolog](http://jeremycook.ca/2012/10/02/turbocharging-your-logs/)
 * [Splunk](http://www.splunk.com/) - Enterprisey
 
-#### PaaS
+### PaaS
 
 * [Loggly](https://www.loggly.com/)
 * [Airbrake.io](https://airbrake.io/)
@@ -88,7 +84,7 @@ Here's a list of some available logging tools:
 * [Logentries](https://logentries.com/)
 * [Splunk Storm](https://www.splunkstorm.com/) - SaaS for Splunk
 
-#### Lastly
+### Lastly
 
 Here's an interesting idea on logging: [Fingers Crossed](http://zeroturnaround.com/rebellabs/attack-of-the-logs-consider-building-a-smarter-log-handler/) logging is the idea of only saving logs which are near errors. If logs do not appear near errors, they are (eventually) discarded.
 
@@ -96,34 +92,10 @@ For PHP readers, [Monolog](https://github.com/Seldaek/monolog) has a [ton of han
 
 For AWS users, Elastic Load Balancers [will finally have Access logs and other data available](http://aws.typepad.com/aws/2014/03/access-logs-for-elastic-load-balancers.html)!
 
----
-
-<a name="logrotate" id="logrotate"></a>
-
-## Managing Logs with Logrotate
-
-So how are log files managed within a server? [Logrotate](https://fedorahosted.org/logrotate/) is usually how. This program can handle keeping log files from becoming too large. It can regularly compress or delete old log files. It can run scripts before or after rotating logs. This stops your servers disk drive (or allocated disk space) from exploding.
-
-**Here is [more on Logrotate, including how to configure it](http://fideloper.com/ubuntu-prod-logrotate)**.
-
-> Note: That one link above is actually the star of the show here in the Logrotate section!
-
-Note the example on how to upload log files to Amazon S3 automatically when each log is rotated. This is a good solution to back up logs for later analysis, but not the most elegant.
-
-Not explicitly stated is that Logrotate runs on a daily cron job. Usually you can find a the `logrotate` script run at `/etc/cron.daily/logrotate`. Many OSes come with scripts which can be run regularly, simply by being placed in the correct directory, such as `/etc/cron.hourly`, `/etc/cron.daily`, `/etc/cron.weely` and `/etc/cron.monthly`.
-
 ## Resources
 
-* [Log Rotate Tutorial](http://fideloper.com/ubuntu-prod-logrotate)
-* [Log Rotate Explanation from Rackspace](http://www.rackspace.com/knowledge_center/article/understanding-logrotate-part-1)
-* [Digital Ocean on Logrotate for Ubuntu](https://www.digitalocean.com/community/articles/how-to-manage-log-files-with-logrotate-on-ubuntu-12-10)
-* [Run Logrotate manually](http://stackoverflow.com/questions/2117771/is-it-possible-to-run-one-logrotate-check-manually) instead of via CRON
-* Finally, [Log Resources for Distributed Environments](http://fideloper.com/web-app-load-balancing) (scroll to the bottom)
+* [Log Resources for Distributed Environments](http://fideloper.com/web-app-load-balancing) (scroll to the bottom)
 
 ## Quick Log Analysis:
 
 <iframe src="//player.vimeo.com/video/87936191" width="100%" height="517" style="width:100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-## Most Importantly:
-
-<iframe width="200%" height="690" style="width:100%" src="//www.youtube.com/embed/2C7mNr5WMjA" frameborder="0" allowfullscreen></iframe>
