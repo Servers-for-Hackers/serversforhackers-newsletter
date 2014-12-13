@@ -9,6 +9,20 @@ Notes:
 A) Need 301 Redirects
 B) Need to merge/move comments from Disqus
 
+Redirects:
+
+```
+# Editions and Articles get combined
+location ~ ^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$ {
+    return 301 $scheme://serversforhackers.com/$mdfile;
+}
+
+# Emails are separate still
+location ~ ^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$ {
+    return 301 $scheme://serversforhackers.com/emails/$mdfile;
+}
+```
+
 /editions/2014/02/25/vagrant-apache/
 
 * Getting off of MAMP (redirect to this one)
