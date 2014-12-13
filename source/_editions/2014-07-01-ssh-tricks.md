@@ -1,9 +1,8 @@
 ---
 title: SSH Tricks
 topics: [Logging In, Tunneling, One-Off Commands]
-description: Amazing things you can do with SSH
+description: Amazing things you can do with SSH, including an introduction to Ansible!
 ---
-# SSH Tricks
 
 We use SSH to log into our servers, but it actually has a lot of neat tricks it can help us with as well! We'll cover some of them here.
 

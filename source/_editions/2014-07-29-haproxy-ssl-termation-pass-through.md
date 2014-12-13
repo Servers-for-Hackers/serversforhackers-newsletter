@@ -44,27 +44,35 @@ We saw how to create a self-signed certificate in a previous edition of SFH. We'
 
 As this process is outlined in a [passed edition on SSL certificates](http://serversforhackers.com/editions/2014/04/08/ssl-certs/), I'll simple show the steps to generate a self-signed certificate here:
 
-	$ sudo mkdir /etc/ssl/xip.io
-	$ sudo openssl genrsa -out /etc/ssl/xip.io/xip.io.key 1024
-	$ sudo openssl req -new -key /etc/ssl/xip.io/xip.io.key -out /etc/ssl/xip.io/xip.io.csr
-	> Country Name (2 letter code) [AU]:US
-	> State or Province Name (full name) [Some-State]:Connecticut
-	> Locality Name (eg, city) []:New Haven
-	> Organization Name (eg, company) [Internet Widgits Pty Ltd]:SFH
-	> Organizational Unit Name (eg, section) []:
-	> Common Name (e.g. server FQDN or YOUR name) []:*.xip.io
-	> Email Address []:
+```shell
+$ sudo mkdir /etc/ssl/xip.io
+$ sudo openssl genrsa -out /etc/ssl/xip.io/xip.io.key 1024
+$ sudo openssl req -new -key /etc/ssl/xip.io/xip.io.key \
+                   -out /etc/ssl/xip.io/xip.io.csr
+> Country Name (2 letter code) [AU]:US
+> State or Province Name (full name) [Some-State]:Connecticut
+> Locality Name (eg, city) []:New Haven
+> Organization Name (eg, company) [Internet Widgits Pty Ltd]:SFH
+> Organizational Unit Name (eg, section) []:
+> Common Name (e.g. server FQDN or YOUR name) []:*.xip.io
+> Email Address []:
 
-	> Please enter the following 'extra' attributes to be sent with your certificate request
-	> A challenge password []:
-	> An optional company name []:
-	$ sudo openssl x509 -req -days 365 -in /etc/ssl/xip.io/xip.io.csr -signkey /etc/ssl/xip.io/xip.io.key -out /etc/ssl/xip.io/xip.io.crt
+> Please enter the following 'extra' attributes to be sent with your certificate request
+> A challenge password []:
+> An optional company name []:
+$ sudo openssl x509 -req -days 365 -in /etc/ssl/xip.io/xip.io.csr \
+                    -signkey /etc/ssl/xip.io/xip.io.key \
+                    -out /etc/ssl/xip.io/xip.io.crt
+```
 
 This leaves us with a `xip.io.csr`, `xip.io.key` and `xip.io.crt` file.
 
 **Next**, after the certificates are created, we need to create a `pem` file. A `pem` file is essentially just the certificate, the key and optionally certificate authorities concatenated into one file. In our example, we'll simply concatenate the certificate and key files together (in that order) to create a `xip.io.pem` file. This is HAProxy's preferred way to read an SSL certificate.
 
-	$ sudo cat /etc/ssl/xip.io/xip.io.crt /etc/ssl/xip.io/xip.io.key | sudo tee /etc/ssl/xip.io/xip.io.pem
+```shell
+$ sudo cat /etc/ssl/xip.io/xip.io.crt /etc/ssl/xip.io/xip.io.key \
+           | sudo tee /etc/ssl/xip.io/xip.io.pem
+```
 
 > When purchasing a real certificate, you won't necessarily get a concatenated "bundle" file. You may have to concatenate them yourself. However, many do provide a bundle file. If you do, it might not be a `pem` file, but instead be a `bundle`, `cert`, `cert`, `key` file or some similar name for the same concept. This [Stack Overflow answer](http://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file) explains that nicely.
 
@@ -72,31 +80,37 @@ In any case, once we have a `pem` file for HAproxy to use, we can adjust our con
 
 We'll setup our application to accept both `http` and `https` connections. In the [last edition on HAProxy](http://serversforhackers.com/editions/2014/07/15/haproxy/), we had this frontend:
 
-	frontend localnodes
-		bind *:80
-		mode http
-		default_backend nodes
+```conf
+frontend localnodes
+	bind *:80
+	mode http
+	default_backend nodes
+```
 
 To terminate an SSL connection in HAProxy, we can now add a binding to the standard SSL port 443, and let HAProxy know where the SSL certificates are:
 
-    frontend localhost
-        bind *:80
-        bind *:443 ssl crt /etc/ssl/xip.io/xip.io.pem
-        mode http
-        default_backend nodes
+```conf
+frontend localhost
+    bind *:80
+    bind *:443 ssl crt /etc/ssl/xip.io/xip.io.pem
+    mode http
+    default_backend nodes
+```
 
 In the above example, we're using the backend "nodes". The backend, luckily, doesn't really need to be configured in any particular way. In the [previous edition on HAProxy](http://serversforhackers.com/editions/2014/07/15/haproxy/), we had the backend like so:
 
-    backend nodes
-        mode http
-        balance roundrobin
-        option forwardfor
-        option httpchk HEAD / HTTP/1.1\r\nHost:localhost
-        server web01 172.17.0.3:9000 check
-        server web02 172.17.0.3:9001 check
-        server web03 172.17.0.3:9002 check
-        http-request set-header X-Forwarded-Port %[dst_port]
-        http-request add-header X-Forwarded-Proto https if { ssl_fc }
+```conf
+backend nodes
+    mode http
+    balance roundrobin
+    option forwardfor
+    option httpchk HEAD / HTTP/1.1\r\nHost:localhost
+    server web01 172.17.0.3:9000 check
+    server web02 172.17.0.3:9001 check
+    server web03 172.17.0.3:9002 check
+    http-request set-header X-Forwarded-Port %[dst_port]
+    http-request add-header X-Forwarded-Proto https if { ssl_fc }
+```
 
 Because the SSL connection is terminated at the Load Balancer, we're still sending regular HTTP requests to the backend servers. We don't need to change this configuration, as it works the same!
 
@@ -104,12 +118,14 @@ Because the SSL connection is terminated at the Load Balancer, we're still sendi
 
 If you'd like the site to be SSL-only, you can add a `redirect` directive to the frontend configuration:
 
-    frontend localhost
-        bind *:80
-        bind *:443 ssl crt /etc/ssl/xip.io/xip.io.pem
-        redirect scheme https if !{ ssl_fc }
-        mode http
-        default_backend nodes
+```conf
+frontend localhost
+    bind *:80
+    bind *:443 ssl crt /etc/ssl/xip.io/xip.io.pem
+    redirect scheme https if !{ ssl_fc }
+    mode http
+    default_backend nodes
+```
 
 Above, we added the `redirect` directive, which will redirect from "http" to "https" if the connection was not made with an SSL connection. More information on [`ssl_fc` is available here](http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#7.3.4-ssl_fc).
 
@@ -126,12 +142,14 @@ In this setup, we need to use TCP mode over HTTP mode in both the frontend and b
 
 **First**, we'll tweak the **frontend** configuration:
 
-    frontend localhost
-        bind *:80
-        bind *:443
-        option tcplog
-        mode tcp
-        default_backend nodes
+```conf
+frontend localhost
+    bind *:80
+    bind *:443
+    option tcplog
+    mode tcp
+    default_backend nodes
+```
 
 This still binds to both port 80 and port 443, giving the opportunity to use both regular and SSL connections.
 
@@ -139,12 +157,14 @@ As mentioned, to pass a secure connection off to a backend server without encryp
 
 **Next**, we need to tweak our **backend** configuration. Notably, we once again need to change this to TCP mode, and we remove some directives to reflect the loss of ability to edit/add HTTP headers:
 
-    backend nodes
-        mode tcp
-        balance roundrobin
-        option ssl-hello-chk
-        server web01 172.17.0.3:443 check
-        server web02 172.17.0.4:443 check
+```conf
+backend nodes
+    mode tcp
+    balance roundrobin
+    option ssl-hello-chk
+    server web01 172.17.0.3:443 check
+    server web02 172.17.0.4:443 check
+```
 
 As you can see, this is set to `mode tcp` - Both frontend and backend configurations need to be set to this mode.
 

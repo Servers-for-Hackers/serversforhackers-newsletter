@@ -1,5 +1,5 @@
 ---
-title: More Security
+title: Firewalls & Auto Updating
 topics: [Setting Up the Firewall With Iptables, Automatic Security Updates]
 description: In this edition, we'll continue on with more security by learning how to manage the firewall with Iptables. We'll also learn how to turn on automatic security updates on Ubuntu.
 ---
