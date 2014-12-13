@@ -12,6 +12,26 @@ B) Need to merge/move comments from Disqus
 Redirects:
 
 ```
+✔️ location = /editions/2014/02/25/vagrant-apache/ {
+    return 301 $scheme://$host/getting-off-of-mamp/;
+}
+
+✔️ location = /editions/2014/03/11/logs/ {
+    return 301 $scheme://$host/log-rotate/;
+}
+
+✔️ location = /editions/2014/03/25/nginx/ {
+    return 301 $scheme://$host/nginx-loadbalancer/;
+}
+
+✔️ location = /editions/2014/04/22/hosts-dns-multi-tenancy/ {
+    return 301 $scheme://$host/server-for-multi-tenancy/;
+}
+
+✔️ location = /editions/2014/06/17/more-security/ {
+    return 301 $scheme://$host/firewall-auto-updating/;
+}
+
 ✔ # Editions and Articles get combined
 location ~ "^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
     return 301 $scheme://$host/$mdfile;
@@ -21,33 +41,13 @@ location ~ "^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
 location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
     return 301 $scheme://$host/emails/$mdfile;
 }
-
-location = /editions/2014/02/25/vagrant-apache/ {
-    return 301 $scheme://$host/getting-off-of-mamp/;
-}
-
-location = /editions/2014/03/11/logs/ {
-    return 301 $scheme://$host/log-rotate/;
-}
-
-location = /editions/2014/03/25/nginx/ {
-    return 301 $scheme://$host/nginx-loadbalancer/;
-}
-
-location = /editions/2014/04/22/hosts-dns-multi-tenancy/ {
-    return 301 $scheme://$host/server-for-multi-tenancy/;
-}
-
-location = /editions/2014/06/17/more-security/ {
-    return 301 $scheme://$host/firewall-auto-updating/;
-}
 ```
 
 ✔️ /editions/2014/02/25/vagrant-apache/
 
 ✔️ * Getting off of MAMP (redirect to this one)
 ✔️ * Configuring Apache Virtual Hosts - grab content from: http://fideloper.com/ubuntu-prod-vhost
-* Redirect http://fideloper.com/ubuntu-prod-vhost to this new page
+✔️ * Redirect http://fideloper.com/ubuntu-prod-vhost to this new page
 ✔️ * Redirect to new URLs
     * /apache-vhost/
     * /getting-off-of-mamp/
@@ -58,7 +58,7 @@ location = /editions/2014/06/17/more-security/ {
 
 ✔️ * All About Logs
 ✔️ * Managing Logs with Logrotate - grab content from: http://fideloper.com/ubuntu-prod-logrotate
-* Redirect http://fideloper.com/ubuntu-prod-logrotate to this new page
+✔️ * Redirect http://fideloper.com/ubuntu-prod-logrotate to this new page
 ✔️ * Redirect to new URLs
     * /all-about-logs/
     * /log-rotate/
