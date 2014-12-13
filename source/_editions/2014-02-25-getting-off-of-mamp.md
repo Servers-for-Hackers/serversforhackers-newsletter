@@ -1,16 +1,8 @@
 ---
-title: Vagrant and Apache
-topics: [Getting Off of MAMP, Configuring Apache Virtual Hosts]
-description: This is the very first Servers for Hackers newsletter. We'll get off of MAMP, and into Vagrant and setting up Apache!
+title: Getting Off of MAMP
+topics: [Getting Off of MAMP]
+description: We'll get off of MAMP, and into Vagrant, along with setting up Apache!
 ---
-
-This is the very first Servers for Hackers newsletter. As one of the main goals of this newsletter is to get those less experienced on the server side of things get their feet wet, we'll start with some basics.
-
-First, we'll discuss getting off of MAMP (or WAMP/XAMP for that matter) and start using a Virtual Machine. Then we'll talk about configuring Apache virtual hosts, as it's commonly a next step after installing Apache.
-
----
-
-<a name="getting-off-mamp" id="getting-off-mamp"></a>
 
 # Getting Off of MAMP
 
@@ -91,46 +83,3 @@ Curious about how to install other things? Check out [Vaprobash](https://github.
 * [NetTuts on Vagrant](http://net.tutsplus.com/tutorials/php/vagrant-what-why-and-how/), with a little Puppet
 * [NetTuts on Vagrant](http://net.tutsplus.com/tutorials/setting-up-a-staging-environment/) for setting up a staging environment
 * [Gist to use to install LAMP stack](https://gist.github.com/fideloper/7074502), requiring no user input. Use it [like this](https://gist.github.com/fideloper/dab171a2aa646e86b782#file-vagrantfile-rb-L18) highlighted code.
-
-
----
-
-<a name="configuring-apache-virtual-hosts" id="configuring-apache-virtual-hosts"></a>
-
-# Configuring Apache Virtual Hosts
-
-If you're using Apache for your development server, knowing how to configure Apache will be important.
-
-Because you might run multiple sites on one Apache server, you need to tell Apache which directory contains the web files (the "web root" or "document root") per website.
-
-First, here's **[a primer on Virtual Hosts](http://fideloper.com/ubuntu-prod-vhost)**, which will be most useful for Vagrant users installing Ubuntu.
-
-If you need more information, check [the documentation](https://httpd.apache.org/docs/2.4/vhosts/). Luckily, it's fairly easy to understand once you know the files to edit. Most comment setups for virtual hosts include [name-based](https://httpd.apache.org/docs/2.4/vhosts/name-based.html), in which you differentiate virtual hosts via `ServerName`. However you can also [use IP addresses](https://httpd.apache.org/docs/2.4/vhosts/ip-based.html) to differentiate.
-
-Finally, there are [examples of common setups](https://httpd.apache.org/docs/2.4/vhosts/examples.html)!
-
-Not using Ubuntu or Debian? Here are guides for [CentOS](https://www.digitalocean.com/community/articles/how-to-set-up-apache-virtual-hosts-on-centos-6), [RedHat](https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Reference_Guide/s1-apache-virtualhosts.html), [FreeBSD](http://www5.us.freebsd.org/doc/handbook/network-apache.html#AEN39491) and [Arch](https://www.digitalocean.com/community/articles/how-to-set-up-apache-virtual-hosts-on-arch-linux).
-
-## The Hosts File
-
-You might also need this. Every computer has a `hosts` file. This file can tell your computer what server to use when you request a specific domain.
-
-For example, if you set a virtual host for url `myproject.local`, your browser won't know what server to send that request to. However, if you also know your server's IP address is `192.168.33.10`, then you can edit your hosts file and add the entry `192.168.33.10  myproject.local`, which informs it where to look when that URL is used.
-
-Here's how to [edit the hosts file on mac](http://osxdaily.com/2012/08/07/edit-hosts-file-mac-os-x/) and two methods for [editing hosts file (as an administrator) on Windows](http://www.petri.co.il/edit-hosts-file-windows-8.htm).
-
-Personally, I've started using [xip.io](http://xip.io), which will map to the IP address given in the URL. This way, you can setup a virtual host with a `ServerName` such as `myproject.192.168.33.11.xip.io`, and use `http://myproject.192.168.33.11.xip.io` in your browser to go to the server. Note that the IP address I used would be the address of your Vagrant server. This lets you avoid editing your hosts file!
-
-
-## More Resources
-
-* [Upgrading from Apache 2.2 to 2.4](http://httpd.apache.org/docs/2.4/upgrading.html). Some servers still install 2.2, however some install the newer 2.4. If you find yourself suddenly using 2.4, know that it comes with some changes in configuration. The above article outlines those.
-* My [vhost tool](https://gist.github.com/fideloper/2710970) script and the [comment on usage](https://gist.github.com/fideloper/2710970#comment-993649), in both Python and Bash flavors. For Ubuntu specifically. This creates and enables an Apache virtual host for you.
-
-## Bonus
-
-Here's a screencast covering more on Apache Virtual Hosts.
-
-<iframe src="//player.vimeo.com/video/87364924" width="100%" height="517" style="width:100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
----
