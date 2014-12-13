@@ -29,7 +29,9 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * Configuring Apache Virtual Hosts - grab content from: http://fideloper.com/ubuntu-prod-vhost
 * Redirect http://fideloper.com/ubuntu-prod-vhost to this new page
 * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+    * /apache-vhost/
+    * /getting-off-of-mamp/
+✔️ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/03/11/logs/
@@ -38,7 +40,9 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * Managing Logs with Logrotate - grab content from: http://fideloper.com/ubuntu-prod-logrotate
 * Redirect http://fideloper.com/ubuntu-prod-logrotate to this new page
 * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+    * /all-about-logs/
+    * /log-rotate/
+✔️ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/03/25/nginx/
@@ -46,7 +50,9 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * Nginx as Frontman (+ wildcard subdomain video)
 ✔️ * Nginx as a Load Balancer
 * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+    * /nginx-start/
+    * /nginx-loadbalancer/
+✔️ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/04/08/ssl-certs/
@@ -54,9 +60,9 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * SSL Overview
 ✔️ * Creating Self-Signed Cert (+ wildcard)
 ✔️ * Apache & Nginx Setup with SSL
-* (I have videos on setting up SSL in production)
-* Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ * Redirect to new URLs
+✔️ * MOVE DISQUS THREAD CORRECTLY
+* NEW ARTICLE: Videos on setting up SSL in production
 
 
 ✔️ /editions/2014/04/22/hosts-dns-multi-tenancy/
@@ -64,7 +70,9 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * Hosts File and DNS (video "more on hosts files")
 ✔️ * Server Setup for Multi-Tenancy Applications
 * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+    - /hosts-file-dns/
+    - /server-for-multi-tenancy/
+✔️ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/05/06/permissions-users/
@@ -72,7 +80,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * Permissions
 ✔️ * User Management
 ✔ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/05/20/copying-files/
@@ -81,7 +89,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * SCP: Secure Copy
 ✔️ * Rsync: Sync Files Across Hosts
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/06/03/initial-security/
@@ -91,7 +99,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
     - Initial User Setup
     - SSH Key Access
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/06/17/more-security/
@@ -99,8 +107,9 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * More Security
     - Setting Up the Firewall: Iptables
     - Automatic Security Updates
-* Redirect to new URL (/firewall-auto-updating/)
-* MOVE DISQUS THREAD CORRECTLY
+* Redirect to new URL 
+    * /firewall-auto-updating/
+✔️ * MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/07/01/ssh-tricks/
@@ -112,7 +121,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
     - One-Off Commands
     - Ansible intro (one-off commands)
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/07/15/haproxy/
@@ -124,7 +133,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
     - HAProxy Configuration
     - Monitoring HAProxy
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/07/29/haproxy-ssl-termation-pass-through/
@@ -134,42 +143,42 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
     - HAProxy with SSL Termination
     - HAProxy with SSL Pass-Through
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/08/12/process-monitoring/
 
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/08/26/getting-started-with-ansible/
 
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/09/09/nginx-caching/
 
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/10/21/mailcatcher/
 
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/11/04/pm2/
 
 * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 
 ✔️ /editions/2014/12/02/pgsql/
 
 ✔️ * Redirect to new URLs
-* MOVE DISQUS THREAD CORRECTLY
+✔️ MOVE DISQUS THREAD CORRECTLY
 
 -->
