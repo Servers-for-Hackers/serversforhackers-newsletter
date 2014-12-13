@@ -13,13 +13,33 @@ Redirects:
 
 ```
 ✔ # Editions and Articles get combined
-location ~ "^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
+location ~ "^/(editions|articles)/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
     return 301 $scheme://$host/$mdfile;
 }
 
 ✔️ # Emails are separate still
-location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
+location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/?$" {
     return 301 $scheme://$host/emails/$mdfile;
+}
+
+location = /editions/2014/02/25/vagrant-apache/ {
+    return 301 $scheme://$host/getting-off-of-mamp/;
+}
+
+location = /editions/2014/03/11/logs/ {
+    return 301 $scheme://$host/log-rotate/;
+}
+
+location = /editions/2014/03/25/nginx/ {
+    return 301 $scheme://$host/nginx-loadbalancer/;
+}
+
+location = /editions/2014/04/22/hosts-dns-multi-tenancy/ {
+    return 301 $scheme://$host/server-for-multi-tenancy/;
+}
+
+location = /editions/2014/06/17/more-security/ {
+    return 301 $scheme://$host/firewall-auto-updating/;
 }
 ```
 
@@ -28,7 +48,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * Getting off of MAMP (redirect to this one)
 ✔️ * Configuring Apache Virtual Hosts - grab content from: http://fideloper.com/ubuntu-prod-vhost
 * Redirect http://fideloper.com/ubuntu-prod-vhost to this new page
-* Redirect to new URLs
+✔️ * Redirect to new URLs
     * /apache-vhost/
     * /getting-off-of-mamp/
 ✔️ * MOVE DISQUS THREAD CORRECTLY
@@ -39,7 +59,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * All About Logs
 ✔️ * Managing Logs with Logrotate - grab content from: http://fideloper.com/ubuntu-prod-logrotate
 * Redirect http://fideloper.com/ubuntu-prod-logrotate to this new page
-* Redirect to new URLs
+✔️ * Redirect to new URLs
     * /all-about-logs/
     * /log-rotate/
 ✔️ * MOVE DISQUS THREAD CORRECTLY
@@ -49,7 +69,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 
 ✔️ * Nginx as Frontman (+ wildcard subdomain video)
 ✔️ * Nginx as a Load Balancer
-* Redirect to new URLs
+✔️ * Redirect to new URLs
     * /nginx-start/
     * /nginx-loadbalancer/
 ✔️ * MOVE DISQUS THREAD CORRECTLY
@@ -69,7 +89,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 
 ✔️ * Hosts File and DNS (video "more on hosts files")
 ✔️ * Server Setup for Multi-Tenancy Applications
-* Redirect to new URLs
+✔️ * Redirect to new URLs
     - /hosts-file-dns/
     - /server-for-multi-tenancy/
 ✔️ * MOVE DISQUS THREAD CORRECTLY
@@ -107,7 +127,7 @@ location ~ "^/emails/[0-9]{4}/[0-9]{2}/[0-9]{2}/(?<mdfile>.*)/$" {
 ✔️ * More Security
     - Setting Up the Firewall: Iptables
     - Automatic Security Updates
-* Redirect to new URL 
+✔️ * Redirect to new URL 
     * /firewall-auto-updating/
 ✔️ * MOVE DISQUS THREAD CORRECTLY
 
