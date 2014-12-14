@@ -1,0 +1,21 @@
+---
+layout: default
+title: Emails
+id: main
+use: [emails]
+description: A newsletter about servers, geared for developers; Simple server management for hackers.
+---
+
+            <div class="content" id="description">
+                <h1>SFH Emails</h1>
+                <p>All emails, to date!</p>
+                <hr />
+            </div>
+            <div class="content" id="editions">
+                {% for email in data.emails %}
+                <article class="edition_overview">
+                    <h2><a href="{{ email.url }}">{{ email.title }} - <span>{{ email.date | date("m.d.Y") }}</span></a></h2>
+                    <hr />
+                </article>
+                {% endfor %}
+            </div>
