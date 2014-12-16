@@ -13,3 +13,7 @@ sculpin_content_types:
         type: path
         singular_name: article
         permalink: :filename/
+    previews:
+        type: path
+        singular_name: preview
+        permalink: preview/:filename/

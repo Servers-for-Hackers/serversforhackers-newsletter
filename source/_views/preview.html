@@ -1,0 +1,46 @@
+{% extends "default" %}
+{% block content_wrapper %}
+            <header class="content">
+                <h1>{{ page.title }}</h1>
+                <hr />
+            </header>
+            <div class="content article-content">
+                {{ page.blocks.content|raw }}
+            </div>
+            <!--
+            <div class="content" id="form" style="text-align:center;">
+                <hr /><br /><br />
+                <form action="https://serversforhackers.us3.list-manage.com/subscribe/post?u=a8135265ae1b33559181e2f60&amp;id=5b5ccc2ff7" method="post">
+                <p>If you like what you see here, Signup to receive regular newsletters:</p>
+                    <ul>
+                        <li><input type="email" name="EMAIL" placeholder="Email Address" class="txt" value=""></li>
+                        <li><button type="submit" class="subcr">Subscribe</button></li>
+                    </ul>
+                    <div style="position: absolute; left: -5000px;"><input type="text" name="b_a8135265ae1b33559181e2f60_5b5ccc2ff7" value=""></div>
+                </form>
+            </div>
+            -->
+            <div id="book_callout">
+              <header class="show_up"><h3>Need more server knowledge?</h3></header>
+              <article>
+                <p>Try out the eBook, where you'll learn <em>much</em> more on building a proper server environment!</p>
+                <p class="button"><a href="https://book.serversforhackers.com/">Read about the eBook!</a></p>
+              </article>
+            </div>
+{% endblock %}
+{% block extra_scripts %}
+
+  <!--[if lte IE 9]>
+  <script src="/static/bower_components/html5-polyfills/classList.js"></script>
+  <![endif]-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      (function(){
+          var codeBlocks = document.querySelectorAll('.content pre, table code');
+          [].forEach.call(codeBlocks, function(codeBlock){
+              codeBlock.classList.add('prettyprint');
+          });
+          prettyPrint();
+      })();
+  </script>
+{% endblock %}

@@ -7,7 +7,7 @@ description: See how to cache both dynamic and static content using Nginx!
 Like Varnish, **Nginx is a very capable web cache**. Many administrators reach for Varnish, often before it's really needed. However, there are two things to know about Nginx:
 
 * Nginx can serve static content (directly) very, very efficiently. This is good when the static files are on the same server as Nginx.
-* Nginx can also act as a "true" cache server when placed in front of application servers, just like you might with Varnish
+* Nginx can also act as a "true" cache server when placed in front of application servers, just like you might with Varnish.
 
 While Varnish is a pure web cache with more advanced cache-specific features than Nginx, Nginx may still be a perfect match for you.
 
@@ -385,7 +385,7 @@ I won't cover what's going on there, but you can see there are more options to p
 Note that for using caching with `FastCGI` cache, I did the following:
 
 * Replaced all instances of `proxy_cache` with `fastcgi_cache`
-* Used `fastcgi_cache_valid 200 60m` to set the expiration times on responses from PHP requests
+* Used `fastcgi_cache_valid 200 60m` to set the expiration times on responses from PHP requests.
 
 You can see this in action:
 

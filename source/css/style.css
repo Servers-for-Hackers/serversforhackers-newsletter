@@ -230,6 +230,49 @@ footer {
     max-width: 100%;
 }
 
+#book_callout {
+    margin-top: 70px;
+}
+
+#book_callout article {
+    padding: 20px;
+    border: 1px solid #e2e1e6;
+    border-top: 0;
+}
+
+.show_up {
+    background: #5bd3ad;
+    padding: 10px;
+}
+
+.show_up h3 {
+    font-weight: 700;
+    font-size: 2em;
+    margin: 0;
+    color: inherit;
+    text-shadow: 1px 1px 1px #ffffff;
+}
+
+#book_callout .button {
+    text-align: center;
+}
+
+#book_callout .button a {
+    display: block;
+    background: #373f43;
+    border: 0;
+    border-radius: 8px;
+    color: #FFF;
+    cursor: pointer;
+    font-family: 'Open Sans', helvetica, arial, sans-serif;
+    font-size: 1em;
+    font-weight: 300;
+    margin: 0 auto;
+    padding: 0;
+    width: 60%;
+    line-height: 50px;
+}
+
 /**** PRETTY PRINT ****/
 .post pre {
     margin-bottom: 20px

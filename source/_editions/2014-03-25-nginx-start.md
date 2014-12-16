@@ -28,7 +28,8 @@ For Ubuntu, which I continue to use for both ease and popularity (and thus good 
 
 ```shell
 # If you don't already have this:
-sudo apt-get install -y python-software-properties
+# You may need to install python-software-properties on Ubuntu 12.04
+sudo apt-get install -y software-properties-common
 
 # Add repository of stable builds:
 sudo add-apt-repository -y ppa:nginx/stable
