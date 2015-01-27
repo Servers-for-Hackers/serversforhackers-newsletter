@@ -1,7 +1,7 @@
 ---
 title: Configuring Apache Virtual Hosts
 topics: [Configuring Apache Virtual Hosts]
-description: Learn what's going on inside of a basic Apache virtualhost
+description: Learn what's going on inside of a basic Apache VirtualHost.
 ---
 
 If you're using Apache for your development server, knowing how to configure Apache will be important.
