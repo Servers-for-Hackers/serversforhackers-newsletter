@@ -173,4 +173,5 @@ cat /etc/selinux/targeted/contexts/files/file_contexts | grep httpd
 * An [amazing talk on using SELinux](https://www.youtube.com/watch?v=MxjenQ31b70)
 * The [slides for said talk](http://people.redhat.com/tcameron/Summit2012/SELinux/cameron_w_120_selinux_for_mere_mortals.pdf)
 * Seriously, watch that talk.
+* [Building a SELinux policy module](http://www.relativkreativ.at/articles/how-to-compile-a-selinux-policy-package)
 
