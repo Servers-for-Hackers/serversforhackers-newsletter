@@ -24,7 +24,7 @@ To generate this key pair, I used the following command:
 ssh-keygen -t rsa -b 4096 -C "fideloper@gmail.com" -f id_deployex
 ```
 
-To copy that to remove server (since I'm on a Vagrant server, not my Mac, which may not have this command), I can use the following to copy the public key into the `deployer` user's `authorized_keys` file:
+To copy that to the remote/production server (since I'm on a Vagrant server, not my Mac, which may not have this command), I can use the following to copy the public key into the `deployer` user's `authorized_keys` file:
 
 ```bash
 # Since not running on mac, we have this command
