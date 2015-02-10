@@ -6,7 +6,7 @@ description: We'll use Laravel's Envoy to deploy a PHP application to a producti
 
 <script type="text/javascript" src="//cdn.sublimevideo.net/js/h4bb7ywv.js"></script>
 
-We'll use Laravel's Envoy to deploy a PHP application to a production server. This will make a new diretory, clone the repository into it, run any needed build steps, and then finally swap the new code out with the older code, so that the new code is then served by Nginx and PHP-FPM.
+We'll use Laravel's Envoy to deploy a PHP application to a production server. This will make a new release directory, clone the repository into it, run any needed build steps, and then finally swap the new code out with the older code, so that Nginx and PHP-FPM serve the new code..
 
 <video id="119176265" class="sublime" poster="https://s3.amazonaws.com/serversforhackers/sfh-bumper-compressor.png" width="1280" height="720" title="Deployment with Envoy" data-uid="119176265" data-autoresize="fit" preload="none">
   <source src="http://player.vimeo.com/external/119176265.hd.mp4?s=def43afc3a02149647a7c8fc48321bb5" data-quality="hd" />
@@ -16,9 +16,9 @@ We'll use Laravel's Envoy to deploy a PHP application to a production server. Th
 
 ## Setup
 
-The remote server is at IP address `104.236.85.162`. It has a user `deployer`, and I created a local SSH keypair to connect to it. That keypair is called `id_deployex`.
+The remote server is at IP address `104.236.85.162`. It has a user `deployer`, and I created a local SSH key pair to connect to it. That key pair is called `id_deployex`.
 
-To generate this keypair, I used the following command:
+To generate this key pair, I used the following command:
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "fideloper@gmail.com" -f id_deployex
@@ -63,7 +63,7 @@ which envoy
 vim ~/.profile
 ```
 
-If the `which envoy` test fails (if there's no output saying the path to the envoy command), edit `.profile`, `.bashrc` or whatever is appropriate for your system. Within this file, we'll append the following near the bottom. Adjust the file path as neede for your development server.
+If the `which envoy` test fails (if there's no output saying the path to the envoy command), edit `.profile`, `.bashrc` or whatever is appropriate for your system. Within this file, we'll append the following near the bottom. Adjust the file path as needed for your development server.
 
 ```bash
 # Prepend the composer bin directory to your PATH
