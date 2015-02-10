@@ -16,9 +16,9 @@ title: Deployment with Envoy
                                 <td>
                                     <h1>Deployment with Envoy</h1>
                                     <p class="lead">Deploy an application using Laravel's Envoy.</p>
-                                    <p>Envoy is a SSH-based task runner, similar to Python's Fabric.</p>
-                                    <p>For this edition, I made another screencast covering how to do Capistrano-like deployment with Envoy.</p>
-                                    <p>This will switch out old code for new using symlinks, allowing is to do any build-steps without interruption to the current code base.</p>
+                                    <p>Envoy is an SSH-based task runner, similar to Python's Fabric.</p>
+                                    <p>For this edition, I made a screencast covering how to do Capistrano-like deployment with Envoy.</p>
+                                    <p>This will use symlinks to switch out old code for new, allowing us to do any build-steps without interruption to the current code base.</p>
                                 </td>
                                 <td class="expander"></td>
                              </tr>
