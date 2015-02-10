@@ -24,7 +24,7 @@ To generate this key pair, I used the following command:
 ssh-keygen -t rsa -b 4096 -C "fideloper@gmail.com" -f id_deployex
 ```
 
-To copy that to the remote/production server (since I'm on a Vagrant server, not my Mac, which may not have this command), I can use the following to copy the public key into the `deployer` user's `authorized_keys` file:
+To copy that to the remote/production server, I can use the following to copy the public key into the `deployer` user's `authorized_keys` file:
 
 ```bash
 # Since not running on mac, we have this command
@@ -33,6 +33,7 @@ To copy that to the remote/production server (since I'm on a Vagrant server, not
 ssh-copy-id -o "PubkeyAuthentication no" deployer@104.236.85.162
 ```
 
+> Note that the `ssh-copy-id` command doesn't come with Macintosh by default. I'm running this command from my development server, which is Ubuntu 14.04 running via Vagrant.
 
 On the remote (production) server, we create SSH key to use within GitHub as a Deploy Key. This lets us push/pull to the GitHub repository from the production server, which we'll use to deploy new code.
 
